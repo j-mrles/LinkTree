@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Little Bee's Creations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #fdf6ec;
+      --periwinkle: #c3bce7;
+      --yellow: #f9d97c;
+      --brown: #6b4c3b;
+      --leaf-green: #a7c796;
+      --accent-green: #7fad71;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background-color: var(--cream);
+      color: var(--brown);
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: var(--periwinkle);
+    }
+
+    header img {
+      max-width: 180px;
+      height: auto;
+      border-radius: 10%;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 1rem 0 0.5rem;
+    }
+
+    p.tagline {
+      font-size: 1.2rem;
+      margin: 0.5rem 0 2rem;
+      color: var(--brown);
+    }
+
+    .hero {
+      background-image: url('./images/homeforbees.jpeg');
+      background-size: cover;
+      background-position: center;
+      color: black;
+      font-size: medium;
+    }
+
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+
+    .cta-button {
+      margin-top: 2rem;
+      background-color: var(--periwinkle);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .cta-button:hover {
+      background-color: var(--accent-green);
+    }
+
+    section {
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+
+    .gallery, .testimonials, .services, .workshops, .contact {
+      background-color: var(--cream);
+    }
+
+    .about{
+      background-color: var(--periwinkle);
+    }
+
+     .services, .contact {
+      background-image: url('./images/bouqet1.png');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .about h2, .testimonials h2, .services h2, .workshops h2, .contact h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--brown);
+    }
+
+    .carousel {
+      position: relative;
+      width: 90%;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel img {
+      min-width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .about img, .testimonials img {
+      width: 80%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background-color: var(--periwinkle);
+      font-size: 0.9rem;
+      color: var(--brown);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="./images/little_beelogo1.png" alt="Little Bee's Creations Logo">
+    <h1>Little Bee's Creations</h1>
+    <p class="tagline">Handmade floral magic, crafted with love</p>
+  </header>
+
+  <section class="hero">
+    <h2>Welcome to Little Bee's Creations!</h2>
+    <button class="cta-button">Browse Flowers</button>
+  </section>
+  
+  <section class="gallery" >
+    <h2>Featured Bouquets</h2>
+    <div class="carousel">
+      <div class="carousel-track" id="carouselTrack">
+        <img src="./images/showcase1.jpeg" alt="Bouquet 1">
+        <img src="./images/showcase2.jpeg" alt="Bouquet 2">
+        <img src="./images/showcase3.jpeg" alt="Bouquet 3">
+      </div>
+    </div>
+  </section>
+  <section class="about">
+    <h2>Our Story</h2>
+    <img src="./images/our_flowers.jpeg" alt="Photo of the shop or team">
+    <p>
+      Little Bee's Creations was founded out of a love for flowers and a passion for creativity. Our mission is to make life's moments more beautiful, one bloom at a time.
+    </p>
+  </section>
+
+  <section class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <img src="./images/little_beelogo1.png" alt="Happy customer testimonial">
+    <p>
+      "Absolutely stunning arrangements! My go-to florist for every occasion." - Happy Customer
+    </p>
+  </section>
+
+  <section class="services">
+    <h2>Our Services</h2>
+    <p>We offer custom floral designs for weddings, birthdays, corporate events, and more. Every arrangement is made with fresh, seasonal flowers to suit your needs.</p>
+  </section>
+
+  <section class="workshops">
+    <h2>Workshops & Events</h2>
+    <p>Join our hands-on flower arrangement workshops and seasonal events to learn, create, and connect with fellow flower lovers.</p>
+  </section>
+
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <p>Want to place an order or have a question? Reach out to us via email at <a href="mailto:info@littlebeescreations.com">info@littlebeescreations.com</a> or call us at (123) 456-7890.</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Little Bee's Creations &mdash; All rights reserved.
+  </footer>
+
+  <script>
+    const track = document.getElementById('carouselTrack');
+    let index = 0;
+
+    setInterval(() => {
+      index = (index + 1) % track.children.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }, 3000);
+  </script>
+</body>
+
+</html>

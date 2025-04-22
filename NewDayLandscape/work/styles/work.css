@@ -1,0 +1,76 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+header {
+
+    padding: 20px 0;
+    text-align: center;
+}
+
+
+nav a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+
+
+main {
+    padding: 20px;
+}
+
+.project-gallery {
+    text-align: center;
+}
+
+.project-item {
+    margin: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.project-item:hover {
+    transform: scale(1.05);
+}
+
+.project-item img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+footer {
+ 
+
+    padding: 10px 20px;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fadeIn {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+    .project-item {
+        margin: 10px;
+    }
+
+
+}
