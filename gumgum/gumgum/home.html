@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gum-Gum Cards</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', cursive;
+      background-color: #0e0420;
+      color: #fdfd96;
+      text-align: center;
+    }
+
+    header {
+      background-color: #460a7f;
+      padding: 1rem;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .header-top img {
+      width: 80px;
+      height: auto;
+    }
+
+    .header-top h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      text-align: left;
+      color: #fdfd96;
+      text-shadow: 3px 3px 0 #000;
+    }
+
+    nav {
+      margin: 1rem 0;
+    }
+
+    nav a {
+      color: #ffe74c;
+      text-decoration: none;
+      margin: 0 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    .hero {
+      background: linear-gradient(to bottom, #8732c9, #2e0256);
+      padding: 3rem 1rem;
+    }
+
+    .hero h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #ffea00;
+    }
+
+    .hero img {
+      max-width: 80%;
+      height: auto;
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 12px #ffd700;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: #ffffff;
+      font-size: 0.8rem;
+    }
+
+    section {
+      padding: 2rem 1rem;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      color: #ffda6f;
+      margin-bottom: 1rem;
+    }
+
+    .shop-preview,
+    .about,
+    .community {
+      background-color: #260042;
+      margin: 1rem auto;
+      max-width: 800px;
+      border: 2px solid #fdfd96;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #ffd700;
+    }
+
+    .shop-preview img,
+    .about img,
+    .community img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 1rem;
+      border-radius: 8px;
+    }
+
+    .shop-preview p,
+    .about p,
+    .community p {
+      font-size: 0.75rem;
+      color: #dcdcdc;
+    }
+
+    footer {
+      background-color: #1a0032;
+      padding: 1rem;
+      font-size: 0.7rem;
+      color: #c4a9f3;
+    }
+
+    .carousel {
+      position: relative;
+      max-width: 100%;
+      overflow: hidden;
+      margin-top: 1rem;
+      border-radius: 8px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-track img {
+      width: 100%;
+      max-width: 800px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #ffd700;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 1;
+      border-radius: 50%;
+    }
+
+    .carousel-btn.left {
+      left: 10px;
+    }
+
+    .carousel-btn.right {
+      right: 10px;
+    }
+
+    .carousel img {
+      max-width: 40%;
+      height: auto;
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 12px #ffd700;
+    }
+
+    .community img {
+      max-width: 40%;
+      height: auto;
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 12px #ffd700;
+    }
+
+    .about-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      text-align: left;
+      padding-right: 30px;
+    }
+
+    .about-content p {
+      flex: 1 1 60%;
+      font-size: 0.75rem;
+      color: #dcdcdc;
+    }
+
+    .about-content img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 30%;
+      box-shadow: 0 0 12px #ffd700;
+    }
+  </style>
+</head>
+
+<script>
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    const track = document.querySelector('.carousel-track');
+    const totalSlides = track.children.length;
+    currentSlide = (index + totalSlides) % totalSlides;
+    const offset = currentSlide * track.children[0].offsetWidth;
+    track.style.transform = `translateX(-${offset}px)`;
+  }
+
+  function prevSlide() {
+    showSlide(currentSlide - 1);
+  }
+
+  function nextSlide() {
+    showSlide(currentSlide + 1);
+  }
+
+  // Auto-slide every 5 seconds
+  setInterval(() => {
+    nextSlide();
+  }, 5000);
+</script>
+
+<body>
+  <header>
+    <div class="header-top">
+      <img src="../images/IMG_2949.png" alt="Gum-Gum Cards Logo" />
+      <h1>Gum-Gum Cards</h1>
+    </div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#community">Community</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="shop-preview">
+    <h2>Welcome to Gum-Gum Cards</h2>
+    <p>
+      Dive into the ultimate retro-inspired collectible card universe where imagination meets nostalgia. Power up with
+      exclusive drops, pixelated action, and an awesome card community.
+    </p>
+    <img src="../images/main-home.png" alt="Retro card collection" />
+  </section>
+
+  <section id="shop" class="shop-preview">
+    <h3 class="section-title">🃏 Featured Cards</h3>
+    <p>
+      Check out the latest additions to the Gum-Gum deck. From rare pulls to custom sets, we’ve got something epic
+      waiting for you.
+    </p>
+
+    <div class="carousel">
+      <button class="carousel-btn left" onclick="prevSlide()">&#10094;</button>
+      <div class="carousel-track">
+        <img src="../images/misty-trainer.png" alt="Card 1" />
+        <img src="../images/rocket-mewtwo.png" alt="Card 2" />
+        <img src="../images/rocket-raticate.png" alt="Card 3" />
+        <img src="../images/rocket-crobat.png" alt="Card 1" />
+        <img src="../images/typhlosion-trainer.png" alt="Card 2" />
+        <img src="../images/rocket-raticate.png" alt="Card 3" />
+      </div>
+      <button class="carousel-btn right" onclick="nextSlide()">&#10095;</button>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h3 class="section-title">🎮 About Us</h3>
+    <div class="about-content">
+      <p>
+        Started by fans, for fans — Gum-Gum Cards brings together love for retro games, vibrant art, and the thrill of
+        collecting. Every card is a piece of pixel-powered passion.
+      </p>
+      <img src="../images/ahmad-selling.png" alt="The Gum-Gum team" />
+    </div>
+  </section>
+
+  <section id="community" class="community">
+    <h3 class="section-title">🌐 Join the Community</h3>
+    <p>Be part of tournaments, giveaways, and livestream pack openings. Connect with other cardmasters and grow your
+      collection together.</p>
+    <img src="../images/gumgum-insta.png" alt="Online card community" />
+  </section>
+
+  <footer>
+    &copy; 2025 Gum-Gum Cards. Retro coolness, modern hype.
+  </footer>
+</body>
+
+</html>
