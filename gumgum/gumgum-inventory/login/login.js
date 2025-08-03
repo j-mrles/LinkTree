@@ -7,7 +7,7 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     // Dummy validation
     if (username === 'admin' && password === 'gumgum') {
       localStorage.setItem('isLoggedIn', 'true');
-      window.location.href = 'index.html';
+      window.location.href = '../main/index.html';
     } else {
       alert('Incorrect username or password. Try admin / gumgum');
     }
