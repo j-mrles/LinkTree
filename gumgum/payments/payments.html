@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payments - Gum-Gum Cards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Bangers&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #6e00ff, #ff007a, #00e5ff);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      font-family: 'Bangers', cursive;
+      color: #fff;
+      text-align: center;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 3rem 1rem;
+    }
+
+    .logo {
+      width: 180px;
+      margin: 0 auto 1.5rem;
+      border-radius: 20px;
+    }
+
+    h1 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 1.2rem;
+      color: #ffeb3b;
+      margin-bottom: 0.5rem;
+      text-shadow: 3px 3px #3b4cca, 0 0 5px #ff0080;
+    }
+
+    .slogan {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      text-shadow: 2px 2px #000000;
+    }
+
+    .payment-link {
+      display: block;
+      background: #fff;
+      color: #000;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 16px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+      border: 2px solid #3b4cca;
+      box-shadow: 0 0 15px #ffcb05, 0 4px 20px #ff007a;
+      transition: 0.3s ease;
+    }
+
+    .payment-link:hover {
+      background: #ffcb05;
+      color: #3b4cca;
+      box-shadow: 0 0 25px #ffcb05, 0 0 60px #ff007a;
+      transform: scale(1.05);
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 2rem;
+      color: #ffeb3b;
+      text-decoration: underline;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="logo" src="../images/IMG_2949.png" alt="Gum-Gum Cards Logo">
+    <h1>Payments</h1>
+    <p class="slogan">Choose Your Preferred Payment Method</p>
+
+    <a class="payment-link" href="https://www.paypal.me/yourusername" target="_blank">Pay with PayPal</a>
+    <a class="payment-link" href="https://venmo.com/yourusername" target="_blank">Pay with Venmo</a>
+    <a class="payment-link" href="https://cash.app/$yourcashtag" target="_blank">Pay with Cash App</a>
+    <a class="payment-link" href="#" onclick="alert('Send via Zelle to: your@email.com or 555-555-5555')">Pay with Zelle</a>
+
+    <a class="back-link" href="../index.html">← Back to Home</a>
+  </div>
+</body>
+</html>
