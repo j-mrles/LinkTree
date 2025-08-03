@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gum-Gum Cards Inventory</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <img src="../images/IMG_2949.png" alt="Gum Gum Logo" class="logo" />
+        <h1>Gum-Gum Cards Inventory</h1>
+        <button onclick="logout()" style="margin: 20px;">Logout</button>
+        <script>
+            function logout() {
+                localStorage.removeItem('isLoggedIn');
+                window.location.href = 'login.html';
+            }
+        </script>
+
+    </header>
+
+    <main>
+        <input type="text" id="searchBar" placeholder="Search cards..." />
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Rarity</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody id="cardTableBody">
+                <!-- Data populated via JS -->
+            </tbody>
+        </table>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+<script>
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+        window.location.href = 'login.html';
+    }
+</script>
+
+</html>
