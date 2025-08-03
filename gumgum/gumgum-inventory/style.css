@@ -1,12 +1,11 @@
-  body {
+body {
     background-color: #1a1a1a;
     color: #ffe66d;
-    font-family: cursive, sans-serif;
+    font-family: 'Comic Sans MS', sans-serif;
     text-align: center;
     margin: 0;
     padding: 0;
   }
-
   
   header {
     background-color: #5e3d99;
