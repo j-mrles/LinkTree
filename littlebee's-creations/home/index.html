@@ -26,9 +26,17 @@
     }
 
     header {
-      display: flex;
-      padding: 2rem 1rem;
       background-color: var(--periwinkle);
+      padding: 1.5rem 1rem;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     header img {
@@ -37,15 +45,72 @@
       border-radius: 10%;
     }
 
+    .header-text {
+      flex: 1;
+    }
+
     h1 {
       font-size: 2.5rem;
-      margin: 1rem 0 0.5rem;
+      margin: 0.5rem 0;
     }
 
     p.tagline {
       font-size: 1.2rem;
-      margin: 0.5rem 0 2rem;
+      margin: 0.5rem 0;
       color: var(--brown);
+    }
+
+    nav {
+      width: 100%;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--brown);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      color: var(--brown);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: color 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+    }
+
+    nav a:hover {
+      color: var(--accent-green);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .cart-icon {
+      position: relative;
+      display: inline-block;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: var(--accent-green);
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
     }
 
     .hero {
@@ -54,17 +119,32 @@
       background-position: center;
       color: black;
       font-size: medium;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1rem;
+    }
+
+    .hero-content {
+      background-color: rgba(253, 246, 236, 0.85);
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
     }
 
     .hero h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
+      color: var(--brown);
     }
 
     .hero p {
       max-width: 600px;
       margin: 0 auto;
       font-size: 1.1rem;
+      color: var(--brown);
     }
 
     .cta-button {
@@ -84,35 +164,90 @@
     }
 
     section {
-      padding: 3rem 1rem;
+      padding: 4rem 1rem;
       text-align: center;
     }
 
-    .gallery, .testimonials, .services, .workshops, .contact {
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery, .testimonials, .workshops {
       background-color: var(--cream);
     }
 
-    .about{
+    .about {
       background-color: var(--periwinkle);
     }
 
-     .services, .contact {
+    .services {
       background-image: url('./images/bouqet1.png');
       background-size: cover;
       background-position: center;
+      position: relative;
     }
 
-    .about h2, .testimonials h2, .services h2, .workshops h2, .contact h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+    .services::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(253, 246, 236, 0.85);
+    }
+
+    .services .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact {
+      background-color: var(--periwinkle);
+      background-image: linear-gradient(135deg, var(--periwinkle) 0%, var(--leaf-green) 100%);
+    }
+
+    .stats {
+      background-color: var(--yellow);
+      padding: 3rem 1rem;
+    }
+
+    .features {
+      background-color: var(--leaf-green);
+      padding: 4rem 1rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
       color: var(--brown);
     }
 
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--brown);
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: var(--brown);
+      margin-bottom: 3rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Featured Bouquets */
     .carousel {
       position: relative;
-      width: 90%;
+      width: 100%;
+      max-width: 1000px;
       margin: 0 auto;
       overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     }
 
     .carousel-track {
@@ -122,17 +257,318 @@
 
     .carousel img {
       min-width: 100%;
-      height: 300px;
+      height: 400px;
       object-fit: cover;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.9);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 2;
+    }
+
+    .carousel-nav:hover {
+      background-color: var(--periwinkle);
+      color: white;
+    }
+
+    .carousel-nav.prev {
+      left: 20px;
+    }
+
+    .carousel-nav.next {
+      right: 20px;
+    }
+
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .about img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .about-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--brown);
+    }
+
+    .about-text p {
+      margin-bottom: 1.5rem;
+    }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .testimonial-card {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    .testimonial-stars {
+      color: var(--yellow);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 1rem;
+      color: var(--brown);
+      line-height: 1.6;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: var(--accent-green);
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .service-card {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      margin-bottom: 1rem;
+      color: var(--brown);
+    }
+
+    .service-card p {
+      color: var(--brown);
+      line-height: 1.6;
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--brown);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      color: var(--brown);
+    }
+
+    /* Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Workshops */
+    .workshops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .workshop-card {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+      text-align: left;
+    }
+
+    .workshop-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .workshop-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .workshop-content {
+      padding: 1.5rem;
+    }
+
+    .workshop-date {
+      color: var(--accent-green);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Contact */
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .contact-info {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
       border-radius: 12px;
     }
 
-    .about img, .testimonials img {
-      width: 80%;
-      max-width: 500px;
-      height: auto;
+    .contact-info h3 {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: start;
+      gap: 1rem;
+    }
+
+    .contact-item strong {
+      color: var(--brown);
+      min-width: 100px;
+    }
+
+    .contact-item a {
+      color: var(--accent-green);
+      text-decoration: none;
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-form {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
       border-radius: 12px;
-      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--brown);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid var(--periwinkle);
+      border-radius: 8px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent-green);
+    }
+
+    .submit-btn {
+      background-color: var(--accent-green);
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--leaf-green);
     }
 
     footer {
@@ -142,60 +578,319 @@
       font-size: 0.9rem;
       color: var(--brown);
     }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .hero {
+        min-height: 300px;
+        padding: 2rem 1rem;
+      }
+
+      .hero h2 {
+        font-size: 1.5rem;
+      }
+
+      .about-content,
+      .contact-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .carousel img {
+        height: 250px;
+      }
+
+      .carousel-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .carousel-nav.prev {
+        left: 10px;
+      }
+
+      .carousel-nav.next {
+        right: 10px;
+      }
+    }
   </style>
 </head>
 
 <body>
   <header>
-    <img src="./images/little_beelogo1.png" alt="Little Bee's Creations Logo">
-    <h1>Little Bee's Creations</h1>
-    <p class="tagline">Handmade floral magic, crafted with love</p>
+    <div class="header-content">
+      <img src="./images/little_beelogo1.png" alt="Little Bee's Creations Logo">
+      <div class="header-text">
+        <h1>Little Bee's Creations</h1>
+        <p class="tagline">Handmade floral magic, crafted with love</p>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="cart.html">Cart <span class="cart-icon"><span class="cart-badge" id="cartBadge">0</span></span></a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
   <section class="hero">
-    <h2>Welcome to Little Bee's Creations!</h2>
-    <button class="cta-button">Browse Flowers</button>
+    <div class="hero-content">
+      <h2>Welcome to Little Bee's Creations!</h2>
+      <p>Discover our beautiful collection of handcrafted floral arrangements, perfect for any occasion. From intimate bouquets to grand event designs, we bring your floral dreams to life.</p>
+      <button class="cta-button" onclick="window.location.href='shop.html'">Browse Flowers</button>
+    </div>
   </section>
-  
-  <section class="gallery" >
-    <h2>Featured Bouquets</h2>
-    <div class="carousel">
-      <div class="carousel-track" id="carouselTrack">
-        <img src="./images/showcase1.jpeg" alt="Bouquet 1">
-        <img src="./images/showcase2.jpeg" alt="Bouquet 2">
-        <img src="./images/showcase3.jpeg" alt="Bouquet 3">
+
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Happy Customers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1000+</div>
+          <div class="stat-label">Arrangements Created</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Years of Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Workshops Hosted</div>
+        </div>
       </div>
     </div>
   </section>
-  <section class="about">
-    <h2>Our Story</h2>
-    <img src="./images/our_flowers.jpeg" alt="Photo of the shop or team">
-    <p>
-      Little Bee's Creations was founded out of a love for flowers and a passion for creativity. Our mission is to make life's moments more beautiful, one bloom at a time.
-    </p>
+  
+  <section class="gallery">
+    <div class="container">
+      <h2>Featured Bouquets</h2>
+      <p class="section-subtitle">Explore our signature collections, each handcrafted with care and attention to detail</p>
+      <div class="carousel">
+        <button class="carousel-nav prev" onclick="changeSlide(-1)">‹</button>
+        <div class="carousel-track" id="carouselTrack">
+          <img src="./images/showcase1.jpeg" alt="Classic Rose Bouquet">
+          <img src="./images/showcase2.jpeg" alt="Spring Garden Mix">
+          <img src="./images/showcase3.jpeg" alt="Elegant White Lilies">
+        </div>
+        <button class="carousel-nav next" onclick="changeSlide(1)">›</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container">
+      <h2>Our Story</h2>
+      <p class="section-subtitle">A journey of passion, creativity, and floral artistry</p>
+      <div class="about-content">
+        <img src="./images/our_flowers.jpeg" alt="Little Bee's Creations Shop">
+        <div class="about-text">
+          <p>
+            Little Bee's Creations was founded out of a love for flowers and a passion for creativity. What started as a small home-based business has grown into a beloved local florist serving the community.
+          </p>
+          <p>
+            Our mission is to make life's moments more beautiful, one bloom at a time. We believe that flowers have the power to express emotions, celebrate occasions, and bring joy to everyday life.
+          </p>
+          <p>
+            Every arrangement is carefully crafted by our skilled florists using only the freshest, highest-quality flowers. We work closely with local growers to ensure sustainable practices and support our community.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <h2>Why Choose Us</h2>
+      <p class="section-subtitle">What sets Little Bee's Creations apart</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🌸</div>
+          <h3>Fresh Daily</h3>
+          <p>We source fresh flowers daily to ensure the highest quality and longest-lasting arrangements.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Custom Designs</h3>
+          <p>Every arrangement is custom-designed to match your style, occasion, and preferences perfectly.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚚</div>
+          <h3>Fast Delivery</h3>
+          <p>Same-day and next-day delivery available. We ensure your flowers arrive fresh and beautiful.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💚</div>
+          <h3>Eco-Friendly</h3>
+          <p>We're committed to sustainable practices and supporting local growers whenever possible.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="testimonials">
-    <h2>What Our Customers Say</h2>
-    <img src="./images/little_beelogo1.png" alt="Happy customer testimonial">
-    <p>
-      "Absolutely stunning arrangements! My go-to florist for every occasion." - Happy Customer
-    </p>
+    <div class="container">
+      <h2>What Our Customers Say</h2>
+      <p class="section-subtitle">Don't just take our word for it - hear from our happy customers</p>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Absolutely stunning arrangements! Little Bee's Creations has been my go-to florist for every occasion. The quality is unmatched and the service is exceptional."</p>
+          <p class="testimonial-author">- Sarah M.</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The wedding bouquets they created for our special day were beyond our expectations. Beautiful, fresh, and exactly what we envisioned. Highly recommend!"</p>
+          <p class="testimonial-author">- Michael & Jennifer K.</p>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"I've been attending their workshops for months and love learning new techniques. The team is so knowledgeable and friendly. A wonderful experience every time!"</p>
+          <p class="testimonial-author">- Emily R.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="services">
-    <h2>Our Services</h2>
-    <p>We offer custom floral designs for weddings, birthdays, corporate events, and more. Every arrangement is made with fresh, seasonal flowers to suit your needs.</p>
+    <div class="container">
+      <h2>Our Services</h2>
+      <p class="section-subtitle">Comprehensive floral solutions for every occasion and need</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">💐</div>
+          <h3>Custom Arrangements</h3>
+          <p>Personalized floral designs tailored to your style, occasion, and budget. Perfect for any special moment.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">👰</div>
+          <h3>Wedding Services</h3>
+          <p>Complete wedding floral packages including bridal bouquets, centerpieces, ceremony decorations, and more.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🏢</div>
+          <h3>Corporate Events</h3>
+          <p>Professional floral arrangements for offices, conferences, and corporate celebrations that make a lasting impression.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎂</div>
+          <h3>Special Occasions</h3>
+          <p>Birthdays, anniversaries, graduations, or just because - we create memorable arrangements for any celebration.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🏠</div>
+          <h3>Home Decor</h3>
+          <p>Beautiful arrangements to brighten your living space. Regular subscription services available for fresh flowers weekly.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">⚱️</div>
+          <h3>Sympathy Arrangements</h3>
+          <p>Thoughtful and respectful floral tributes crafted with care and compassion for difficult times.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="workshops">
-    <h2>Workshops & Events</h2>
-    <p>Join our hands-on flower arrangement workshops and seasonal events to learn, create, and connect with fellow flower lovers.</p>
+    <div class="container">
+      <h2>Workshops & Events</h2>
+      <p class="section-subtitle">Join our hands-on flower arrangement workshops and seasonal events</p>
+      <div class="workshops-grid">
+        <div class="workshop-card">
+          <img src="./images/showcase1.jpeg" alt="Beginner's Workshop" class="workshop-image">
+          <div class="workshop-content">
+            <div class="workshop-date">Every Saturday, 10 AM - 12 PM</div>
+            <h3>Beginner's Basics</h3>
+            <p>Learn the fundamentals of flower arranging. Perfect for beginners! All materials included. $45 per person.</p>
+          </div>
+        </div>
+        <div class="workshop-card">
+          <img src="./images/showcase2.jpeg" alt="Advanced Workshop" class="workshop-image">
+          <div class="workshop-content">
+            <div class="workshop-date">Every Sunday, 2 PM - 4 PM</div>
+            <h3>Advanced Techniques</h3>
+            <p>Master advanced floral design techniques. For those with some experience. $65 per person.</p>
+          </div>
+        </div>
+        <div class="workshop-card">
+          <img src="./images/showcase3.jpeg" alt="Seasonal Workshop" class="workshop-image">
+          <div class="workshop-content">
+            <div class="workshop-date">Monthly - Seasonal Themes</div>
+            <h3>Seasonal Specials</h3>
+            <p>Special workshops celebrating seasonal flowers and holidays. Check our calendar for upcoming dates!</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="contact">
-    <h2>Contact Us</h2>
-    <p>Want to place an order or have a question? Reach out to us via email at <a href="mailto:info@littlebeescreations.com">info@littlebeescreations.com</a> or call us at (123) 456-7890.</p>
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p class="section-subtitle">Get in touch with us - we'd love to hear from you!</p>
+      <div class="contact-content">
+        <div class="contact-info">
+          <h3>Visit Us</h3>
+          <div class="contact-item">
+            <strong>Address:</strong>
+            <span>123 Flower Street, Bloomington, CA 90210</span>
+          </div>
+          <div class="contact-item">
+            <strong>Phone:</strong>
+            <a href="tel:+11234567890">(123) 456-7890</a>
+          </div>
+          <div class="contact-item">
+            <strong>Email:</strong>
+            <a href="mailto:info@littlebeescreations.com">info@littlebeescreations.com</a>
+          </div>
+          <div class="contact-item">
+            <strong>Hours:</strong>
+            <span>Mon-Sat: 9 AM - 6 PM<br>Sunday: 10 AM - 4 PM</span>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3>Send Us a Message</h3>
+          <form onsubmit="handleContactForm(event)">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </section>
 
   <footer>
@@ -203,13 +898,58 @@
   </footer>
 
   <script>
-    const track = document.getElementById('carouselTrack');
-    let index = 0;
+    // Update cart badge
+    function updateCartBadge() {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const badge = document.getElementById('cartBadge');
+      if (badge) {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'flex' : 'none';
+      }
+    }
 
-    setInterval(() => {
-      index = (index + 1) % track.children.length;
-      track.style.transform = `translateX(-${index * 100}%)`;
-    }, 3000);
+    // Carousel functionality
+    let currentSlide = 0;
+    const track = document.getElementById('carouselTrack');
+    
+    function changeSlide(direction) {
+      if (!track) return;
+      const totalSlides = track.children.length;
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    // Auto-advance carousel
+    if (track) {
+      setInterval(() => {
+        changeSlide(1);
+      }, 5000);
+    }
+
+    // Contact form handler
+    function handleContactForm(event) {
+      event.preventDefault();
+      alert('Thank you for your message! We will get back to you soon.');
+      event.target.reset();
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Initialize cart badge
+    updateCartBadge();
   </script>
 </body>
 

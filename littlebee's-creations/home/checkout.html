@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout - Little Bee's Creations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #fdf6ec;
+      --periwinkle: #c3bce7;
+      --yellow: #f9d97c;
+      --brown: #6b4c3b;
+      --leaf-green: #a7c796;
+      --accent-green: #7fad71;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background-color: var(--cream);
+      color: var(--brown);
+    }
+
+    header {
+      background-color: var(--periwinkle);
+      padding: 1.5rem 1rem;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header img {
+      max-width: 180px;
+      height: auto;
+      border-radius: 10%;
+    }
+
+    .header-text {
+      flex: 1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 0.5rem 0;
+    }
+
+    p.tagline {
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+      color: var(--brown);
+    }
+
+    nav {
+      width: 100%;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--brown);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      color: var(--brown);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: color 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+    }
+
+    nav a:hover {
+      color: var(--accent-green);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .cart-icon {
+      position: relative;
+      display: inline-block;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: var(--accent-green);
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .checkout-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 3rem 1rem;
+    }
+
+    .checkout-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .checkout-header h2 {
+      font-size: 2.5rem;
+      color: var(--brown);
+      margin-bottom: 1rem;
+    }
+
+    .checkout-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .checkout-content {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    .checkout-form {
+      background-color: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-section {
+      margin-bottom: 2rem;
+    }
+
+    .form-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--brown);
+      border-bottom: 2px solid var(--periwinkle);
+      padding-bottom: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--brown);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid var(--periwinkle);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: 'Quicksand', sans-serif;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent-green);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .order-summary {
+      background-color: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .order-summary h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--brown);
+      border-bottom: 2px solid var(--periwinkle);
+      padding-bottom: 0.5rem;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .order-item-name {
+      font-weight: 600;
+    }
+
+    .order-item-details {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .summary-row.total {
+      font-size: 1.5rem;
+      font-weight: 600;
+      padding-top: 1rem;
+      border-top: 2px solid var(--brown);
+      color: var(--accent-green);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background-color: var(--accent-green);
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 1.5rem;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--leaf-green);
+    }
+
+    .submit-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .error-message {
+      color: #ff6b6b;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .form-group.error input,
+    .form-group.error select,
+    .form-group.error textarea {
+      border-color: #ff6b6b;
+    }
+
+    .form-group.error .error-message {
+      display: block;
+    }
+
+    .success-message {
+      background-color: white;
+      border-radius: 12px;
+      padding: 3rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .success-message h2 {
+      color: var(--accent-green);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .success-message p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: var(--brown);
+    }
+
+    .shop-link {
+      display: inline-block;
+      background-color: var(--periwinkle);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    .shop-link:hover {
+      background-color: var(--accent-green);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background-color: var(--periwinkle);
+      font-size: 0.9rem;
+      color: var(--brown);
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .order-summary {
+        position: static;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <img src="./images/little_beelogo1.png" alt="Little Bee's Creations Logo">
+      <div class="header-text">
+        <h1>Little Bee's Creations</h1>
+        <p class="tagline">Handmade floral magic, crafted with love</p>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="cart.html">Cart <span class="cart-icon"><span class="cart-badge" id="cartBadge">0</span></span></a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="checkout-container">
+    <div class="checkout-header">
+      <h2>Checkout</h2>
+    </div>
+
+    <div id="checkoutContent">
+      <!-- Checkout content will be loaded here -->
+    </div>
+
+    <div id="successMessage" class="success-message">
+      <h2>✓ Order Placed Successfully!</h2>
+      <p>Thank you for your order! We'll send you a confirmation email shortly.</p>
+      <p>Your order number is: <strong id="orderNumber"></strong></p>
+      <a href="shop.html" class="shop-link">Continue Shopping</a>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Little Bee's Creations &mdash; All rights reserved.
+  </footer>
+
+  <script>
+    // Update cart badge
+    function updateCartBadge() {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const badge = document.getElementById('cartBadge');
+      if (badge) {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'flex' : 'none';
+      }
+    }
+
+    // Render checkout form
+    function renderCheckout() {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const checkoutContent = document.getElementById('checkoutContent');
+
+      if (cart.length === 0) {
+        checkoutContent.innerHTML = `
+          <div style="background-color: white; border-radius: 12px; padding: 3rem; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--brown);">Your cart is empty</h3>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--brown);">Start shopping to add beautiful flowers to your cart!</p>
+            <a href="shop.html" style="display: inline-block; background-color: var(--periwinkle); color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600;">Browse Flowers</a>
+          </div>
+        `;
+        return;
+      }
+
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const tax = subtotal * 0.08;
+      const total = subtotal + tax;
+
+      checkoutContent.innerHTML = `
+        <div class="checkout-content">
+          <form id="checkoutForm" class="checkout-form" onsubmit="handleSubmit(event)">
+            <div class="form-section">
+              <h3>Shipping Information</h3>
+              <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" name="fullName" required>
+                <div class="error-message">Please enter your full name</div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error-message">Please enter a valid email address</div>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required>
+                <div class="error-message">Please enter a valid phone number</div>
+              </div>
+              <div class="form-group">
+                <label for="address">Street Address *</label>
+                <input type="text" id="address" name="address" required>
+                <div class="error-message">Please enter your address</div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="city">City *</label>
+                  <input type="text" id="city" name="city" required>
+                  <div class="error-message">Please enter your city</div>
+                </div>
+                <div class="form-group">
+                  <label for="state">State *</label>
+                  <input type="text" id="state" name="state" required>
+                  <div class="error-message">Please enter your state</div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="zipCode">ZIP Code *</label>
+                  <input type="text" id="zipCode" name="zipCode" required pattern="[0-9]{5}">
+                  <div class="error-message">Please enter a valid ZIP code</div>
+                </div>
+                <div class="form-group">
+                  <label for="country">Country *</label>
+                  <input type="text" id="country" name="country" value="United States" required>
+                  <div class="error-message">Please enter your country</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3>Delivery Instructions</h3>
+              <div class="form-group">
+                <label for="deliveryDate">Preferred Delivery Date</label>
+                <input type="date" id="deliveryDate" name="deliveryDate" min="${new Date().toISOString().split('T')[0]}">
+              </div>
+              <div class="form-group">
+                <label for="instructions">Special Instructions</label>
+                <textarea id="instructions" name="instructions" rows="4" placeholder="Any special delivery instructions or notes..."></textarea>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3>Payment Information</h3>
+              <div class="form-group">
+                <label for="cardName">Name on Card *</label>
+                <input type="text" id="cardName" name="cardName" required>
+                <div class="error-message">Please enter the name on card</div>
+              </div>
+              <div class="form-group">
+                <label for="cardNumber">Card Number *</label>
+                <input type="text" id="cardNumber" name="cardNumber" required pattern="[0-9]{13,19}" placeholder="1234 5678 9012 3456">
+                <div class="error-message">Please enter a valid card number</div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="expiry">Expiry Date *</label>
+                  <input type="text" id="expiry" name="expiry" required pattern="[0-9]{2}/[0-9]{2}" placeholder="MM/YY">
+                  <div class="error-message">Please enter a valid expiry date</div>
+                </div>
+                <div class="form-group">
+                  <label for="cvv">CVV *</label>
+                  <input type="text" id="cvv" name="cvv" required pattern="[0-9]{3,4}" placeholder="123">
+                  <div class="error-message">Please enter a valid CVV</div>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Place Order</button>
+          </form>
+
+          <div class="order-summary">
+            <h3>Order Summary</h3>
+            ${cart.map(item => `
+              <div class="order-item">
+                <div>
+                  <div class="order-item-name">${item.name}</div>
+                  <div class="order-item-details">Qty: ${item.quantity} × $${item.price.toFixed(2)}</div>
+                </div>
+                <div>$${(item.price * item.quantity).toFixed(2)}</div>
+              </div>
+            `).join('')}
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span>$${subtotal.toFixed(2)}</span>
+            </div>
+            <div class="summary-row">
+              <span>Tax</span>
+              <span>$${tax.toFixed(2)}</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total</span>
+              <span>$${total.toFixed(2)}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Handle form submission
+    function handleSubmit(event) {
+      event.preventDefault();
+      
+      // Validate form
+      const form = event.target;
+      const formData = new FormData(form);
+      let isValid = true;
+
+      // Remove previous error states
+      document.querySelectorAll('.form-group').forEach(group => {
+        group.classList.remove('error');
+      });
+
+      // Validate required fields
+      const requiredFields = ['fullName', 'email', 'phone', 'address', 'city', 'state', 'zipCode', 'country', 'cardName', 'cardNumber', 'expiry', 'cvv'];
+      requiredFields.forEach(field => {
+        const input = document.getElementById(field);
+        if (!input.value.trim()) {
+          isValid = false;
+          input.closest('.form-group').classList.add('error');
+        }
+      });
+
+      // Validate email
+      const email = document.getElementById('email').value;
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        isValid = false;
+        document.getElementById('email').closest('.form-group').classList.add('error');
+      }
+
+      if (!isValid) {
+        alert('Please fill in all required fields correctly.');
+        return;
+      }
+
+      // Generate order number
+      const orderNumber = 'LB-' + Date.now().toString().slice(-8);
+      document.getElementById('orderNumber').textContent = orderNumber;
+
+      // Clear cart
+      localStorage.removeItem('cart');
+
+      // Show success message
+      document.getElementById('checkoutContent').style.display = 'none';
+      document.getElementById('successMessage').classList.add('show');
+      updateCartBadge();
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initialize
+    renderCheckout();
+    updateCartBadge();
+  </script>
+</body>
+
+</html>
+
