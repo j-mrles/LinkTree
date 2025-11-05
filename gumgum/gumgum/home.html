@@ -62,68 +62,109 @@
       text-shadow: 2px 2px 0 #000;
     }
 
+    body {
+      background: 
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(70, 10, 127, 0.3) 2px, rgba(70, 10, 127, 0.3) 4px),
+        radial-gradient(circle at 20% 50%, #460a7f 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, #8732c9 0%, transparent 50%),
+        #0e0420;
+      background-attachment: fixed;
+    }
+
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      z-index: 9999;
+    }
+
     .hero {
-      background: linear-gradient(to bottom, #8732c9, #2e0256);
-      padding: 3rem 1rem;
+      background: 
+        linear-gradient(135deg, rgba(135, 50, 201, 0.9), rgba(46, 2, 86, 0.9)),
+        url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23ffd700" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      padding: 4rem 1rem;
+      position: relative;
+      border-bottom: 4px solid #ffea00;
+      box-shadow: inset 0 0 50px rgba(255, 215, 0, 0.3);
+    }
+
+    .hero::before {
+      content: '>>>';
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      color: #00ff00;
+      font-size: 1.5rem;
+      animation: blink 1s infinite;
+    }
+
+    .hero::after {
+      content: '<<<';
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      color: #00ff00;
+      font-size: 1.5rem;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0.3; }
     }
 
     .hero h2 {
-      font-size: 1.5rem;
+      font-size: 2rem;
       margin-bottom: 1rem;
       color: #ffea00;
+      text-shadow: 
+        0 0 10px #ffd700,
+        0 0 20px #ffd700,
+        3px 3px 0 #000,
+        5px 5px 0 #ff0080;
+      animation: glow 2s ease-in-out infinite alternate;
     }
 
-    .hero img {
-      max-width: 80%;
-      height: auto;
-      margin-top: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 0 12px #ffd700;
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 3px 3px 0 #000; }
+      to { text-shadow: 0 0 20px #ffd700, 0 0 30px #ffd700, 0 0 40px #ff0080, 3px 3px 0 #000; }
     }
 
     .hero p {
       max-width: 600px;
       margin: 0 auto;
       color: #ffffff;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
+      text-shadow: 2px 2px 0 #000;
+    }
+
+    .hero img {
+      max-width: 70%;
+      height: auto;
+      margin-top: 2rem;
+      border: 4px solid #ffea00;
+      box-shadow: 
+        0 0 20px #ffd700,
+        0 0 40px rgba(255, 215, 0, 0.5),
+        inset 0 0 20px rgba(255, 215, 0, 0.2);
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
     }
 
     section {
-      padding: 2rem 1rem;
-    }
-
-    .section-title {
-      font-size: 1.2rem;
-      color: #ffda6f;
-      margin-bottom: 1rem;
-    }
-
-    .shop-preview,
-    .about,
-    .community {
-      background-color: #260042;
-      margin: 1rem auto;
-      max-width: 800px;
-      border: 2px solid #fdfd96;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 0 8px #ffd700;
-    }
-
-    .shop-preview img,
-    .about img,
-    .community img {
-      max-width: 100%;
-      height: auto;
-      margin-top: 1rem;
-      border-radius: 8px;
-    }
-
-    .shop-preview p,
-    .about p,
-    .community p {
-      font-size: 0.75rem;
-      color: #dcdcdc;
+      padding: 3rem 1rem;
+      position: relative;
     }
 
     footer {
@@ -133,12 +174,54 @@
       color: #c4a9f3;
     }
 
+    .arcade-section {
+      background: 
+        linear-gradient(180deg, rgba(38, 0, 66, 0.95), rgba(26, 0, 50, 0.95)),
+        repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255, 215, 0, 0.05) 50px, rgba(255, 215, 0, 0.05) 100px);
+      padding: 3rem 1rem;
+      margin: 2rem 0;
+      border-top: 4px solid #ffea00;
+      border-bottom: 4px solid #ffea00;
+      position: relative;
+    }
+
+    .arcade-section::before {
+      content: '█ █ █';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: #ffea00;
+      font-size: 1rem;
+      letter-spacing: 2rem;
+      padding-top: 0.5rem;
+    }
+
+    .arcade-section::after {
+      content: '█ █ █';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: #ffea00;
+      font-size: 1rem;
+      letter-spacing: 2rem;
+      padding-bottom: 0.5rem;
+    }
+
     .carousel {
       position: relative;
       max-width: 100%;
       overflow: hidden;
-      margin-top: 1rem;
-      border-radius: 8px;
+      margin-top: 2rem;
+      border: 4px solid #ffea00;
+      border-style: double;
+      box-shadow: 
+        0 0 30px rgba(255, 215, 0, 0.7),
+        inset 0 0 30px rgba(255, 215, 0, 0.2);
+      background: #000;
     }
 
     .carousel-track {
@@ -158,14 +241,30 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 2rem;
-      background: rgba(0, 0, 0, 0.3);
-      color: white;
-      border: none;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #460a7f, #8732c9);
+      color: #ffea00;
+      border: 3px solid #ffea00;
       cursor: pointer;
-      padding: 0.5rem;
+      padding: 1rem;
       z-index: 1;
-      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 
+        0 0 15px rgba(255, 215, 0, 0.6),
+        inset 0 0 10px rgba(255, 215, 0, 0.2);
+      transition: all 0.3s;
+      clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+    }
+
+    .carousel-btn:hover {
+      background: linear-gradient(135deg, #8732c9, #ffea00);
+      color: #000;
+      box-shadow: 0 0 25px #ffd700;
+      transform: translateY(-50%) scale(1.1);
     }
 
     .carousel-btn.left {
@@ -192,28 +291,760 @@
       box-shadow: 0 0 12px #ffd700;
     }
 
-    .about-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-      text-align: left;
-      padding-right: 30px;
+
+    .hero {
+      position: relative;
+      overflow: hidden;
     }
 
-    .about-content p {
-      flex: 1 1 60%;
-      font-size: 0.75rem;
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .stats-banner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      padding: 2rem;
+      background: 
+        linear-gradient(135deg, rgba(26, 0, 50, 0.95), rgba(70, 10, 127, 0.95)),
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 215, 0, 0.1) 10px, rgba(255, 215, 0, 0.1) 20px);
+      border: 4px solid #ffea00;
+      border-style: double;
+      margin: 2rem auto;
+      max-width: 1000px;
+      box-shadow: 
+        0 0 20px rgba(255, 215, 0, 0.6),
+        inset 0 0 20px rgba(255, 215, 0, 0.1);
+      position: relative;
+    }
+
+    .stats-banner::before,
+    .stats-banner::after {
+      content: '█';
+      position: absolute;
+      color: #ffea00;
+      font-size: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .stats-banner::before {
+      left: -20px;
+      animation: blink 1s infinite;
+    }
+
+    .stats-banner::after {
+      right: -20px;
+      animation: blink 1s infinite 0.5s;
+    }
+
+    .stat-box {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 80px;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      color: #00ff00;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 0 #000;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.6rem;
+      color: #dcdcdc;
+      line-height: 1.2;
+    }
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .quick-link-card {
+      background: 
+        linear-gradient(135deg, rgba(70, 10, 127, 0.9), rgba(135, 50, 201, 0.9)),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 215, 0, 0.1) 2px, rgba(255, 215, 0, 0.1) 4px);
+      border: 3px solid #ffe74c;
+      border-style: double;
+      padding: 2rem;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.3s;
+      box-shadow: 
+        0 0 15px rgba(255, 215, 0, 0.4),
+        inset 0 0 15px rgba(255, 215, 0, 0.1);
+      position: relative;
+      clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 5px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 150px;
+      text-align: center;
+    }
+
+    .quick-link-card::before {
+      content: '▶';
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      color: #00ff00;
+      font-size: 0.8rem;
+    }
+
+    .quick-link-card:hover {
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 
+        0 0 25px #ffd700,
+        0 0 50px rgba(255, 215, 0, 0.6),
+        inset 0 0 20px rgba(255, 215, 0, 0.2);
+      border-color: #ffea00;
+      background: 
+        linear-gradient(135deg, rgba(135, 50, 201, 0.95), rgba(70, 10, 127, 0.95)),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 215, 0, 0.2) 2px, rgba(255, 215, 0, 0.2) 4px);
+    }
+
+    .quick-link-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .quick-link-title {
+      font-size: 0.8rem;
+      color: #ffea00;
+      margin-bottom: 0.3rem;
+    }
+
+    .quick-link-desc {
+      font-size: 0.6rem;
       color: #dcdcdc;
     }
 
-    .about-content img {
-      width: 180px;
-      height: 180px;
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .feature-card {
+      background: 
+        linear-gradient(135deg, rgba(26, 0, 50, 0.9), rgba(70, 10, 127, 0.9)),
+        repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255, 215, 0, 0.1) 5px, rgba(255, 215, 0, 0.1) 10px);
+      border: 3px solid #8732c9;
+      border-style: double;
+      padding: 1.5rem;
+      transition: all 0.3s;
+      box-shadow: 
+        0 0 15px rgba(135, 50, 201, 0.5),
+        inset 0 0 15px rgba(135, 50, 201, 0.2);
+      position: relative;
+      clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .feature-card::before {
+      content: '★';
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      color: #ffea00;
+      font-size: 1rem;
+    }
+
+    .feature-card:hover {
+      transform: scale(1.08) translateY(-5px);
+      border-color: #ffea00;
+      box-shadow: 
+        0 0 25px #ffd700,
+        0 0 50px rgba(255, 215, 0, 0.6),
+        inset 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+
+    .feature-card img {
+      width: 100%;
+      height: 200px;
       object-fit: cover;
-      border-radius: 30%;
-      box-shadow: 0 0 12px #ffd700;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card-title {
+      font-size: 0.7rem;
+      color: #ffea00;
+      margin-top: 0.5rem;
+    }
+
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      border: 3px solid #ffe74c;
+      border-style: double;
+      box-shadow: 
+        0 0 15px rgba(255, 215, 0, 0.5),
+        inset 0 0 15px rgba(255, 215, 0, 0.1);
+      transition: all 0.3s;
+      background: #000;
+      clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 5px);
+      position: relative;
+      aspect-ratio: 1;
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 215, 0, 0.1) 2px,
+        rgba(255, 215, 0, 0.1) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.15) rotate(2deg);
+      z-index: 10;
+      border-color: #ffea00;
+      box-shadow: 
+        0 0 30px #ffd700,
+        0 0 60px rgba(255, 215, 0, 0.8);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+      filter: contrast(1.2) brightness(1.1);
+    }
+
+    .testimonials-section {
+      background: 
+        repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(255, 215, 0, 0.05) 20px, rgba(255, 215, 0, 0.05) 40px),
+        linear-gradient(135deg, rgba(26, 0, 50, 0.95), rgba(38, 0, 66, 0.95));
+      padding: 3rem 1rem;
+      margin: 3rem auto;
+      max-width: 1000px;
+      border: 4px solid #ffd700;
+      border-style: double;
+      box-shadow: 
+        0 0 30px rgba(255, 215, 0, 0.6),
+        inset 0 0 30px rgba(255, 215, 0, 0.1);
+      position: relative;
+    }
+
+    .testimonials-section::before {
+      content: 'REVIEWS';
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0e0420;
+      padding: 0 1rem;
+      color: #ffea00;
+      font-size: 0.9rem;
+      letter-spacing: 0.5rem;
+      border: 2px solid #ffd700;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .testimonial-card {
+      background: 
+        linear-gradient(135deg, rgba(38, 0, 66, 0.9), rgba(26, 0, 50, 0.9)),
+        repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(255, 215, 0, 0.1) 3px, rgba(255, 215, 0, 0.1) 6px);
+      border: 3px solid #ffe74c;
+      border-style: double;
+      padding: 2rem;
+      text-align: left;
+      box-shadow: 
+        0 0 15px rgba(255, 215, 0, 0.4),
+        inset 0 0 15px rgba(255, 215, 0, 0.1);
+      clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 180px;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      color: #ffea00;
+      font-size: 3rem;
+      line-height: 1;
+      opacity: 0.5;
+    }
+
+    .testimonial-stars {
+      color: #ffea00;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonial-text {
+      font-size: 0.7rem;
+      color: #dcdcdc;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonial-author {
+      font-size: 0.65rem;
+      color: #ffda6f;
+    }
+
+    .features-section {
+      background: 
+        repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(255, 215, 0, 0.05) 100px, rgba(255, 215, 0, 0.05) 200px),
+        linear-gradient(135deg, rgba(70, 10, 127, 0.95), rgba(135, 50, 201, 0.95));
+      padding: 4rem 1rem;
+      margin: 3rem 0;
+      border-top: 4px solid #ffea00;
+      border-bottom: 4px solid #ffea00;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .features-section::before {
+      content: '████████████████████';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      color: #ffea00;
+      font-size: 0.8rem;
+      letter-spacing: 0.5rem;
+      text-align: center;
+      padding: 0.5rem 0;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .features-section::after {
+      content: '████████████████████';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      color: #ffea00;
+      font-size: 0.8rem;
+      letter-spacing: 0.5rem;
+      text-align: center;
+      padding: 0.5rem 0;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .feature-item {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 2rem;
+      border: 3px solid #8732c9;
+      border-style: double;
+      box-shadow: 
+        0 0 20px rgba(135, 50, 201, 0.5),
+        inset 0 0 20px rgba(135, 50, 201, 0.2);
+      clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+    }
+
+    .feature-item:hover {
+      border-color: #ffea00;
+      box-shadow: 
+        0 0 30px #ffd700,
+        inset 0 0 30px rgba(255, 215, 0, 0.3);
+      transform: scale(1.05);
+    }
+
+    .feature-icon-large {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 10px #ffd700);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .feature-item h4 {
+      font-size: 0.9rem;
+      color: #ffea00;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-item p {
+      font-size: 0.65rem;
+      color: #ffffff;
+    }
+
+    .promo-banner {
+      background: 
+        repeating-linear-gradient(45deg, #ffea00, #ffea00 10px, #ffd700 10px, #ffd700 20px),
+        linear-gradient(135deg, #ffea00, #ffd700);
+      color: #000;
+      padding: 2.5rem;
+      margin: 3rem auto;
+      max-width: 1000px;
+      border: 4px solid #000;
+      border-style: double;
+      box-shadow: 
+        0 0 30px #ffd700,
+        inset 0 0 20px rgba(0, 0, 0, 0.2);
+      clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px), 0 15px);
+      position: relative;
+      animation: flash 3s ease-in-out infinite;
+      text-align: center;
+    }
+
+    @keyframes flash {
+      0%, 100% { box-shadow: 0 0 30px #ffd700, inset 0 0 20px rgba(0, 0, 0, 0.2); }
+      50% { box-shadow: 0 0 50px #ffd700, 0 0 100px rgba(255, 215, 0, 0.8), inset 0 0 20px rgba(0, 0, 0, 0.2); }
+    }
+
+    .promo-banner::before,
+    .promo-banner::after {
+      content: '⚠';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      color: #000;
+    }
+
+    .promo-banner::before {
+      left: 1rem;
+      animation: blink 1s infinite;
+    }
+
+    .promo-banner::after {
+      right: 1rem;
+      animation: blink 1s infinite 0.5s;
+    }
+
+    .promo-banner h3 {
+      font-size: 1rem;
+      color: #000;
+      margin-bottom: 0.5rem;
+    }
+
+    .promo-banner p {
+      font-size: 0.7rem;
+      color: #000;
+    }
+
+    .events-section {
+      background: 
+        repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(255, 215, 0, 0.05) 30px, rgba(255, 215, 0, 0.05) 60px),
+        linear-gradient(135deg, rgba(38, 0, 66, 0.95), rgba(26, 0, 50, 0.95));
+      margin: 3rem auto;
+      max-width: 1000px;
+      border: 4px solid #fdfd96;
+      border-style: double;
+      padding: 3rem 2rem;
+      box-shadow: 
+        0 0 30px rgba(255, 215, 0, 0.6),
+        inset 0 0 30px rgba(255, 215, 0, 0.1);
+      position: relative;
+      clip-path: polygon(20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px), 0 20px);
+    }
+
+    .events-section::before {
+      content: 'EVENTS';
+      position: absolute;
+      top: -20px;
+      left: 2rem;
+      background: #0e0420;
+      padding: 0.5rem 1.5rem;
+      color: #ffea00;
+      font-size: 0.9rem;
+      letter-spacing: 0.5rem;
+      border: 3px solid #ffd700;
+      border-style: double;
+      clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 5px);
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .event-card {
+      background: 
+        linear-gradient(135deg, rgba(26, 0, 50, 0.9), rgba(70, 10, 127, 0.9)),
+        repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(255, 215, 0, 0.1) 4px, rgba(255, 215, 0, 0.1) 8px);
+      border: 3px solid #8732c9;
+      border-style: double;
+      padding: 2rem;
+      text-align: left;
+      box-shadow: 
+        0 0 15px rgba(135, 50, 201, 0.5),
+        inset 0 0 15px rgba(135, 50, 201, 0.2);
+      clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px);
+      transition: all 0.3s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 180px;
+    }
+
+    .event-card:hover {
+      border-color: #ffea00;
+      box-shadow: 
+        0 0 25px #ffd700,
+        inset 0 0 25px rgba(255, 215, 0, 0.3);
+      transform: translateY(-5px);
+    }
+
+    .event-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-card h4 {
+      font-size: 0.8rem;
+      color: #ffea00;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-card p {
+      font-size: 0.65rem;
+      color: #dcdcdc;
+      line-height: 1.6;
+    }
+
+    .event-date {
+      font-size: 0.7rem;
+      color: #ffd700;
+      margin-top: 0.5rem;
+    }
+
+    .cta-section {
+      background: 
+        repeating-linear-gradient(135deg, transparent, transparent 50px, rgba(255, 215, 0, 0.05) 50px, rgba(255, 215, 0, 0.05) 100px),
+        linear-gradient(135deg, rgba(46, 2, 86, 0.95), rgba(70, 10, 127, 0.95));
+      padding: 4rem 1rem;
+      margin: 3rem 0;
+      text-align: center;
+      border-top: 4px solid #ffea00;
+      border-bottom: 4px solid #ffea00;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '>>> INSERT COIN <<<';
+      position: absolute;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #00ff00;
+      font-size: 1rem;
+      letter-spacing: 0.3rem;
+      animation: blink 1.5s infinite;
+      text-shadow: 0 0 10px #00ff00;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .cta-button {
+      background: 
+        repeating-linear-gradient(45deg, #ffea00, #ffea00 5px, #ffd700 5px, #ffd700 10px),
+        linear-gradient(135deg, #ffea00, #ffd700);
+      color: #000;
+      padding: 1.5rem 3rem;
+      border: 4px solid #000;
+      border-style: double;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: bold;
+      transition: all 0.3s;
+      box-shadow: 
+        0 0 20px rgba(255, 215, 0, 0.7),
+        inset 0 0 15px rgba(0, 0, 0, 0.2);
+      clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+      position: relative;
+      text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+    }
+
+    .cta-button::before {
+      content: '▶';
+      position: absolute;
+      left: 1rem;
+      color: #000;
+    }
+
+    .cta-button:hover {
+      transform: scale(1.15);
+      box-shadow: 
+        0 0 40px #ffd700,
+        0 0 80px rgba(255, 215, 0, 0.8),
+        inset 0 0 20px rgba(0, 0, 0, 0.3);
+      border-color: #ffea00;
+    }
+
+    .all-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .mini-card {
+      background: #000;
+      border: 3px solid #8732c9;
+      border-style: double;
+      overflow: hidden;
+      transition: all 0.3s;
+      box-shadow: 
+        0 0 15px rgba(135, 50, 201, 0.5),
+        inset 0 0 15px rgba(135, 50, 201, 0.2);
+      clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 5px);
+      position: relative;
+      aspect-ratio: 1;
+    }
+
+    .mini-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 215, 0, 0.1) 2px,
+        rgba(255, 215, 0, 0.1) 4px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .mini-card:hover {
+      transform: translateY(-8px) scale(1.1) rotate(3deg);
+      border-color: #ffea00;
+      box-shadow: 
+        0 0 30px #ffd700,
+        0 0 60px rgba(255, 215, 0, 0.8);
+      z-index: 10;
+    }
+
+    .mini-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+      filter: contrast(1.3) brightness(1.2) saturate(1.2);
+    }
+
+    .retro-box {
+      background: 
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 215, 0, 0.1) 2px, rgba(255, 215, 0, 0.1) 4px),
+        linear-gradient(135deg, rgba(38, 0, 66, 0.95), rgba(26, 0, 50, 0.95));
+      border: 4px solid #fdfd96;
+      border-style: double;
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 1000px;
+      box-shadow: 
+        0 0 25px rgba(255, 215, 0, 0.6),
+        inset 0 0 25px rgba(255, 215, 0, 0.1);
+      clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px), 0 15px);
+      position: relative;
+    }
+
+    .retro-box::before {
+      content: '█';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #ffea00;
+      font-size: 1.5rem;
+      background: #0e0420;
+      padding: 0 1rem;
+    }
+
+    .pixel-border {
+      border-image: 
+        repeating-linear-gradient(90deg, #ffea00 0, #ffea00 10px, transparent 10px, transparent 20px) 1;
+      border-width: 4px;
+      border-style: solid;
     }
   </style>
 </head>
@@ -273,24 +1104,69 @@
     </nav>
   </header>
 
-  <section class="shop-preview">
-    <h2>Welcome to Gum-Gum Cards</h2>
-    <p>
-      Dive into the ultimate retro-inspired collectible card universe where imagination meets nostalgia. Power up with
-      exclusive drops, pixelated action, and an awesome card community.
-    </p>
-    <img src="../images/main-home.png" alt="Retro card collection" />
+  <div class="scanlines"></div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>GUM-GUM CARDS</h2>
+      <p>RETRO COLLECTIBLES • PIXEL POWER • ARCADE STYLE</p>
+      <img src="../images/main-home.png" alt="Retro card collection" />
+      
+      <div class="stats-banner">
+        <div class="stat-box">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">CARDS</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">10K+</div>
+          <div class="stat-label">FOLLOWERS</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">AUTHENTIC</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">1000+</div>
+          <div class="stat-label">SALES</div>
+        </div>
+      </div>
+
+      <div class="quick-links">
+        <a href="shop.html" class="quick-link-card">
+          <div class="quick-link-icon">🛒</div>
+          <div class="quick-link-title">SHOP</div>
+          <div class="quick-link-desc">BROWSE CARDS</div>
+        </a>
+        <a href="https://www.instagram.com/gumgumpokemon/" target="_blank" class="quick-link-card">
+          <div class="quick-link-icon">📷</div>
+          <div class="quick-link-title">INSTAGRAM</div>
+          <div class="quick-link-desc">FOLLOW US</div>
+        </a>
+        <a href="https://ebay.us/m/tVP3Gb" target="_blank" class="quick-link-card">
+          <div class="quick-link-icon">💎</div>
+          <div class="quick-link-title">EBAY</div>
+          <div class="quick-link-desc">SHOP ONLINE</div>
+        </a>
+        <a href="community.html" class="quick-link-card">
+          <div class="quick-link-icon">🌐</div>
+          <div class="quick-link-title">COMMUNITY</div>
+          <div class="quick-link-desc">JOIN EVENTS</div>
+        </a>
+      </div>
+    </div>
   </section>
 
-  <section id="shop" class="shop-preview">
-    <h3 class="section-title">🃏 Featured Cards</h3>
-    <p>
-      Check out the latest additions to the Gum-Gum deck. From rare pulls to custom sets, we’ve got something epic
-      waiting for you.
-    </p>
+  <div class="promo-banner">
+    <h3>LIMITED TIME: FREE SHIPPING!</h3>
+    <p>Orders over $50 • Code: FREESHIP50</p>
+  </div>
+
+  <section class="arcade-section">
+    <h3 class="section-title">🃏 FEATURED CARDS</h3>
+    <p style="font-size: 0.75rem; color: #dcdcdc; margin-bottom: 1rem;">LATEST ADDITIONS TO THE DECK</p>
 
     <div class="carousel">
-      <button class="carousel-btn left" onclick="prevSlide()">&#10094;</button>
+      <button class="carousel-btn left" onclick="prevSlide()">◀</button>
       <div class="carousel-track">
         <img src="../images/misty-trainer.png" alt="Misty Trainer Card" />
         <img src="../images/rocket-mewtwo.png" alt="Rocket Mewtwo Card" />
@@ -299,51 +1175,197 @@
         <img src="../images/typhlosion-trainer.png" alt="Typhlosion Trainer Card" />
         <img src="../images/cynthia-garchomp.png" alt="Cynthia Garchomp Card" />
       </div>
-      <button class="carousel-btn right" onclick="nextSlide()">&#10095;</button>
+      <button class="carousel-btn right" onclick="nextSlide()">▶</button>
+    </div>
+
+    <div class="featured-grid">
+      <div class="feature-card">
+        <img src="../images/misty-trainer.png" alt="Misty Trainer">
+        <div class="feature-card-title">MISTY TRAINER</div>
+      </div>
+      <div class="feature-card">
+        <img src="../images/rocket-mewtwo.png" alt="Rocket Mewtwo">
+        <div class="feature-card-title">ROCKET MEWTWO</div>
+      </div>
+      <div class="feature-card">
+        <img src="../images/cynthia-garchomp.png" alt="Cynthia Garchomp">
+        <div class="feature-card-title">CYNTHIA GARCHOMP</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <a href="shop.html" class="cta-button">VIEW ALL CARDS →</a>
     </div>
   </section>
 
-  <section id="about" class="about">
-    <h3 class="section-title">🎮 About Us</h3>
-    <div class="about-content">
-      <p>
-        Started by fans, for fans — Gum-Gum Cards brings together love for retro games, vibrant art, and the thrill of
-        collecting. Every card is a piece of pixel-powered passion.
-      </p>
-      <img src="../images/ahmad-selling.png" alt="The Gum-Gum team" />
+  <section class="features-section">
+    <div style="padding-top: 3rem;">
+      <h3 class="section-title" style="color: #ffea00; margin-bottom: 2rem;">✨ WHY CHOOSE US</h3>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon-large">🔍</div>
+          <h4>100% AUTHENTIC</h4>
+          <p>VERIFIED CARDS</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon-large">🚚</div>
+          <h4>FAST SHIPPING</h4>
+          <p>SAME-DAY PROCESS</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon-large">💰</div>
+          <h4>FAIR PRICES</h4>
+          <p>BEST VALUES</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon-large">⭐</div>
+          <h4>100% RATING</h4>
+          <p>PERFECT FEEDBACK</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="community" class="community">
-    <h3 class="section-title">🌐 Join the Community</h3>
-    <p>Be part of tournaments, giveaways, and livestream pack openings. Connect with other cardmasters and grow your
-      collection together.</p>
-    <img src="../images/gumgum-insta.png" alt="Online card community" />
-    <div style="margin-top: 1.5rem;">
-      <a href="https://www.instagram.com/gumgumpokemon/" target="_blank" style="color: #ffe74c; text-decoration: none; font-size: 0.9rem; margin: 0 1rem;">Follow on Instagram</a>
-      <a href="https://ebay.us/m/tVP3Gb" target="_blank" style="color: #ffe74c; text-decoration: none; font-size: 0.9rem; margin: 0 1rem;">Shop on eBay</a>
+  <section class="retro-box">
+    <h3 class="section-title" style="margin-top: 1rem;">🃏 BROWSE COLLECTION</h3>
+    <p style="font-size: 0.75rem; color: #dcdcdc; margin-bottom: 1rem;">EXPLORE ALL CARDS</p>
+    <div class="all-cards-grid">
+      <div class="mini-card">
+        <img src="../images/misty-trainer.png" alt="Card">
+      </div>
+      <div class="mini-card">
+        <img src="../images/rocket-mewtwo.png" alt="Card">
+      </div>
+      <div class="mini-card">
+        <img src="../images/rocket-raticate.png" alt="Card">
+      </div>
+      <div class="mini-card">
+        <img src="../images/rocket-crobat.png" alt="Card">
+      </div>
+      <div class="mini-card">
+        <img src="../images/typhlosion-trainer.png" alt="Card">
+      </div>
+      <div class="mini-card">
+        <img src="../images/cynthia-garchomp.png" alt="Card">
+      </div>
+    </div>
+    <div style="margin-top: 2rem;">
+      <a href="shop.html" class="cta-button">FULL COLLECTION →</a>
     </div>
   </section>
 
-  <section id="contact" class="shop-preview">
-    <h3 class="section-title">📧 Contact Us</h3>
-    <p style="font-size: 0.75rem; color: #dcdcdc; margin-bottom: 1.5rem;">
-      Have questions about our cards, want to place a custom order, or need help with your collection? 
-      We're here to help! Reach out through any of the channels below.
-    </p>
-    <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center; font-size: 0.75rem;">
-      <div>
-        <strong style="color: #ffda6f;">📱 Instagram:</strong> 
-        <a href="https://www.instagram.com/gumgumpokemon/" target="_blank" style="color: #ffe74c; text-decoration: none;">@gumgumpokemon</a>
+  <section class="testimonials-section">
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Amazing cards and fast shipping! Highly recommend!"</p>
+        <p class="testimonial-author">- SARAH M.</p>
       </div>
-      <div>
-        <strong style="color: #ffda6f;">🛒 eBay Shop:</strong> 
-        <a href="https://ebay.us/m/tVP3Gb" target="_blank" style="color: #ffe74c; text-decoration: none;">Visit our eBay store</a>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Best prices and authentic cards. Will definitely buy again!"</p>
+        <p class="testimonial-author">- MIKE T.</p>
       </div>
-      <div>
-        <strong style="color: #ffda6f;">💳 Payment Options:</strong> 
-        <a href="../payments/payments.html" style="color: #ffe74c; text-decoration: none;">View payment methods</a>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Packaging was perfect. Cards arrived in mint condition!"</p>
+        <p class="testimonial-author">- ALEX R.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="events-section">
+    <p style="font-size: 0.75rem; color: #dcdcdc; margin-top: 2rem; margin-bottom: 1rem;">JOIN COMMUNITY EVENTS</p>
+    <div class="events-grid">
+      <div class="event-card">
+        <div class="event-icon">🎁</div>
+        <h4>MONTHLY GIVEAWAY</h4>
+        <p>WIN RARE CARDS</p>
+        <div class="event-date">ONGOING</div>
+      </div>
+      <div class="event-card">
+        <div class="event-icon">📺</div>
+        <h4>PACK OPENINGS</h4>
+        <p>LIVE STREAMS</p>
+        <div class="event-date">WEEKLY</div>
+      </div>
+      <div class="event-card">
+        <div class="event-icon">🏆</div>
+        <h4>TRADING EVENTS</h4>
+        <p>CONNECT & TRADE</p>
+        <div class="event-date">MONTHLY</div>
+      </div>
+      <div class="event-card">
+        <div class="event-icon">💬</div>
+        <h4>SHOWCASE</h4>
+        <p>SHARE COLLECTIONS</p>
+        <div class="event-date">ONGOING</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="retro-box">
+    <h3 class="section-title" style="margin-top: 1rem;">🎮 ABOUT US</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; margin-top: 2rem;">
+      <div style="text-align: left;">
+        <p style="font-size: 0.75rem; color: #dcdcdc; line-height: 1.8;">STARTED BY FANS, FOR FANS. EVERY CARD IS PIXEL-POWERED PASSION.</p>
+        <div style="margin-top: 1.5rem;">
+          <a href="about.html" class="cta-button" style="display: inline-block;">LEARN MORE →</a>
+        </div>
+      </div>
+      <img src="../images/ahmad-selling.png" alt="The Gum-Gum team" style="width: 100%; border: 3px solid #ffea00; border-style: double; box-shadow: 0 0 20px #ffd700;" />
+    </div>
+    <div class="image-gallery" style="margin-top: 2rem;">
+      <div class="gallery-item">
+        <img src="../images/rocket-crobat.png" alt="Card Collection">
+      </div>
+      <div class="gallery-item">
+        <img src="../images/typhlosion-trainer.png" alt="Card Collection">
+      </div>
+      <div class="gallery-item">
+        <img src="../images/rocket-raticate.png" alt="Card Collection">
+      </div>
+      <div class="gallery-item">
+        <img src="../images/misty-trainer.png" alt="Card Collection">
+      </div>
+    </div>
+  </section>
+
+  <section class="retro-box">
+    <h3 class="section-title" style="margin-top: 1rem;">🌐 JOIN COMMUNITY</h3>
+    <p style="font-size: 0.75rem; color: #dcdcdc; margin-bottom: 1.5rem;">TOURNAMENTS • GIVEAWAYS • PACK OPENINGS</p>
+    <img src="../images/gumgum-insta.png" alt="Online card community" style="max-width: 60%; border: 3px solid #ffea00; border-style: double; box-shadow: 0 0 20px #ffd700; margin-bottom: 2rem;" />
+    <div class="quick-links">
+      <a href="https://www.instagram.com/gumgumpokemon/" target="_blank" class="quick-link-card">
+        <div class="quick-link-icon">📷</div>
+        <div class="quick-link-title">INSTAGRAM</div>
+        <div class="quick-link-desc">@GUMGUMPOKEMON</div>
+      </a>
+      <a href="https://ebay.us/m/tVP3Gb" target="_blank" class="quick-link-card">
+        <div class="quick-link-icon">🛒</div>
+        <div class="quick-link-title">EBAY</div>
+        <div class="quick-link-desc">SHOP NOW</div>
+      </a>
+      <a href="community.html" class="quick-link-card">
+        <div class="quick-link-icon">🌐</div>
+        <div class="quick-link-title">COMMUNITY</div>
+        <div class="quick-link-desc">JOIN EVENTS</div>
+      </a>
+      <a href="contact.html" class="quick-link-card">
+        <div class="quick-link-icon">✉️</div>
+        <div class="quick-link-title">CONTACT</div>
+        <div class="quick-link-desc">GET IN TOUCH</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h3 class="section-title" style="color: #ffea00; margin-top: 3rem;">READY TO START COLLECTING?</h3>
+    <p style="font-size: 0.75rem; color: #ffffff; margin-bottom: 2rem;">JOIN THOUSANDS OF COLLECTORS BUILDING THEIR DREAM COLLECTIONS!</p>
+    <div class="cta-buttons">
+      <a href="shop.html" class="cta-button">🛒 SHOP NOW</a>
+      <a href="https://www.instagram.com/gumgumpokemon/" target="_blank" class="cta-button">📷 FOLLOW US</a>
+      <a href="community.html" class="cta-button">🌐 JOIN COMMUNITY</a>
     </div>
   </section>
 

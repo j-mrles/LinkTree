@@ -196,6 +196,80 @@
       box-shadow: 0 0 25px #ffd700;
     }
 
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .category-tab {
+      background-color: #1a0032;
+      border: 2px solid #8732c9;
+      color: #ffe74c;
+      padding: 0.5rem 1rem;
+      font-size: 0.7rem;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+
+    .category-tab:hover,
+    .category-tab.active {
+      background-color: #8732c9;
+      border-color: #ffea00;
+      color: #ffea00;
+      box-shadow: 0 0 10px #ffd700;
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background-color: #1a0032;
+      border: 2px solid #ffe74c;
+      border-radius: 8px;
+    }
+
+    .stat-box {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 1.2rem;
+      color: #00ff00;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.6rem;
+      color: #dcdcdc;
+    }
+
+    .featured-banner {
+      background: linear-gradient(135deg, #8732c9, #460a7f);
+      padding: 2rem;
+      border-radius: 10px;
+      margin: 2rem 0;
+      border: 2px solid #ffd700;
+      box-shadow: 0 0 20px #ffd700;
+    }
+
+    .featured-banner h3 {
+      font-size: 1rem;
+      color: #ffea00;
+      margin-bottom: 1rem;
+    }
+
+    .featured-banner p {
+      font-size: 0.7rem;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
     footer {
       background-color: #1a0032;
       padding: 1rem;
@@ -228,6 +302,34 @@
       Browse our collection of rare and collectible Pokémon cards. From vintage classics to modern chase cards, 
       we've got the perfect addition to your collection. All cards are authenticated and in mint condition!
     </p>
+
+    <div class="stats-bar">
+      <div class="stat-box">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Cards Available</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Authentic Cards</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">eBay Store Open</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">1000+</div>
+        <div class="stat-label">Happy Customers</div>
+      </div>
+    </div>
+
+    <div class="category-tabs">
+      <button class="category-tab active" onclick="filterCategory('all')">All Cards</button>
+      <button class="category-tab" onclick="filterCategory('vintage')">Vintage</button>
+      <button class="category-tab" onclick="filterCategory('modern')">Modern</button>
+      <button class="category-tab" onclick="filterCategory('rare')">Rare</button>
+      <button class="category-tab" onclick="filterCategory('trainer')">Trainer Cards</button>
+      <button class="category-tab" onclick="filterCategory('special')">Special Editions</button>
+    </div>
 
     <div class="shop-section">
       <h3 class="section-heading">🔥 Featured Cards</h3>
@@ -312,7 +414,72 @@
         to be the first to know about new arrivals, special deals, and limited-time offers.
       </p>
     </div>
+
+    <div class="featured-banner">
+      <h3>🎁 Limited Time: Free Shipping on Orders Over $50!</h3>
+      <p>
+        Use code FREESHIP50 at checkout for free shipping on all orders over $50. Valid until end of month. 
+        Don't miss out on this amazing deal!
+      </p>
+    </div>
+
+    <div class="shop-section">
+      <h3 class="section-heading">📚 Card Categories</h3>
+      <div class="cards-grid">
+        <div class="card-item">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🎴</div>
+          <div class="card-name">Vintage Base Set</div>
+          <div class="card-type">Original 1999-2000 cards</div>
+          <div class="card-rarity">Starting at $25</div>
+          <a href="https://ebay.us/m/tVP3Gb" target="_blank" class="shop-button">Browse Vintage</a>
+        </div>
+        <div class="card-item">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">✨</div>
+          <div class="card-name">Modern Chase Cards</div>
+          <div class="card-type">Latest sets & alt arts</div>
+          <div class="card-rarity">Starting at $15</div>
+          <a href="https://ebay.us/m/tVP3Gb" target="_blank" class="shop-button">Browse Modern</a>
+        </div>
+        <div class="card-item">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
+          <div class="card-name">Graded Cards</div>
+          <div class="card-type">PSA/BGS graded</div>
+          <div class="card-rarity">Various prices</div>
+          <a href="https://ebay.us/m/tVP3Gb" target="_blank" class="shop-button">Browse Graded</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="shop-section">
+      <h3 class="section-heading">💡 Shopping Tips</h3>
+      <div style="text-align: left; font-size: 0.7rem; color: #dcdcdc; line-height: 1.8;">
+        <p><strong style="color: #ffda6f;">• Check Card Condition:</strong> All cards are listed with detailed condition descriptions. Read carefully!</p>
+        <p><strong style="color: #ffda6f;">• Authentication:</strong> We verify every card before listing. All high-value cards include authenticity photos.</p>
+        <p><strong style="color: #ffda6f;">• Shipping:</strong> Cards are shipped in top loaders and bubble mailers for maximum protection.</p>
+        <p><strong style="color: #ffda6f;">• Best Offers:</strong> Many listings accept best offers. Don't hesitate to make an offer!</p>
+        <p><strong style="color: #ffda6f;">• Bundles:</strong> Save money by purchasing multiple cards together. Check our bundle listings!</p>
+      </div>
+    </div>
+
+    <div class="shop-section">
+      <h3 class="section-heading">⭐ Customer Reviews</h3>
+      <div style="text-align: left; font-size: 0.7rem; color: #dcdcdc;">
+        <p style="margin-bottom: 1rem;"><strong style="color: #ffea00;">★★★★★</strong> "Amazing cards and fast shipping! Highly recommend!" - Sarah M.</p>
+        <p style="margin-bottom: 1rem;"><strong style="color: #ffea00;">★★★★★</strong> "Best prices and authentic cards. Will definitely buy again!" - Mike T.</p>
+        <p style="margin-bottom: 1rem;"><strong style="color: #ffea00;">★★★★★</strong> "Packaging was perfect. Cards arrived in mint condition!" - Alex R.</p>
+      </div>
+    </div>
   </div>
+
+  <script>
+    function filterCategory(category) {
+      const tabs = document.querySelectorAll('.category-tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+      // In a real implementation, this would filter the cards
+      console.log('Filtering by:', category);
+    }
+  </script>
 
   <footer>
     &copy; 2025 Gum-Gum Cards. Retro coolness, modern hype.

@@ -213,6 +213,60 @@
       margin-top: 3rem;
     }
 
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .info-card {
+      background-color: #1a0032;
+      border: 2px solid #ffe74c;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .info-card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-card h4 {
+      font-size: 0.8rem;
+      color: #ffea00;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-card p {
+      font-size: 0.65rem;
+      color: #dcdcdc;
+      line-height: 1.6;
+    }
+
+    .faq-item {
+      background-color: #1a0032;
+      border: 2px solid #8732c9;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .faq-item strong {
+      display: block;
+      font-size: 0.75rem;
+      color: #ffda6f;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-item span {
+      font-size: 0.7rem;
+      color: #dcdcdc;
+      line-height: 1.6;
+    }
+
     @media (max-width: 768px) {
       .contact-grid {
         grid-template-columns: 1fr;
@@ -294,20 +348,85 @@
     </div>
 
     <div class="content-section">
-      <h3>Frequently Asked Questions</h3>
-      <div style="text-align: left;">
-        <p><strong style="color: #ffda6f;">Q: How do I purchase cards?</strong><br>
-        A: Browse our eBay store or contact us through Instagram for custom orders!</p>
-
-        <p><strong style="color: #ffda6f;">Q: Are all cards authentic?</strong><br>
-        A: Yes! We verify the authenticity of every card before listing.</p>
-
-        <p><strong style="color: #ffda6f;">Q: Do you ship internationally?</strong><br>
-        A: Yes, we ship worldwide! Shipping costs vary by location.</p>
-
-        <p><strong style="color: #ffda6f;">Q: Can I request specific cards?</strong><br>
-        A: Absolutely! Contact us and we'll let you know if we have it or can find it!</p>
+      <h3>Quick Contact Options</h3>
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="info-card-icon">📱</div>
+          <h4>Instagram DM</h4>
+          <p>Fastest response! Message us @gumgumpokemon for quick questions</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🛒</div>
+          <h4>eBay Messages</h4>
+          <p>For questions about specific listings or orders</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">💬</div>
+          <h4>Contact Form</h4>
+          <p>Use the form above for detailed inquiries</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">⏰</div>
+          <h4>Response Time</h4>
+          <p>We respond within 24-48 hours on all platforms</p>
+        </div>
       </div>
+    </div>
+
+    <div class="content-section">
+      <h3>Frequently Asked Questions</h3>
+      <div class="faq-item">
+        <strong>Q: How do I purchase cards?</strong>
+        <span>A: Browse our eBay store or contact us through Instagram for custom orders! We accept PayPal, Venmo, Cash App, and Zelle.</span>
+      </div>
+      <div class="faq-item">
+        <strong>Q: Are all cards authentic?</strong>
+        <span>A: Yes! We verify the authenticity of every card before listing. All high-value cards include authenticity photos.</span>
+      </div>
+      <div class="faq-item">
+        <strong>Q: Do you ship internationally?</strong>
+        <span>A: Yes, we ship worldwide! Shipping costs vary by location. International orders typically take 2-3 weeks.</span>
+      </div>
+      <div class="faq-item">
+        <strong>Q: Can I request specific cards?</strong>
+        <span>A: Absolutely! Contact us and we'll let you know if we have it in stock or can help you find it!</span>
+      </div>
+      <div class="faq-item">
+        <strong>Q: What's your return policy?</strong>
+        <span>A: We accept returns within 7 days if the card doesn't match the description. Cards must be in original condition.</span>
+      </div>
+      <div class="faq-item">
+        <strong>Q: Do you offer card grading services?</strong>
+        <span>A: We don't grade cards ourselves, but we can help you find reputable grading services. We also sell pre-graded cards!</span>
+      </div>
+      <div class="faq-item">
+        <strong>Q: How do I track my order?</strong>
+        <span>A: You'll receive a tracking number via email or eBay message once your order ships. Most orders ship within 1-2 business days.</span>
+      </div>
+      <div class="faq-item">
+        <strong>Q: Do you buy collections?</strong>
+        <span>A: Yes! If you have a collection to sell, contact us with photos and we'll make you an offer. We're always looking for new inventory!</span>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h3>Business Hours & Availability</h3>
+      <div style="text-align: left; font-size: 0.7rem; color: #dcdcdc; line-height: 1.8;">
+        <p><strong style="color: #ffda6f;">eBay Store:</strong> Open 24/7 - Shop anytime!</p>
+        <p><strong style="color: #ffda6f;">Instagram:</strong> Active daily - Check stories for latest updates and new arrivals</p>
+        <p><strong style="color: #ffda6f;">Customer Service:</strong> We respond to messages Monday-Friday, 9 AM - 6 PM EST</p>
+        <p><strong style="color: #ffda6f;">Shipping:</strong> Orders placed Monday-Thursday ship within 1-2 business days. Weekend orders ship Monday.</p>
+        <p><strong style="color: #ffda6f;">Holiday Hours:</strong> We may have limited availability during major holidays. Check our Instagram for updates!</p>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h3>Partnership & Collaboration</h3>
+      <p style="font-size: 0.75rem; color: #dcdcdc; line-height: 1.8;">
+        Interested in collaborating, sponsoring an event, or partnering with Gum-Gum Cards? 
+        We're always open to working with fellow collectors, content creators, and businesses 
+        that align with our values. Reach out through the contact form above and let's talk!
+      </p>
     </div>
   </div>
 

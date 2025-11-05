@@ -136,6 +136,83 @@
       line-height: 1.6;
     }
 
+    .timeline {
+      margin: 2rem 0;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline-item {
+      margin-bottom: 2rem;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background-color: #ffe74c;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #ffea00;
+      border: 2px solid #000;
+    }
+
+    .timeline-year {
+      font-size: 0.8rem;
+      color: #ffea00;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-content {
+      font-size: 0.7rem;
+      color: #dcdcdc;
+      line-height: 1.6;
+    }
+
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .achievement-item {
+      background-color: #1a0032;
+      border: 2px solid #ffd700;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .achievement-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .achievement-item h4 {
+      font-size: 0.8rem;
+      color: #ffea00;
+      margin-bottom: 0.5rem;
+    }
+
+    .achievement-item p {
+      font-size: 0.6rem;
+      color: #dcdcdc;
+    }
+
     footer {
       background-color: #1a0032;
       padding: 1rem;
@@ -213,6 +290,100 @@
           <p>Professional packaging ensures your cards arrive in perfect condition, every time.</p>
         </div>
       </div>
+    </div>
+
+    <div class="content-section">
+      <h3>Our Journey - Timeline</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2020 - The Beginning</div>
+          <div class="timeline-content">
+            Started as a small passion project, selling cards from our personal collections to fellow collectors.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2021 - Growing Community</div>
+          <div class="timeline-content">
+            Launched Instagram account and began building a community of Pokémon card enthusiasts. Reached 1,000 followers!
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2022 - eBay Store Launch</div>
+          <div class="timeline-content">
+            Opened official eBay store with 500+ authentic cards. Started offering professional authentication services.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2023 - Major Milestone</div>
+          <div class="timeline-content">
+            Reached 10,000+ Instagram followers and completed over 1,000 successful transactions with 100% positive feedback.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2024 - Expansion</div>
+          <div class="timeline-content">
+            Expanded inventory to include graded cards, vintage sets, and exclusive finds. Launched community events and giveaways.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025 - Today</div>
+          <div class="timeline-content">
+            Continuing to grow, discover rare cards, and build the best Pokémon card collecting community possible!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h3>Our Achievements</h3>
+      <div class="achievements-grid">
+        <div class="achievement-item">
+          <div class="achievement-icon">🏆</div>
+          <h4>100% Positive Feedback</h4>
+          <p>Maintained perfect rating across all platforms</p>
+        </div>
+        <div class="achievement-item">
+          <div class="achievement-icon">⭐</div>
+          <h4>10,000+ Followers</h4>
+          <p>Growing community on Instagram</p>
+        </div>
+        <div class="achievement-item">
+          <div class="achievement-icon">📦</div>
+          <h4>1,000+ Sales</h4>
+          <p>Successful transactions completed</p>
+        </div>
+        <div class="achievement-item">
+          <div class="achievement-icon">💎</div>
+          <h4>500+ Cards</h4>
+          <p>Current inventory available</p>
+        </div>
+        <div class="achievement-item">
+          <div class="achievement-icon">🔍</div>
+          <h4>100% Authentic</h4>
+          <p>Every card verified before listing</p>
+        </div>
+        <div class="achievement-item">
+          <div class="achievement-icon">🚚</div>
+          <h4>Fast Shipping</h4>
+          <p>Same-day processing, worldwide delivery</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h3>Why Choose Gum-Gum Cards?</h3>
+      <p>
+        <strong style="color: #ffda6f;">Passion-Driven:</strong> We're not just sellers—we're collectors who understand the thrill of the hunt and the joy of finding that perfect card.
+      </p>
+      <p>
+        <strong style="color: #ffda6f;">Trust & Transparency:</strong> Every card is photographed from multiple angles, condition is honestly described, and we're always available to answer questions.
+      </p>
+      <p>
+        <strong style="color: #ffda6f;">Community Focus:</strong> We believe in building relationships, not just making sales. Our community events, giveaways, and interactions make us more than just a store.
+      </p>
+      <p>
+        <strong style="color: #ffda6f;">Quality First:</strong> We only list cards we'd want in our own collection. If it's not good enough for us, it's not good enough for you.
+      </p>
     </div>
 
     <div class="content-section">
