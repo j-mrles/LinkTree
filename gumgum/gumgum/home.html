@@ -1046,6 +1046,320 @@
       border-width: 4px;
       border-style: solid;
     }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+      body {
+        font-size: 0.7rem;
+      }
+
+      header {
+        padding: 0.5rem;
+      }
+
+      .header-top {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .header-top img {
+        width: 60px;
+      }
+
+      .header-top h1 {
+        font-size: 1.2rem;
+        text-align: center;
+      }
+
+      nav {
+        margin: 0.5rem 0;
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
+      }
+
+      nav a {
+        font-size: 0.7rem;
+        margin: 0 0.5rem;
+        padding: 0.3rem;
+      }
+
+      .hero {
+        padding: 2rem 1rem;
+      }
+
+      .hero h2 {
+        font-size: 1.2rem;
+      }
+
+      .hero p {
+        font-size: 0.7rem;
+      }
+
+      .hero img {
+        max-width: 90%;
+      }
+
+      .stats-banner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 1.5rem;
+        margin: 1.5rem auto;
+      }
+
+      .stat-number {
+        font-size: 1.2rem;
+      }
+
+      .stat-label {
+        font-size: 0.5rem;
+      }
+
+      .quick-links {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .quick-link-card {
+        padding: 1.5rem 1rem;
+        min-height: 120px;
+      }
+
+      .quick-link-icon {
+        font-size: 2rem;
+      }
+
+      .quick-link-title {
+        font-size: 0.7rem;
+      }
+
+      .quick-link-desc {
+        font-size: 0.55rem;
+      }
+
+      .promo-banner {
+        padding: 1.5rem;
+        margin: 2rem auto;
+      }
+
+      .promo-banner h3 {
+        font-size: 0.8rem;
+      }
+
+      .promo-banner p {
+        font-size: 0.6rem;
+      }
+
+      .arcade-section {
+        padding: 2rem 1rem;
+      }
+
+      .section-title {
+        font-size: 1rem;
+      }
+
+      .carousel-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+      }
+
+      .carousel-btn.left {
+        left: 5px;
+      }
+
+      .carousel-btn.right {
+        right: 5px;
+      }
+
+      .featured-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .feature-card {
+        padding: 1.5rem;
+      }
+
+      .features-section {
+        padding: 3rem 1rem;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .feature-item {
+        padding: 1.5rem;
+        min-height: 180px;
+      }
+
+      .feature-icon-large {
+        font-size: 3rem;
+      }
+
+      .feature-item h4 {
+        font-size: 0.8rem;
+      }
+
+      .feature-item p {
+        font-size: 0.6rem;
+      }
+
+      .all-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+
+      .testimonials-section {
+        padding: 2rem 1rem;
+        margin: 2rem auto;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .testimonial-card {
+        padding: 1.5rem;
+        min-height: auto;
+      }
+
+      .events-section {
+        padding: 2rem 1rem;
+        margin: 2rem auto;
+      }
+
+      .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .event-card {
+        padding: 1.5rem;
+        min-height: 160px;
+      }
+
+      .event-icon {
+        font-size: 1.5rem;
+      }
+
+      .event-card h4 {
+        font-size: 0.7rem;
+      }
+
+      .event-card p {
+        font-size: 0.6rem;
+      }
+
+      .image-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .retro-box {
+        padding: 1.5rem;
+        margin: 1.5rem auto;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+      }
+
+      .about-image {
+        max-width: 100% !important;
+        order: -1;
+      }
+
+      .retro-box img {
+        max-width: 100% !important;
+      }
+
+      .community-image {
+        max-width: 100% !important;
+      }
+
+      .cta-section {
+        padding: 3rem 1rem;
+        margin: 2rem 0;
+      }
+
+      .cta-section::before {
+        font-size: 0.8rem;
+        letter-spacing: 0.2rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .cta-button {
+        padding: 1rem 2rem;
+        font-size: 0.8rem;
+        width: 90%;
+        max-width: 300px;
+      }
+
+      section {
+        padding: 2rem 1rem;
+      }
+
+      footer {
+        padding: 1rem 0.5rem;
+        font-size: 0.6rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-banner {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .quick-links {
+        grid-template-columns: 1fr;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .all-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .image-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h2 {
+        font-size: 1rem;
+      }
+
+      .hero p {
+        font-size: 0.65rem;
+      }
+
+      nav a {
+        font-size: 0.6rem;
+        margin: 0 0.3rem;
+      }
+
+      .section-title {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 
@@ -1306,14 +1620,14 @@
 
   <section class="retro-box">
     <h3 class="section-title" style="margin-top: 1rem;">🎮 ABOUT US</h3>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; margin-top: 2rem;">
+    <div class="about-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; margin-top: 2rem;">
       <div style="text-align: left;">
         <p style="font-size: 0.75rem; color: #dcdcdc; line-height: 1.8;">STARTED BY FANS, FOR FANS. EVERY CARD IS PIXEL-POWERED PASSION.</p>
         <div style="margin-top: 1.5rem;">
           <a href="about.html" class="cta-button" style="display: inline-block;">LEARN MORE →</a>
         </div>
       </div>
-      <img src="../images/ahmad-selling.png" alt="The Gum-Gum team" style="width: 100%; border: 3px solid #ffea00; border-style: double; box-shadow: 0 0 20px #ffd700;" />
+      <img src="../images/ahmad-selling.png" alt="The Gum-Gum team" class="about-image" style="width: 100%; border: 3px solid #ffea00; border-style: double; box-shadow: 0 0 20px #ffd700;" />
     </div>
     <div class="image-gallery" style="margin-top: 2rem;">
       <div class="gallery-item">
@@ -1334,7 +1648,7 @@
   <section class="retro-box">
     <h3 class="section-title" style="margin-top: 1rem;">🌐 JOIN COMMUNITY</h3>
     <p style="font-size: 0.75rem; color: #dcdcdc; margin-bottom: 1.5rem;">TOURNAMENTS • GIVEAWAYS • PACK OPENINGS</p>
-    <img src="../images/gumgum-insta.png" alt="Online card community" style="max-width: 60%; border: 3px solid #ffea00; border-style: double; box-shadow: 0 0 20px #ffd700; margin-bottom: 2rem;" />
+    <img src="../images/gumgum-insta.png" alt="Online card community" class="community-image" style="max-width: 60%; border: 3px solid #ffea00; border-style: double; box-shadow: 0 0 20px #ffd700; margin-bottom: 2rem;" />
     <div class="quick-links">
       <a href="https://www.instagram.com/gumgumpokemon/" target="_blank" class="quick-link-card">
         <div class="quick-link-icon">📷</div>
