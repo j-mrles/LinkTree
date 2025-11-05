@@ -7,9 +7,10 @@ body, h1, h2, p {
 
 
 body {
-    font-family: "Arial", sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f0f8f0 0%, #e8f5e8 100%);
+    color: #2c3e2d;
+    line-height: 1.6;
 }
 #main-image {
     overflow: hidden;
@@ -40,9 +41,13 @@ body {
 }
 
 .service-item {
-    border: 1px solid #ddd; 
-    padding: 15px;
+    border: 2px solid #e8f5e8; 
+    padding: 20px;
     text-align: left;
+    background: #fff;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .service-item img {
@@ -60,22 +65,31 @@ body {
 }
 
 
+.service-item:hover {
+    box-shadow: 0 8px 20px rgba(106, 153, 78, 0.3); 
+    transform: translateY(-5px); 
+    border-color: #6a994e;
+    transition: all 0.3s ease; 
+}
+
 .service-item.hovered {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
-    transform: scale(1.05); 
-    transition: box-shadow 0.3s ease, transform 0.3s ease; 
+    box-shadow: 0 8px 20px rgba(106, 153, 78, 0.3); 
+    transform: translateY(-5px); 
+    border-color: #6a994e;
+    transition: all 0.3s ease; 
 }
 
 
 header {
-    font-family: Arial, Helvetica, sans-serif;
-    background-size: cover;
-    color: #076426;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #2d5016 0%, #4a7c2a 50%, #6a994e 100%);
+    color: #ffffff;
     text-align: center;
-    padding: 1.25em;
+    padding: 2em 1.25em;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .logo img {
@@ -175,12 +189,12 @@ nav a:focus {
 }
 
 main {
-    max-width: 50em; 
-    margin: 1.25em auto;
+    max-width: 1200px; 
+    margin: 2em auto;
     background-color: #fff;
-    padding: 1.25em;
+    padding: 2em;
     border-radius: 1.25em; 
-    box-shadow: 0 0 1.25em rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); 
 }
 
 section {
@@ -191,7 +205,15 @@ section {
 }
 
 h2 {
-    color: #6a994e;
+    color: #2d5016;
+    font-size: 2em;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+h3 {
+    color: #4a7c2a;
+    font-size: 1.4em;
 }
 
 select {
@@ -285,17 +307,27 @@ footer p {
     text-align: left;
 }
 
+.contact-us {
+    text-align: center;
+}
+
 .contact-us button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007BFF;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #4a7c2a 0%, #6a994e 100%);
     color: #fff;
     border: none;
+    border-radius: 8px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(106, 153, 78, 0.3);
 }
 
 .contact-us button:hover {
-    background-color: #0056b3;
+    background: linear-gradient(135deg, #6a994e 0%, #4a7c2a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(106, 153, 78, 0.4);
 }
 .estimate-calculator {
     padding: 20px;

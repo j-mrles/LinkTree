@@ -26,31 +26,33 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
-    }
-
-    .header-top img {
-      width: 80px;
-      height: auto;
     }
 
     .header-top h1 {
       margin: 0;
       font-size: 1.6rem;
-      text-align: left;
+      text-align: center;
       color: #fdfd96;
       text-shadow: 3px 3px 0 #000;
     }
 
     nav {
       margin: 1rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     nav a {
       color: #ffe74c;
       text-decoration: none;
-      margin: 0 1.2rem;
+      margin: 0 0.5rem;
       font-size: 0.9rem;
+      padding: 0.5rem 0.8rem;
+      display: inline-block;
+      transition: all 0.3s ease;
     }
 
     nav a:hover {
@@ -1059,11 +1061,6 @@
 
       .header-top {
         flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      .header-top img {
-        width: 60px;
       }
 
       .header-top h1 {
@@ -1073,15 +1070,16 @@
 
       nav {
         margin: 0.5rem 0;
+        padding: 0.5rem;
+        flex-direction: row;
         flex-wrap: wrap;
-        display: flex;
-        justify-content: center;
       }
 
       nav a {
         font-size: 0.7rem;
-        margin: 0 0.5rem;
-        padding: 0.3rem;
+        margin: 0.2rem;
+        padding: 0.5rem 0.8rem;
+        display: inline-block;
       }
 
       .hero {
@@ -1173,6 +1171,11 @@
         right: 5px;
       }
 
+      .carousel-track img {
+        max-width: 100%;
+        border-radius: 8px;
+      }
+
       .featured-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -1210,8 +1213,12 @@
       }
 
       .all-cards-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+      }
+
+      .mini-card {
+        aspect-ratio: 1;
       }
 
       .testimonials-section {
@@ -1321,43 +1328,217 @@
       .stats-banner {
         grid-template-columns: 1fr;
         gap: 1rem;
+        padding: 1rem;
+      }
+
+      .stat-box {
+        min-height: 60px;
+      }
+
+      .stat-number {
+        font-size: 1rem;
       }
 
       .quick-links {
         grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+
+      .quick-link-card {
+        padding: 1.2rem;
+        min-height: 100px;
       }
 
       .features-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .feature-item {
+        padding: 1.2rem;
+        min-height: 160px;
       }
 
       .events-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .event-card {
+        padding: 1.2rem;
+        min-height: 140px;
       }
 
       .all-cards-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
       }
 
       .image-gallery {
         grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .hero {
+        padding: 1.5rem 0.5rem;
       }
 
       .hero h2 {
-        font-size: 1rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
       }
 
       .hero p {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
+        padding: 0 0.5rem;
+      }
+
+      .hero img {
+        max-width: 95%;
+        margin-top: 1rem;
+      }
+
+      nav {
+        padding: 0.5rem 0;
+        flex-direction: column;
+        gap: 0.5rem;
       }
 
       nav a {
         font-size: 0.6rem;
-        margin: 0 0.3rem;
+        margin: 0;
+        padding: 0.6rem;
+        display: block;
+        width: 90%;
+        max-width: 300px;
+        text-align: center;
+        margin: 0 auto;
       }
 
       .section-title {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+        padding: 0.5rem;
+      }
+
+      .carousel-btn.left {
+        left: 2px;
+      }
+
+      .carousel-btn.right {
+        right: 2px;
+      }
+
+      .carousel-track img {
+        max-width: 100%;
+        border-radius: 6px;
+      }
+
+      .featured-grid {
+        gap: 1rem;
+      }
+
+      .feature-card {
+        padding: 1rem;
+      }
+
+      .feature-card img {
+        height: 150px;
+      }
+
+      .promo-banner {
+        padding: 1rem;
+        margin: 1.5rem auto;
+      }
+
+      .promo-banner h3 {
+        font-size: 0.7rem;
+      }
+
+      .promo-banner p {
+        font-size: 0.55rem;
+      }
+
+      .promo-banner::before,
+      .promo-banner::after {
+        font-size: 1.2rem;
+      }
+
+      .testimonial-card {
+        padding: 1.2rem;
+      }
+
+      .testimonial-text {
+        font-size: 0.65rem;
+      }
+
+      .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.7rem;
+        width: 95%;
+      }
+
+      .retro-box {
+        padding: 1rem;
+        margin: 1rem auto;
+      }
+
+      section {
+        padding: 1.5rem 0.5rem;
+      }
+
+      .arcade-section {
+        padding: 1.5rem 0.5rem;
+        margin: 1rem 0;
+      }
+
+      .features-section {
+        padding: 2rem 0.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .cta-section {
+        padding: 2rem 0.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .cta-section::before {
+        font-size: 0.7rem;
+        letter-spacing: 0.1rem;
+        padding: 0.3rem;
+      }
+
+      .hero::before,
+      .hero::after {
+        font-size: 1rem;
+        top: 0.5rem;
+      }
+
+      .hero::before {
+        left: 0.5rem;
+      }
+
+      .hero::after {
+        right: 0.5rem;
+      }
+
+      .stats-banner::before,
+      .stats-banner::after {
+        font-size: 1rem;
+      }
+
+      .stats-banner::before {
+        left: -15px;
+      }
+
+      .stats-banner::after {
+        right: -15px;
       }
     }
   </style>
@@ -1405,7 +1586,6 @@
 <body>
   <header>
     <div class="header-top">
-      <img src="../images/IMG_2949.png" alt="Gum-Gum Cards Logo" />
       <h1>Gum-Gum Cards</h1>
     </div>
     <nav>
@@ -1424,7 +1604,7 @@
     <div class="hero-content">
       <h2>GUM-GUM CARDS</h2>
       <p>RETRO COLLECTIBLES • PIXEL POWER • ARCADE STYLE</p>
-      <img src="../images/main-home.png" alt="Retro card collection" />
+    <img src="../images/main-home.png" alt="Retro card collection" />
       
       <div class="stats-banner">
         <div class="stat-box">
