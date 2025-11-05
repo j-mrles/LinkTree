@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community - Gum-Gum Cards</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', cursive;
+      background-color: #0e0420;
+      color: #fdfd96;
+      text-align: center;
+    }
+
+    header {
+      background-color: #460a7f;
+      padding: 1rem;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .header-top img {
+      width: 80px;
+      height: auto;
+    }
+
+    .header-top h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      text-align: left;
+      color: #fdfd96;
+      text-shadow: 3px 3px 0 #000;
+    }
+
+    nav {
+      margin: 1rem 0;
+    }
+
+    nav a {
+      color: #ffe74c;
+      text-decoration: none;
+      margin: 0 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    nav a.active {
+      color: #ffea00;
+      text-shadow: 2px 2px 0 #000;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .page-title {
+      font-size: 1.8rem;
+      color: #ffea00;
+      margin-bottom: 1rem;
+      text-shadow: 3px 3px 0 #000;
+    }
+
+    .content-section {
+      background-color: #260042;
+      margin: 2rem auto;
+      max-width: 900px;
+      border: 2px solid #fdfd96;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #ffd700;
+    }
+
+    .content-section h3 {
+      font-size: 1.2rem;
+      color: #ffda6f;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-section p {
+      font-size: 0.75rem;
+      color: #dcdcdc;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .community-image {
+      max-width: 100%;
+      width: 500px;
+      border-radius: 8px;
+      margin: 2rem 0;
+      box-shadow: 0 0 12px #ffd700;
+    }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      align-items: center;
+    }
+
+    .social-link {
+      background-color: #1a0032;
+      border: 2px solid #ffe74c;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #ffea00;
+      font-size: 0.8rem;
+      transition: all 0.3s;
+      display: inline-block;
+      min-width: 250px;
+    }
+
+    .social-link:hover {
+      background-color: #ffea00;
+      color: #000;
+      box-shadow: 0 0 15px #ffd700;
+      transform: translateY(-3px);
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .event-card {
+      background-color: #1a0032;
+      border: 2px solid #ffe74c;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .event-card h4 {
+      font-size: 0.9rem;
+      color: #ffea00;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-card p {
+      font-size: 0.65rem;
+      color: #dcdcdc;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+
+    .event-date {
+      font-size: 0.7rem;
+      color: #ffd700;
+      margin-top: 1rem;
+    }
+
+    footer {
+      background-color: #1a0032;
+      padding: 1rem;
+      font-size: 0.7rem;
+      color: #c4a9f3;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-top">
+      <img src="../images/IMG_2949.png" alt="Gum-Gum Cards Logo" />
+      <h1>Gum-Gum Cards</h1>
+    </div>
+    <nav>
+      <a href="../index.html">Main</a>
+      <a href="home.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="community.html" class="active">Community</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2 class="page-title">🌐 Join the Community</h2>
+
+    <div class="content-section">
+      <h3>Connect With Fellow Collectors</h3>
+      <p>
+        Be part of tournaments, giveaways, and livestream pack openings. Connect with other cardmasters 
+        and grow your collection together. The Gum-Gum Cards community is where passion for Pokémon 
+        meets friendship!
+      </p>
+      <img src="../images/gumgum-insta.png" alt="Online card community" class="community-image">
+    </div>
+
+    <div class="content-section">
+      <h3>Follow Us on Social Media</h3>
+      <p>Stay updated with the latest drops, community events, and exclusive offers!</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/gumgumpokemon/" target="_blank" class="social-link">
+          📷 Follow on Instagram
+        </a>
+        <a href="https://ebay.us/m/tVP3Gb" target="_blank" class="social-link">
+          🛒 Visit our eBay Store
+        </a>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h3>Upcoming Events</h3>
+      <p>Join us for these exciting community activities!</p>
+      <div class="events-grid">
+        <div class="event-card">
+          <h4>🎁 Monthly Giveaway</h4>
+          <p>Every month we give away rare cards to our Instagram followers! Follow us to enter.</p>
+          <div class="event-date">Ongoing</div>
+        </div>
+        <div class="event-card">
+          <h4>📺 Pack Opening Livestreams</h4>
+          <p>Watch us open packs live and share in the excitement! Check our Instagram for schedule.</p>
+          <div class="event-date">Weekly</div>
+        </div>
+        <div class="event-card">
+          <h4>🏆 Trading Events</h4>
+          <p>Virtual trading sessions where community members can connect and trade cards safely.</p>
+          <div class="event-date">Monthly</div>
+        </div>
+        <div class="event-card">
+          <h4>💬 Community Showcase</h4>
+          <p>Share your collection highlights! Tag us on Instagram for a chance to be featured.</p>
+          <div class="event-date">Ongoing</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h3>Community Guidelines</h3>
+      <p style="text-align: left;">
+        • Be respectful and kind to all community members<br>
+        • Share authentic cards and honest trading practices<br>
+        • Follow Instagram's community guidelines<br>
+        • Have fun and celebrate the love of collecting!<br>
+      </p>
+      <p style="margin-top: 1.5rem;">
+        Questions or want to collaborate? <a href="contact.html" style="color: #ffe74c; text-decoration: none;">Contact us!</a>
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Gum-Gum Cards. Retro coolness, modern hype.
+  </footer>
+</body>
+
+</html>
+

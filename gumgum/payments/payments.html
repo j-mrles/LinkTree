@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Payments - Gum-Gum Cards</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Bangers&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4+Z2DeJGsmHTkH5qp6kc2gHcOGktGnmzF0E2sVFhTVdPv2uS7j5C5JQ7TQ5FgKKpg4zY03qst0" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     body {
       margin: 0;
@@ -86,10 +87,23 @@
     <h1>Payments</h1>
     <p class="slogan">Choose Your Preferred Payment Method</p>
 
-    <a class="payment-link" href="https://www.paypal.me/yourusername" target="_blank">Pay with PayPal</a>
-    <a class="payment-link" href="https://venmo.com/yourusername" target="_blank">Pay with Venmo</a>
-    <a class="payment-link" href="https://cash.app/$yourcashtag" target="_blank">Pay with Cash App</a>
-    <a class="payment-link" href="#" onclick="alert('Send via Zelle to: your@email.com or 555-555-5555')">Pay with Zelle</a>
+    <a class="payment-link" href="https://www.paypal.me/yourusername" target="_blank">
+      <i class="fab fa-paypal" style="margin-right: 8px;"></i>Pay with PayPal
+    </a>
+    <a class="payment-link" href="https://venmo.com/yourusername" target="_blank">
+      <i class="fab fa-cc-visa" style="margin-right: 8px;"></i>Pay with Venmo
+    </a>
+    <a class="payment-link" href="https://cash.app/$yourcashtag" target="_blank">
+      <i class="fas fa-dollar-sign" style="margin-right: 8px;"></i>Pay with Cash App
+    </a>
+    <a class="payment-link" href="#" onclick="alert('Send via Zelle to: your@email.com or 555-555-5555')">
+      <i class="fas fa-mobile-alt" style="margin-right: 8px;"></i>Pay with Zelle
+    </a>
+
+    <div style="margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 12px; font-size: 0.9rem;">
+      <p style="margin: 0.5rem 0;"><strong>Note:</strong> Please contact us through Instagram or eBay to confirm your order before making payment.</p>
+      <p style="margin: 0.5rem 0;"><strong>Payment links:</strong> Update these links with your actual payment information.</p>
+    </div>
 
     <a class="back-link" href="../index.html">← Back to Home</a>
   </div>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact - Gum-Gum Cards</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', cursive;
+      background-color: #0e0420;
+      color: #fdfd96;
+      text-align: center;
+    }
+
+    header {
+      background-color: #460a7f;
+      padding: 1rem;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .header-top img {
+      width: 80px;
+      height: auto;
+    }
+
+    .header-top h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      text-align: left;
+      color: #fdfd96;
+      text-shadow: 3px 3px 0 #000;
+    }
+
+    nav {
+      margin: 1rem 0;
+    }
+
+    nav a {
+      color: #ffe74c;
+      text-decoration: none;
+      margin: 0 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    nav a.active {
+      color: #ffea00;
+      text-shadow: 2px 2px 0 #000;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .page-title {
+      font-size: 1.8rem;
+      color: #ffea00;
+      margin-bottom: 1rem;
+      text-shadow: 3px 3px 0 #000;
+    }
+
+    .content-section {
+      background-color: #260042;
+      margin: 2rem auto;
+      max-width: 800px;
+      border: 2px solid #fdfd96;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #ffd700;
+      text-align: left;
+    }
+
+    .content-section h3 {
+      font-size: 1.2rem;
+      color: #ffda6f;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .content-section p {
+      font-size: 0.75rem;
+      color: #dcdcdc;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-info {
+      background-color: #1a0032;
+      border: 2px solid #ffe74c;
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .contact-info h4 {
+      font-size: 0.9rem;
+      color: #ffea00;
+      margin-bottom: 1rem;
+    }
+
+    .contact-item {
+      margin-bottom: 1rem;
+      font-size: 0.7rem;
+      color: #dcdcdc;
+    }
+
+    .contact-item strong {
+      color: #ffda6f;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .contact-item a {
+      color: #ffe74c;
+      text-decoration: none;
+    }
+
+    .contact-item a:hover {
+      color: #ffea00;
+      text-decoration: underline;
+    }
+
+    .contact-form {
+      background-color: #1a0032;
+      border: 2px solid #ffe74c;
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.7rem;
+      color: #ffda6f;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 0.7rem;
+      font-family: 'Press Start 2P', cursive;
+      background-color: #0e0420;
+      border: 2px solid #8732c9;
+      color: #fdfd96;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #ffea00;
+      box-shadow: 0 0 8px #ffd700;
+    }
+
+    .submit-btn {
+      background-color: #8732c9;
+      color: #fff;
+      border: 2px solid #ffe74c;
+      padding: 0.75rem 2rem;
+      font-size: 0.7rem;
+      font-family: 'Press Start 2P', cursive;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .submit-btn:hover {
+      background-color: #ffea00;
+      color: #000;
+      box-shadow: 0 0 15px #ffd700;
+    }
+
+    footer {
+      background-color: #1a0032;
+      padding: 1rem;
+      font-size: 0.7rem;
+      color: #c4a9f3;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-top">
+      <img src="../images/IMG_2949.png" alt="Gum-Gum Cards Logo" />
+      <h1>Gum-Gum Cards</h1>
+    </div>
+    <nav>
+      <a href="../index.html">Main</a>
+      <a href="home.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="community.html">Community</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2 class="page-title">📧 Contact Us</h2>
+
+    <div class="content-section">
+      <h3>Get in Touch</h3>
+      <p>
+        Have questions about our cards, want to place a custom order, or need help with your collection? 
+        We're here to help! Reach out through any of the channels below.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h4>Contact Information</h4>
+          <div class="contact-item">
+            <strong>📱 Instagram</strong>
+            <a href="https://www.instagram.com/gumgumpokemon/" target="_blank">@gumgumpokemon</a>
+          </div>
+          <div class="contact-item">
+            <strong>🛒 eBay Shop</strong>
+            <a href="https://ebay.us/m/tVP3Gb" target="_blank">Visit our store</a>
+          </div>
+          <div class="contact-item">
+            <strong>💳 Payments</strong>
+            <a href="../payments/payments.html">Payment options</a>
+          </div>
+          <div class="contact-item">
+            <strong>⏰ Response Time</strong>
+            <span>We typically respond within 24-48 hours</span>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <h4>Send a Message</h4>
+          <form onsubmit="handleContactForm(event)">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h3>Frequently Asked Questions</h3>
+      <div style="text-align: left;">
+        <p><strong style="color: #ffda6f;">Q: How do I purchase cards?</strong><br>
+        A: Browse our eBay store or contact us through Instagram for custom orders!</p>
+
+        <p><strong style="color: #ffda6f;">Q: Are all cards authentic?</strong><br>
+        A: Yes! We verify the authenticity of every card before listing.</p>
+
+        <p><strong style="color: #ffda6f;">Q: Do you ship internationally?</strong><br>
+        A: Yes, we ship worldwide! Shipping costs vary by location.</p>
+
+        <p><strong style="color: #ffda6f;">Q: Can I request specific cards?</strong><br>
+        A: Absolutely! Contact us and we'll let you know if we have it or can find it!</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Gum-Gum Cards. Retro coolness, modern hype.
+  </footer>
+
+  <script>
+    function handleContactForm(event) {
+      event.preventDefault();
+      alert('Thank you for your message! We will get back to you soon via email or Instagram DM.');
+      event.target.reset();
+    }
+  </script>
+</body>
+
+</html>
+

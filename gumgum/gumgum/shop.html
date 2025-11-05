@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop - Gum-Gum Cards</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', cursive;
+      background-color: #0e0420;
+      color: #fdfd96;
+      text-align: center;
+    }
+
+    header {
+      background-color: #460a7f;
+      padding: 1rem;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .header-top img {
+      width: 80px;
+      height: auto;
+    }
+
+    .header-top h1 {
+      margin: 0;
+      font-size: 1.6rem;
+      text-align: left;
+      color: #fdfd96;
+      text-shadow: 3px 3px 0 #000;
+    }
+
+    nav {
+      margin: 1rem 0;
+    }
+
+    nav a {
+      color: #ffe74c;
+      text-decoration: none;
+      margin: 0 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    nav a.active {
+      color: #ffea00;
+      text-shadow: 2px 2px 0 #000;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .page-title {
+      font-size: 1.8rem;
+      color: #ffea00;
+      margin-bottom: 1rem;
+      text-shadow: 3px 3px 0 #000;
+    }
+
+    .page-subtitle {
+      font-size: 0.75rem;
+      color: #dcdcdc;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .shop-section {
+      background-color: #260042;
+      margin: 2rem auto;
+      max-width: 1000px;
+      border: 2px solid #fdfd96;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 8px #ffd700;
+    }
+
+    .section-heading {
+      font-size: 1.2rem;
+      color: #ffda6f;
+      margin-bottom: 1.5rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card-item {
+      background-color: #1a0032;
+      border: 2px solid #ffe74c;
+      border-radius: 8px;
+      padding: 1rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #ffd700;
+    }
+
+    .card-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 8px #8732c9;
+    }
+
+    .card-name {
+      font-size: 0.7rem;
+      color: #ffea00;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .card-type {
+      font-size: 0.6rem;
+      color: #c4a9f3;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-rarity {
+      font-size: 0.6rem;
+      color: #ffd700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-price {
+      font-size: 0.9rem;
+      color: #00ff00;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 0 #000;
+    }
+
+    .card-stock {
+      font-size: 0.6rem;
+      color: #dcdcdc;
+      margin-bottom: 1rem;
+    }
+
+    .shop-button {
+      background-color: #8732c9;
+      color: #fff;
+      border: 2px solid #ffe74c;
+      padding: 0.5rem 1rem;
+      font-size: 0.7rem;
+      font-family: 'Press Start 2P', cursive;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .shop-button:hover {
+      background-color: #ffea00;
+      color: #000;
+      box-shadow: 0 0 10px #ffd700;
+    }
+
+    .ebay-link {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      background-color: #ffea00;
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      box-shadow: 0 0 15px #ffd700;
+      transition: all 0.3s;
+    }
+
+    .ebay-link:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #ffd700;
+    }
+
+    footer {
+      background-color: #1a0032;
+      padding: 1rem;
+      font-size: 0.7rem;
+      color: #c4a9f3;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-top">
+      <img src="../images/IMG_2949.png" alt="Gum-Gum Cards Logo" />
+      <h1>Gum-Gum Cards</h1>
+    </div>
+    <nav>
+      <a href="../index.html">Main</a>
+      <a href="home.html">Home</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="about.html">About</a>
+      <a href="community.html">Community</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2 class="page-title">🃏 Card Shop</h2>
+    <p class="page-subtitle">
+      Browse our collection of rare and collectible Pokémon cards. From vintage classics to modern chase cards, 
+      we've got the perfect addition to your collection. All cards are authenticated and in mint condition!
+    </p>
+
+    <div class="shop-section">
+      <h3 class="section-heading">🔥 Featured Cards</h3>
+      <div class="cards-grid">
+        <div class="card-item">
+          <img src="../images/misty-trainer.png" alt="Misty Trainer Card">
+          <div class="card-name">Misty Trainer Card</div>
+          <div class="card-type">Type: Water/Support</div>
+          <div class="card-rarity">Rarity: Ultra Rare</div>
+          <div class="card-price">$45.99</div>
+          <div class="card-stock">In Stock: 3</div>
+          <a href="https://ebay.us/m/tVP3Gb" target="_blank" class="shop-button">Buy on eBay</a>
+        </div>
+
+        <div class="card-item">
+          <img src="../images/rocket-mewtwo.png" alt="Rocket Mewtwo Card">
+          <div class="card-name">Team Rocket Mewtwo</div>
+          <div class="card-type">Type: Psychic/Dark</div>
+          <div class="card-rarity">Rarity: Secret Rare</div>
+          <div class="card-price">$299.99</div>
+          <div class="card-stock">In Stock: 1</div>
+          <a href="https://ebay.us/m/tVP3Gb" target="_blank" class="shop-button">Buy on eBay</a>
+        </div>
+
+        <div class="card-item">
+          <img src="../images/rocket-raticate.png" alt="Rocket Raticate Card">
+          <div class="card-name">Team Rocket Raticate</div>
+          <div class="card-type">Type: Normal/Dark</div>
+          <div class="card-rarity">Rarity: Rare</div>
+          <div class="card-price">$24.99</div>
+          <div class="card-stock">In Stock: 5</div>
+          <a href="https://ebay.us/m/tVP3Gb" target="_blank" class="shop-button">Buy on eBay</a>
+        </div>
+
+        <div class="card-item">
+          <img src="../images/rocket-crobat.png" alt="Rocket Crobat Card">
+          <div class="card-name">Team Rocket Crobat</div>
+          <div class="card-type">Type: Poison/Dark</div>
+          <div class="card-rarity">Rarity: Ultra Rare</div>
+          <div class="card-price">$89.99</div>
+          <div class="card-stock">In Stock: 2</div>
+          <a href="https://ebay.us/m/tVP3Gb" target="_blank" class="shop-button">Buy on eBay</a>
+        </div>
+
+        <div class="card-item">
+          <img src="../images/typhlosion-trainer.png" alt="Typhlosion Trainer Card">
+          <div class="card-name">Typhlosion Trainer</div>
+          <div class="card-type">Type: Fire/Support</div>
+          <div class="card-rarity">Rarity: Ultra Rare</div>
+          <div class="card-price">$67.99</div>
+          <div class="card-stock">In Stock: 4</div>
+          <a href="https://ebay.us/m/tVP3Gb" target="_blank" class="shop-button">Buy on eBay</a>
+        </div>
+
+        <div class="card-item">
+          <img src="../images/cynthia-garchomp.png" alt="Cynthia Garchomp Card">
+          <div class="card-name">Cynthia's Garchomp</div>
+          <div class="card-type">Type: Dragon/Ground</div>
+          <div class="card-rarity">Rarity: Alternate Art</div>
+          <div class="card-price">$159.99</div>
+          <div class="card-stock">In Stock: 1</div>
+          <a href="https://ebay.us/m/tVP3Gb" target="_blank" class="shop-button">Buy on eBay</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="shop-section">
+      <h3 class="section-heading">💎 Premium Collection</h3>
+      <p style="font-size: 0.75rem; color: #dcdcdc; line-height: 1.6;">
+        Looking for something specific? Check out our full eBay store for hundreds more cards, 
+        including vintage base set, modern chase cards, and exclusive rarities. We regularly update 
+        our inventory with new finds!
+      </p>
+      <a href="https://ebay.us/m/tVP3Gb" target="_blank" class="ebay-link">🛒 Visit Full eBay Store</a>
+    </div>
+
+    <div class="shop-section">
+      <h3 class="section-heading">📦 What's New</h3>
+      <p style="font-size: 0.75rem; color: #dcdcdc; line-height: 1.6;">
+        We're constantly adding new cards to our collection! Follow us on Instagram 
+        <a href="https://www.instagram.com/gumgumpokemon/" target="_blank" style="color: #ffe74c;">@gumgumpokemon</a> 
+        to be the first to know about new arrivals, special deals, and limited-time offers.
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Gum-Gum Cards. Retro coolness, modern hype.
+  </footer>
+</body>
+
+</html>
+

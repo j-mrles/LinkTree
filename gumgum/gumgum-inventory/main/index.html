@@ -14,6 +14,11 @@
         <h1>Gum-Gum Cards Inventory</h1>
         <button onclick="logout()" style="margin: 20px;">Logout</button>
         <script>
+            // Check if user is logged in
+            if (!localStorage.getItem('isLoggedIn')) {
+                window.location.href = '../login/login.html';
+            }
+            
             function logout() {
                 localStorage.removeItem('isLoggedIn');
                 window.location.href = '../login/login.html';
