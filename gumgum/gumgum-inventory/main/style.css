@@ -25,6 +25,8 @@ body {
     var(--bg);
   color: var(--text);
   min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body.modal-open {
@@ -526,7 +528,8 @@ textarea {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 32px;
-  align-items: center;
+  align-items: start;
+  align-content: start;
 }
 
 .login-hero {
