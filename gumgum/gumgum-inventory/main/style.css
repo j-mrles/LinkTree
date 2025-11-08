@@ -1322,11 +1322,11 @@ textarea {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(16, 16, 30, 0.4);
-  border: 1px solid rgba(255, 230, 109, 0.2);
+  background: rgba(24, 30, 44, 0.6);
+  border: 1px solid rgba(95, 125, 255, 0.22);
   border-radius: 14px;
   padding: 12px 14px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(245, 246, 251, 0.9);
   font-size: 0.95rem;
 }
 
@@ -1335,26 +1335,32 @@ textarea {
 }
 
 .login-card {
-  background: linear-gradient(168deg, rgba(24, 24, 40, 0.96), rgba(14, 14, 24, 0.96));
+  background: linear-gradient(165deg, rgba(27, 33, 48, 0.96), rgba(18, 24, 36, 0.96));
   border-radius: 24px;
   padding: 36px 32px 32px;
-  border: 1px solid rgba(255, 230, 109, 0.4);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(95, 125, 255, 0.3);
+  box-shadow: 0 30px 60px rgba(10, 16, 35, 0.55);
   display: flex;
   flex-direction: column;
   gap: 24px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.login-card--unlocked {
+  border-color: rgba(76, 211, 167, 0.45);
+  box-shadow: 0 35px 75px rgba(76, 211, 167, 0.25);
 }
 
 .login-card__header h2 {
   margin: 8px 0 8px;
   font-size: 1.8rem;
-  letter-spacing: 0.08em;
-  color: var(--primary);
+  letter-spacing: -0.01em;
+  color: #f5f6fb;
 }
 
 .login-card__header p {
   margin: 0;
-  color: var(--muted);
+  color: rgba(154, 164, 194, 0.88);
   font-size: 0.95rem;
 }
 
@@ -1362,14 +1368,15 @@ textarea {
   display: inline-block;
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(255, 230, 109, 0.2);
-  border: 1px solid rgba(255, 230, 109, 0.4);
-  color: var(--primary);
+  background: rgba(95, 125, 255, 0.15);
+  border: 1px solid rgba(95, 125, 255, 0.3);
+  color: rgba(245, 246, 251, 0.9);
   font-size: 0.75rem;
   letter-spacing: 0.16em;
 }
 
-.login-form {
+.login-form,
+.pin-form {
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -1377,10 +1384,10 @@ textarea {
 
 .login-field span {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted);
+  letter-spacing: 0.12em;
+  color: rgba(154, 164, 194, 0.85);
   margin-bottom: 6px;
 }
 
@@ -1395,7 +1402,7 @@ textarea {
   transform: translateY(-50%);
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(154, 164, 194, 0.8);
   font-size: 1rem;
   cursor: pointer;
   padding: 4px;
@@ -1405,37 +1412,64 @@ textarea {
   color: var(--primary);
 }
 
+.pin-submit,
 .login-submit {
   width: 100%;
   font-size: 0.95rem;
+}
+
+.pin-help {
+  margin: -6px 0 0;
+  font-size: 0.82rem;
+  color: rgba(154, 164, 194, 0.75);
+}
+
+.pin-error {
+  margin: -10px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 107, 107, 0.18);
+  border: 1px solid rgba(255, 107, 107, 0.35);
+  color: rgba(255, 178, 178, 0.95);
+  font-size: 0.82rem;
+}
+
+.pin-form--error input {
+  border-color: rgba(255, 107, 107, 0.55);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.25);
+}
+
+.pin-form--success input {
+  border-color: rgba(76, 211, 167, 0.55);
+  box-shadow: 0 0 0 3px rgba(76, 211, 167, 0.22);
 }
 
 .login-footer {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  color: var(--muted);
+  color: rgba(154, 164, 194, 0.9);
   font-size: 0.85rem;
 }
 
 .login-hint {
   margin: 0;
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(154, 164, 194, 0.75);
 }
 
 .login-meta {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(16, 16, 30, 0.5);
-  border: 1px solid rgba(159, 160, 208, 0.25);
+  background: rgba(24, 30, 44, 0.6);
+  border: 1px solid rgba(95, 125, 255, 0.25);
   border-radius: 12px;
   padding: 10px 12px;
 }
 
 .login-meta code {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(245, 246, 251, 0.85);
   font-size: 0.78rem;
 }
 
