@@ -41,18 +41,7 @@
 
     <main class="inventory-main">
       <section class="command-strip">
-        <div class="command-strip__left">
-          <label class="command-field">
-            <span class="command-label">Search Deck</span>
-            <div class="command-input">
-              <input type="text" id="searchBar" placeholder="Type a card, set, or note…" autocomplete="off" />
-              <button type="button" id="clearSearchBtn" class="chip-btn" aria-label="Clear search">
-                Reset
-              </button>
-            </div>
-          </label>
-        </div>
-        <div class="command-strip__right">
+        <div class="command-strip__right command-strip__right--solo">
           <button type="button" id="addItemBtn" class="primary-btn command-primary">+ Add Card</button>
           <div class="sync-indicator">
             <span class="sync-dot"></span>
@@ -97,6 +86,7 @@
                 <th scope="col">Type</th>
                 <th scope="col">Rarity</th>
                 <th scope="col">Price</th>
+                <th scope="col">Price Paid</th>
                 <th scope="col">Stock</th>
                 <th scope="col">Last Updated</th>
                 <th scope="col">Actions</th>
@@ -104,7 +94,7 @@
             </thead>
             <tbody id="cardTableBody">
               <tr>
-                <td colspan="9">
+                <td colspan="10">
                   <div class="table-empty">
                     <p>No cards yet. Click “Add Card” to get started.</p>
                   </div>
@@ -119,9 +109,36 @@
     <div class="modal-backdrop" id="modalBackdrop" hidden>
       <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <button type="button" id="closeModalBtn" class="icon-btn" aria-label="Close form">&times;</button>
-        <h2 id="modalTitle">Add Card</h2>
-        <p id="modalSubtitle">Create a new entry for your inventory.</p>
-        <form id="itemForm" novalidate>
+        <h2 id="modalTitle">Find Cards</h2>
+        <p id="modalSubtitle">Search the Pokémon TCG database to add inventory instantly.</p>
+
+        <div id="modalSearchSection" class="modal-search">
+          <form id="intelForm" class="intel-form modal-search__form">
+            <label class="intel-field">
+              <span class="intel-label">Search Pokémon Card</span>
+              <div class="intel-input">
+                <input
+                  type="text"
+                  id="intelSearchInput"
+                  placeholder="e.g. Charizard sv49, Umbreon VMAX"
+                  autocomplete="off"
+                />
+                <button type="submit" class="primary-btn intel-submit">Search</button>
+              </div>
+            </label>
+          </form>
+          <div class="modal-search__actions">
+            <button type="button" class="chip-btn chip-btn--ghost" id="intelClearBtn" hidden>Clear Results</button>
+          </div>
+          <p class="intel-hint">Tip: Include set codes or numbers (e.g. “Charizard sv49”) to narrow results.</p>
+          <div class="intel-results" id="intelResults" aria-live="polite">
+            <div class="intel-placeholder">
+              Search for a Pokémon card to add it to your inventory.
+            </div>
+          </div>
+        </div>
+
+        <form id="itemForm" class="is-hidden" novalidate>
           <input type="hidden" id="cardId" name="cardId" />
 
           <div class="form-grid">
@@ -165,6 +182,11 @@
             <label>
               <span>Price (USD) *</span>
               <input type="number" id="cardPrice" name="price" min="0" step="0.01" placeholder="e.g. 149.99" required />
+            </label>
+
+            <label>
+              <span>Price Paid (USD)</span>
+              <input type="number" id="cardPricePaid" name="pricePaid" min="0" step="0.01" placeholder="e.g. 80.00" />
             </label>
 
             <label>
