@@ -28,24 +28,145 @@
     </header>
 
     <main>
-        <input type="text" id="searchBar" placeholder="Search cards..." />
+      <section class="toolbar">
+        <div class="search-wrapper">
+          <input type="text" id="searchBar" placeholder="Search cards, sets, types..." autocomplete="off" />
+          <button type="button" id="clearSearchBtn" class="secondary-btn" aria-label="Clear search">
+            Clear
+          </button>
+        </div>
+        <div class="toolbar-actions">
+          <button type="button" id="addItemBtn" class="primary-btn">+ Add Card</button>
+        </div>
+      </section>
 
-        <table>
+      <section class="summary-grid" aria-live="polite">
+        <article class="summary-card">
+          <h2>Total Unique Cards</h2>
+          <p id="totalItems">0</p>
+          <span>Tracked SKUs</span>
+        </article>
+        <article class="summary-card">
+          <h2>Total Quantity</h2>
+          <p id="totalQuantity">0</p>
+          <span>Cards in stock</span>
+        </article>
+        <article class="summary-card">
+          <h2>Inventory Value</h2>
+          <p id="totalValue">$0.00</p>
+          <span>Retail estimate</span>
+        </article>
+      </section>
+
+      <section class="table-wrapper">
+        <div class="table-header">
+          <h2>Inventory</h2>
+          <div class="table-meta">
+            <span id="lastSynced">Last synced: --</span>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table aria-describedby="lastSynced">
             <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Rarity</th>
-                    <th>Price</th>
-                    <th>Stock</th>
-                </tr>
+              <tr>
+                <th scope="col">Name &amp; Set</th>
+                <th scope="col">Franchise</th>
+                <th scope="col">Condition</th>
+                <th scope="col">Type</th>
+                <th scope="col">Rarity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Last Updated</th>
+                <th scope="col">Actions</th>
+              </tr>
             </thead>
             <tbody id="cardTableBody">
-                <!-- Data populated via JS -->
+              <tr>
+                <td colspan="9">
+                  <div class="table-empty">
+                    <p>No cards yet. Click “Add Card” to get started.</p>
+                  </div>
+                </td>
+              </tr>
             </tbody>
-        </table>
+          </table>
+        </div>
+      </section>
     </main>
 
-    <script src="./script.js"></script>
+    <div class="modal-backdrop" id="modalBackdrop" hidden>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button type="button" id="closeModalBtn" class="icon-btn" aria-label="Close form">&times;</button>
+        <h2 id="modalTitle">Add Card</h2>
+        <p id="modalSubtitle">Create a new entry for your inventory.</p>
+        <form id="itemForm" novalidate>
+          <input type="hidden" id="cardId" name="cardId" />
+
+          <div class="form-grid">
+            <label>
+              <span>Card Name *</span>
+              <input type="text" id="cardName" name="name" placeholder="e.g. Umbreon VMAX" required />
+            </label>
+
+            <label>
+              <span>Franchise *</span>
+              <select id="cardFranchise" name="franchise" required>
+                <option value="pokemon">Pokemon</option>
+                <option value="one piece">One Piece</option>
+                <option value="other" selected>Other</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Set / Series</span>
+              <input type="text" id="cardSet" name="setName" placeholder="e.g. Evolving Skies" />
+            </label>
+
+            <label>
+              <span>Type</span>
+              <input type="text" id="cardType" name="type" placeholder="e.g. Dark" />
+            </label>
+
+            <label>
+              <span>Condition *</span>
+              <select id="cardCondition" name="condition" required>
+                <option value="sealed">Sealed</option>
+                <option value="unsealed">Unsealed</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Rarity</span>
+              <input type="text" id="cardRarity" name="rarity" placeholder="e.g. Alternate Art Secret Rare" />
+            </label>
+
+            <label>
+              <span>Price (USD) *</span>
+              <input type="number" id="cardPrice" name="price" min="0" step="0.01" placeholder="e.g. 149.99" required />
+            </label>
+
+            <label>
+              <span>Stock *</span>
+              <input type="number" id="cardStock" name="stock" min="0" step="1" placeholder="e.g. 3" required />
+            </label>
+          </div>
+
+          <label class="notes-field">
+            <span>Notes</span>
+            <textarea id="cardNotes" name="notes" rows="3" placeholder="Condition, grading, supplier, etc."></textarea>
+          </label>
+
+          <div class="modal-actions">
+            <button type="button" class="secondary-btn" id="cancelModalBtn">Cancel</button>
+            <button type="submit" class="primary-btn" id="submitBtn">Save Card</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="status-toast" id="statusToast" role="status" aria-live="polite" hidden></div>
+
+    <script type="module" src="./script.js"></script>
 </body>
 </html>
