@@ -255,18 +255,20 @@ function renderTable(data) {
           : "condition-chip condition-unsealed";
       return `
         <tr data-id="${item.id}">
-          <td>
-            <strong>${escapeHtml(item.name)}</strong>
-            <small>${escapeHtml(item.setName || "—")}</small>
+          <td data-label="Name &amp; Set">
+            <div class="cell-text">
+              <strong>${escapeHtml(item.name)}</strong>
+              <small>${escapeHtml(item.setName || "—")}</small>
+            </div>
           </td>
-          <td>${escapeHtml(formatFranchise(item.franchise))}</td>
-          <td><span class="${conditionClass}">${escapeHtml(formatCondition(item.condition))}</span></td>
-          <td>${escapeHtml(item.type || "—")}</td>
-          <td>${escapeHtml(item.rarity || "—")}${notesIcon}</td>
-          <td>${formatCurrency(item.price)}</td>
-          <td><span class="${stockClass}">${item.stock}</span></td>
-          <td>${formatDate(item.updatedAt)}</td>
-          <td class="actions">
+          <td data-label="Franchise"><span class="cell-value">${escapeHtml(formatFranchise(item.franchise))}</span></td>
+          <td data-label="Condition"><span class="${conditionClass}">${escapeHtml(formatCondition(item.condition))}</span></td>
+          <td data-label="Type"><span class="cell-value">${escapeHtml(item.type || "—")}</span></td>
+          <td data-label="Rarity"><span class="cell-value">${escapeHtml(item.rarity || "—")}${notesIcon}</span></td>
+          <td data-label="Price"><span class="cell-value">${formatCurrency(item.price)}</span></td>
+          <td data-label="Stock"><span class="${stockClass}">${item.stock}</span></td>
+          <td data-label="Last Updated"><span class="cell-value">${formatDate(item.updatedAt)}</span></td>
+          <td class="actions" data-label="Actions">
             <button type="button" class="action-btn edit-btn">Edit</button>
             <button type="button" class="action-btn delete-btn">Delete</button>
           </td>

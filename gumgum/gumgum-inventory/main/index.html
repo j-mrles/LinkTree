@@ -8,66 +8,87 @@
     <link rel="stylesheet" href="./style.css" />
 </head>
 
-<body>
-    <header>
-        <img src="../../images/IMG_2949.png" alt="Gum Gum Logo" class="logo" />
-        <h1>Gum-Gum Cards Inventory</h1>
-        <button onclick="logout()" style="margin: 20px;">Logout</button>
-        <script>
-            // Check if user is logged in
-            if (!localStorage.getItem('isLoggedIn')) {
-                window.location.href = '../login/login.html';
-            }
-            
-            function logout() {
-                localStorage.removeItem('isLoggedIn');
-                window.location.href = '../login/login.html';
-            }
-        </script>
-
+<body class="inventory-body">
+    <div class="inventory-overlay"></div>
+    <header class="inventory-header">
+      <div class="inventory-header__left">
+        <img src="../../images/IMG_2949.png" alt="Gum-Gum Logo" class="inventory-logo" />
+        <div class="inventory-header__text">
+          <span class="inventory-label">Gum-Gum Control</span>
+          <h1 class="inventory-title">Deck Vault Console</h1>
+          <p class="inventory-subtitle">Retro-simple controls to watch sealed and unsealed stock in real time.</p>
+        </div>
+      </div>
+      <div class="inventory-header__right">
+        <div class="inventory-status">
+          <span class="status-indicator"></span>
+          <span class="status-copy">Realtime link active</span>
+        </div>
+        <button type="button" class="ghost-btn" onclick="logout()">Log Out</button>
+      </div>
     </header>
 
-    <main>
-      <section class="toolbar">
-        <div class="search-wrapper">
-          <input type="text" id="searchBar" placeholder="Search cards, sets, types..." autocomplete="off" />
-          <button type="button" id="clearSearchBtn" class="secondary-btn" aria-label="Clear search">
-            Clear
-          </button>
-        </div>
-        <div class="toolbar-actions">
-          <button type="button" id="addItemBtn" class="primary-btn">+ Add Card</button>
-        </div>
-      </section>
+    <script>
+      if (!localStorage.getItem('isLoggedIn')) {
+        window.location.href = '../login/login.html';
+      }
+      
+      function logout() {
+        localStorage.removeItem('isLoggedIn');
+        window.location.href = '../login/login.html';
+      }
+    </script>
 
-      <section class="summary-grid" aria-live="polite">
-        <article class="summary-card">
-          <h2>Total Unique Cards</h2>
-          <p id="totalItems">0</p>
-          <span>Tracked SKUs</span>
-        </article>
-        <article class="summary-card">
-          <h2>Total Quantity</h2>
-          <p id="totalQuantity">0</p>
-          <span>Cards in stock</span>
-        </article>
-        <article class="summary-card">
-          <h2>Inventory Value</h2>
-          <p id="totalValue">$0.00</p>
-          <span>Retail estimate</span>
-        </article>
-      </section>
-
-      <section class="table-wrapper">
-        <div class="table-header">
-          <h2>Inventory</h2>
-          <div class="table-meta">
+    <main class="inventory-main">
+      <section class="command-strip">
+        <div class="command-strip__left">
+          <label class="command-field">
+            <span class="command-label">Search Deck</span>
+            <div class="command-input">
+              <input type="text" id="searchBar" placeholder="Type a card, set, or note…" autocomplete="off" />
+              <button type="button" id="clearSearchBtn" class="chip-btn" aria-label="Clear search">
+                Reset
+              </button>
+            </div>
+          </label>
+        </div>
+        <div class="command-strip__right">
+          <button type="button" id="addItemBtn" class="primary-btn command-primary">+ Add Card</button>
+          <div class="sync-indicator">
+            <span class="sync-dot"></span>
             <span id="lastSynced">Last synced: --</span>
           </div>
         </div>
+      </section>
 
-        <div class="table-scroll">
-          <table aria-describedby="lastSynced">
+      <section class="stat-panel" aria-live="polite">
+        <article class="stat-card">
+          <span class="stat-label">Total Unique Cards</span>
+          <p id="totalItems" class="stat-number">0</p>
+          <span class="stat-caption">Tracked SKUs</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Total Quantity</span>
+          <p id="totalQuantity" class="stat-number">0</p>
+          <span class="stat-caption">Cards in stock</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-label">Inventory Value</span>
+          <p id="totalValue" class="stat-number">$0.00</p>
+          <span class="stat-caption">Retail estimate</span>
+        </article>
+      </section>
+
+      <section class="data-frame">
+        <header class="data-frame__header">
+          <div>
+            <h2>Inventory Ledger</h2>
+            <p>Every card recorded in the Gum-Gum vault. Edit inline, check sealed status, and monitor value at a glance.</p>
+          </div>
+        </header>
+
+        <div class="data-scroll">
+          <table>
             <thead>
               <tr>
                 <th scope="col">Name &amp; Set</th>
