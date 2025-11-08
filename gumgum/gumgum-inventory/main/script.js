@@ -60,11 +60,15 @@ const intelForm = document.getElementById("intelForm");
 const intelInput = document.getElementById("intelSearchInput");
 const intelResults = document.getElementById("intelResults");
 const intelClearBtn = document.getElementById("intelClearBtn");
+const intelSpinner = document.getElementById("intelSpinner");
 
 let inventoryCache = [];
 let lastIntelResults = [];
 let intelAbortController = null;
 const intelCache = new Map();
+const searchHistory = [];
+const HISTORY_LIMIT = 10;
+let debounceTimer = null;
 
 const FRANCHISE_ORDER = ["pokemon", "one piece", "other"];
 const CONDITION_ORDER = ["sealed", "unsealed"];
@@ -131,15 +135,11 @@ document.addEventListener("keydown", (event) => {
 
 if (intelForm && intelInput && intelResults) {
   intelForm.addEventListener("submit", handleIntelSearch);
+  intelInput.addEventListener("input", handleIntelInputDebounced);
 
   if (intelClearBtn) {
     intelClearBtn.addEventListener("click", () => {
-      lastIntelResults = [];
-      intelInput.value = "";
-      intelClearBtn.hidden = true;
-      renderIntelPlaceholder(
-        "Use the scanner to fetch art, rarity, and pricing intel. You can pipe any result directly into the inventory modal."
-      );
+      resetIntelUI();
       intelInput.focus();
     });
   }
@@ -175,6 +175,17 @@ if (intelForm && intelInput && intelResults) {
 
     showManualEntryFromIntel(card, { pricePaid, quantity });
   });
+
+  if (intelHistoryContainer) {
+    intelHistoryContainer.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-history]");
+      if (!button || !intelInput) return;
+      const query = button.dataset.history;
+      if (!query) return;
+      intelInput.value = query;
+      intelForm?.requestSubmit();
+    });
+  }
 }
 
 tableBody.addEventListener("click", async (event) => {
@@ -322,6 +333,7 @@ async function handleIntelSearch(event) {
     if (intelClearBtn) {
       intelClearBtn.hidden = false;
     }
+    addToSearchHistory(rawQuery);
     return;
   }
 
@@ -350,12 +362,18 @@ async function handleIntelSearch(event) {
     if (intelClearBtn) {
       intelClearBtn.hidden = false;
     }
+    addToSearchHistory(rawQuery);
   } catch (error) {
     if (error.name === "AbortError") return;
     console.error("Pokémon TCG API search failed:", error);
-    renderIntelStatus("Scan failed. The Pokémon TCG API may be busy—try again in a moment.", true);
+    if (error instanceof TypeError) {
+      renderIntelStatus("Network error: Unable to reach the Pokémon TCG API. Check your connection and try again.", true);
+    } else {
+      renderIntelStatus("Scan failed. The Pokémon TCG API may be busy—try again in a moment.", true);
+    }
   } finally {
     intelResults?.classList.remove("intel-results--loading");
+    intelSpinner?.classList.remove("is-active");
   }
 }
 
@@ -366,12 +384,14 @@ function renderIntelLoading() {
 function renderIntelPlaceholder(message) {
   if (!intelResults) return;
   intelResults.classList.remove("intel-results--loading");
+  intelSpinner?.classList.remove("is-active");
   intelResults.innerHTML = `<div class="intel-placeholder">${escapeHtml(message)}</div>`;
 }
 
 function renderIntelStatus(message, isError = false) {
   if (!intelResults) return;
   intelResults.classList.remove("intel-results--loading");
+  intelSpinner?.classList.remove("is-active");
   intelResults.innerHTML = `<div class="intel-status${isError ? " intel-status--error" : ""}">${escapeHtml(
     message
   )}</div>`;
@@ -381,7 +401,9 @@ function resetIntelUI() {
   lastIntelResults = [];
   if (intelInput) intelInput.value = "";
   if (intelClearBtn) intelClearBtn.hidden = true;
+  intelSpinner?.classList.remove("is-active");
   renderIntelPlaceholder("Search for a Pokémon card to add it to your inventory.");
+  renderSearchHistory();
 }
 
 function renderIntelSkeleton() {
@@ -402,11 +424,33 @@ function renderIntelSkeleton() {
     )
     .join("");
   intelResults.innerHTML = skeletons;
+  intelSpinner?.classList.add("is-active");
 }
 
 function sanitizeIntelQuery(rawQuery) {
   const sanitized = rawQuery.replace(/"/g, "").replace(/\s+/g, " ").trim();
   return sanitized.length >= 2 ? sanitized.toLowerCase() : "";
+}
+
+function handleIntelInputDebounced(event) {
+  if (debounceTimer) {
+    clearTimeout(debounceTimer);
+  }
+
+  const value = event.target.value.trim();
+  if (!value) {
+    resetIntelUI();
+    return;
+  }
+
+  if (intelCache.has(sanitizeIntelQuery(value))) {
+    renderIntelResults(intelCache.get(sanitizeIntelQuery(value)));
+    if (intelClearBtn) intelClearBtn.hidden = false;
+  }
+
+  debounceTimer = setTimeout(() => {
+    intelForm?.requestSubmit();
+  }, 350);
 }
 
 async function fetchPokemonCards(sanitizedQuery, signal) {
@@ -445,13 +489,25 @@ async function fetchPokemonCards(sanitizedQuery, signal) {
   }
 
   const payload = await response.json();
-  console.log("[Intel] Raw payload:", payload);
-  return Array.isArray(payload?.data) ? payload.data : [];
+  const data = Array.isArray(payload?.data) ? payload.data : [];
+  // Sort client-side by exact match, then by release date desc
+  data.sort((a, b) => {
+    const exactA = a.name?.toLowerCase() === sanitizedQuery;
+    const exactB = b.name?.toLowerCase() === sanitizedQuery;
+    if (exactA && !exactB) return -1;
+    if (!exactA && exactB) return 1;
+    const dateA = a.set?.releaseDate ? Date.parse(a.set.releaseDate) : 0;
+    const dateB = b.set?.releaseDate ? Date.parse(b.set.releaseDate) : 0;
+    return dateB - dateA;
+  });
+  console.log("[Intel] Processed payload:", data);
+  return data;
 }
 
 function renderIntelResults(cards) {
   if (!intelResults) return;
   intelResults.classList.remove("intel-results--loading");
+  intelSpinner?.classList.remove("is-active");
 
   const markup = cards
     .map((card, index) => {
@@ -578,7 +634,66 @@ function buildIntelNotes(card) {
   if (Array.isArray(card.subtypes) && card.subtypes.length) {
     notes.push(`Subtypes: ${card.subtypes.join(", ")}`);
   }
+  if (card.number) notes.push(`Card Number: ${card.number}`);
   return notes.join(" • ");
+}
+
+function addToSearchHistory(query) {
+  const trimmed = query.trim();
+  if (!trimmed) return;
+
+  const existingIndex = searchHistory.findIndex((entry) => entry.toLowerCase() === trimmed.toLowerCase());
+  if (existingIndex !== -1) {
+    searchHistory.splice(existingIndex, 1);
+  }
+
+  searchHistory.unshift(trimmed);
+  if (searchHistory.length > HISTORY_LIMIT) {
+    searchHistory.length = HISTORY_LIMIT;
+  }
+
+  const historyData = JSON.stringify(searchHistory);
+  try {
+    localStorage.setItem("intelSearchHistory", historyData);
+  } catch (error) {
+    console.warn("Unable to persist search history:", error);
+  }
+
+  renderSearchHistory();
+}
+
+function loadSearchHistory() {
+  try {
+    const stored = localStorage.getItem("intelSearchHistory");
+    if (!stored) return;
+    const parsed = JSON.parse(stored);
+    if (Array.isArray(parsed)) {
+      searchHistory.length = 0;
+      parsed.slice(0, HISTORY_LIMIT).forEach((entry) => searchHistory.push(entry));
+    }
+  } catch (error) {
+    console.warn("Unable to load search history:", error);
+  }
+
+  renderSearchHistory();
+}
+
+function renderSearchHistory() {
+  if (!intelHistoryContainer) return;
+
+  if (!searchHistory.length) {
+    intelHistoryContainer.innerHTML = "";
+    intelHistoryContainer.classList.add("is-hidden");
+    return;
+  }
+
+  intelHistoryContainer.classList.remove("is-hidden");
+  intelHistoryContainer.innerHTML = searchHistory
+    .map(
+      (entry) =>
+        `<button type="button" class="history-chip" data-history="${escapeHtml(entry)}">${escapeHtml(entry)}</button>`
+    )
+    .join("");
 }
 
 function updateSummary() {
@@ -600,6 +715,7 @@ function updateLastSynced() {
 }
 
 function openModal(mode, card = null) {
+  loadSearchHistory();
   modalBackdrop.removeAttribute("hidden");
   document.body.classList.add("modal-open");
   itemForm.reset();

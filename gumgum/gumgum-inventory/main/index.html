@@ -14,8 +14,7 @@
       <div class="inventory-header__left">
         <img src="../../images/IMG_2949.png" alt="Gum-Gum Logo" class="inventory-logo" />
         <div class="inventory-header__text">
-          <span class="inventory-label">Gum-Gum Control</span>
-          <h1 class="inventory-title">Deck Vault Console</h1>
+          <h1 class="inventory-title">Gum-Gum Dashboard</h1>
           <p class="inventory-subtitle">Retro-simple controls to watch sealed and unsealed stock in real time.</p>
         </div>
       </div>
@@ -71,7 +70,7 @@
       <section class="data-frame">
         <header class="data-frame__header">
           <div>
-            <h2>Inventory Ledger</h2>
+            <h2>Inventory Management</h2>
             <p>Every card recorded in the Gum-Gum vault. Edit inline, check sealed status, and monitor value at a glance.</p>
           </div>
         </header>
@@ -126,11 +125,13 @@
                 <button type="submit" class="primary-btn intel-submit">Search</button>
               </div>
             </label>
+            <div class="modal-search__spinner" id="intelSpinner" aria-hidden="true"></div>
           </form>
           <div class="modal-search__actions">
             <button type="button" class="chip-btn chip-btn--ghost" id="intelClearBtn" hidden>Clear Results</button>
           </div>
           <p class="intel-hint">Tip: Include set codes or numbers (e.g. “Charizard sv49”) to narrow results.</p>
+          <div class="intel-history" id="intelHistory" aria-live="polite"></div>
           <div class="intel-results" id="intelResults" aria-live="polite">
             <div class="intel-placeholder">
               Search for a Pokémon card to add it to your inventory.
