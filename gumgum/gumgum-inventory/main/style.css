@@ -1254,6 +1254,27 @@ textarea {
   color: var(--danger);
 }
 
+.inventory-footnote {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 36px auto 54px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(245, 246, 251, 0.72);
+}
+
+.inventory-footnote a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.inventory-footnote a:hover,
+.inventory-footnote a:focus-visible {
+  text-decoration: underline;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(1);

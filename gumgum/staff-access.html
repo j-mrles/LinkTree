@@ -168,6 +168,24 @@
     .back-link:hover {
       color: #ffcb05;
     }
+
+    .built-by {
+      margin-top: 1.75rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: 0.06em;
+    }
+
+    .built-by a {
+      color: #ffcb05;
+      text-decoration: none;
+    }
+
+    .built-by a:hover,
+    .built-by a:focus-visible {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -201,6 +219,7 @@
       Back to links
     </a>
   </main>
+  <p class="built-by">Built by <a href="https://galaxylabs.net" target="_blank" rel="noopener noreferrer">GalaxyLabs</a>. <a href="https://galaxylabs.net" target="_blank" rel="noopener noreferrer">Click here</a> to contact for more information.</p>
 
   <script>
     const accessForm = document.getElementById("accessForm");
