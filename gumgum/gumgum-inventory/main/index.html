@@ -40,8 +40,9 @@
 
     <main class="inventory-main">
       <section class="command-strip">
-        <div class="command-strip__right command-strip__right--solo">
-          <button type="button" id="addItemBtn" class="primary-btn command-primary">+ Add Card</button>
+        <div class="command-strip__right">
+          <button type="button" id="smartAddBtn" class="primary-btn command-primary">Smart Search</button>
+          <button type="button" id="manualAddBtn" class="secondary-btn command-secondary">Manual Entry</button>
           <div class="sync-indicator">
             <span class="sync-dot"></span>
             <span id="lastSynced">Last synced: --</span>
@@ -110,6 +111,7 @@
         <button type="button" id="closeModalBtn" class="icon-btn" aria-label="Close form">&times;</button>
         <h2 id="modalTitle">Find Cards</h2>
         <p id="modalSubtitle">Search the Pokémon TCG database to add inventory instantly.</p>
+        <p class="modal-beta-warning">⚠️ Heads up: this smart search is in beta—Pokémon TCG API responses can take a few seconds to load.</p>
 
         <div id="modalSearchSection" class="modal-search">
           <form id="intelForm" class="intel-form modal-search__form">

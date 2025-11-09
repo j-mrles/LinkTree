@@ -26,7 +26,8 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const inventoryRef = collection(db, "inventory");
 
-const addItemBtn = document.getElementById("addItemBtn");
+const smartAddBtn = document.getElementById("smartAddBtn");
+const manualAddBtn = document.getElementById("manualAddBtn");
 const tableBody = document.getElementById("cardTableBody");
 const totalItemsEl = document.getElementById("totalItems");
 const totalQuantityEl = document.getElementById("totalQuantity");
@@ -61,6 +62,7 @@ const intelInput = document.getElementById("intelSearchInput");
 const intelResults = document.getElementById("intelResults");
 const intelClearBtn = document.getElementById("intelClearBtn");
 const intelSpinner = document.getElementById("intelSpinner");
+const intelHistoryContainer = document.getElementById("intelHistory");
 
 let inventoryCache = [];
 let lastIntelResults = [];
@@ -117,7 +119,8 @@ onSnapshot(
 );
 
 
-addItemBtn.addEventListener("click", () => openModal("create"));
+smartAddBtn?.addEventListener("click", () => openModal("create"));
+manualAddBtn?.addEventListener("click", () => openModal("manual"));
 closeModalBtn.addEventListener("click", closeModal);
 cancelModalBtn.addEventListener("click", closeModal);
 
@@ -744,6 +747,15 @@ function openModal(mode, card = null) {
     setTimeout(() => {
       cardNameField.focus();
     }, 50);
+  } else if (mode === "manual") {
+    modalSearchSection?.classList.add("is-hidden");
+    itemForm.classList.remove("is-hidden");
+    modalTitle.textContent = "Manual Entry";
+    modalSubtitle.textContent = "Fill in the details below to add a card without searching.";
+    submitBtn.textContent = "Save Card";
+    setTimeout(() => {
+      cardNameField.focus();
+    }, 50);
   } else {
     modalSearchSection?.classList.remove("is-hidden");
     itemForm.classList.add("is-hidden");
@@ -926,8 +938,8 @@ function renderConfigWarning() {
   lastSyncedEl.textContent =
     "Last synced: connect Firebase to enable realtime data.";
 
-  addItemBtn.disabled = true;
-  addItemBtn.title = "Configure Firebase to enable inventory management.";
+  smartAddBtn?.setAttribute("disabled", "true");
+  manualAddBtn?.setAttribute("disabled", "true");
 
   tableBody.innerHTML = `
     <tr>

@@ -37,23 +37,7 @@
         <p>Enter the control room with your admin credentials.</p>
       </header>
 
-      <form id="pinForm" class="pin-form" autocomplete="off">
-        <label class="login-field">
-          <span>Staff PIN</span>
-          <input
-            type="password"
-            id="staffPin"
-            placeholder="Enter security PIN"
-            autocomplete="one-time-code"
-            required
-          />
-        </label>
-        <button type="submit" class="secondary-btn pin-submit">Unlock Staff Access</button>
-        <p id="pinHelp" class="pin-help">Enter the four-letter PIN issued by management.</p>
-        <p id="pinError" class="pin-error" role="alert" hidden>Invalid PIN. Try again.</p>
-      </form>
-
-      <form id="loginForm" class="login-form" hidden>
+      <form id="loginForm" class="login-form">
         <label class="login-field">
           <span>Username</span>
           <input type="text" id="username" placeholder="admin" autocomplete="username" required />
@@ -71,7 +55,7 @@
       </form>
 
       <footer class="login-footer">
-        <p class="login-hint">Hint: PIN kang • Username admin • Password gumgum</p>
+        <p class="login-hint">Hint: Access PIN gumgum • Username admin • Password gumgum</p>
         <div class="login-meta">
           <span class="status-dot"></span>
           Inventory Link: <code>/gumgum/gumgum-inventory/main/index.html</code>

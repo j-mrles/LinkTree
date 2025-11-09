@@ -304,6 +304,31 @@ main {
   transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
+.command-secondary {
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: rgba(95, 125, 255, 0.12);
+  color: rgba(245, 246, 251, 0.9);
+  border: 1px solid rgba(95, 125, 255, 0.28);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.command-secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(95, 125, 255, 0.2);
+  box-shadow: 0 16px 28px rgba(95, 125, 255, 0.2);
+}
+
+.command-secondary:disabled,
+.command-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 .sync-indicator {
   display: flex;
   align-items: center;
@@ -525,6 +550,18 @@ main {
   margin: 0 0 18px;
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.04em;
+}
+
+.modal-beta-warning {
+  margin: 0;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 193, 7, 0.16);
+  border: 1px solid rgba(255, 193, 7, 0.38);
+  color: rgba(255, 231, 186, 0.95);
+  font-size: 0.85rem;
   letter-spacing: 0.04em;
 }
 
