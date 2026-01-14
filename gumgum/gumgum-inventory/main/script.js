@@ -1079,7 +1079,7 @@ async function importEbaySnapshot() {
 }
 
 function getEbayDomSnippet() {
-  return `(() => {
+  return `;(() => {
   const uniqueBy = (list, keyFn) => {
     const seen = new Set();
     const out = [];
@@ -1093,18 +1093,27 @@ function getEbayDomSnippet() {
   };
 
   const cleanTitle = (value) => {
-    const raw = (value ?? "").toString();
-    return raw
-      .replace(/\r?\n/g, " ")
-      .replace(/^\s*new\s*listing\s*/i, "")
-      .replace(/\bopens in a new window or tab\b/gi, "")
-      .replace(/\s+/g, " ")
-      .trim();
+    let raw = (value ?? "").toString();
+    // Avoid regex literals to keep this snippet copy/paste-safe across consoles.
+    raw = raw.replaceAll("\r", " ").replaceAll("\n", " ").replaceAll("\t", " ");
+    raw = raw.replaceAll("Opens in a new window or tab", "");
+    raw = raw.trimStart();
+    if (raw.toLowerCase().startsWith("new listing")) {
+      raw = raw.slice("new listing".length);
+    }
+    raw = raw.trim();
+    // Collapse consecutive whitespace without regex.
+    while (raw.includes("  ")) raw = raw.replaceAll("  ", " ");
+    return raw;
   };
 
   const toNumber = (value) => {
     const raw = (value ?? "").toString();
-    const cleaned = raw.replace(/[^0-9.\\-]/g, "");
+    let cleaned = "";
+    for (let i = 0; i < raw.length; i += 1) {
+      const ch = raw[i];
+      if ((ch >= "0" && ch <= "9") || ch === "." || ch === "-") cleaned += ch;
+    }
     const n = Number.parseFloat(cleaned);
     return Number.isFinite(n) ? n : null;
   };
@@ -1138,7 +1147,20 @@ function getEbayDomSnippet() {
     }
   };
 
-  const listingIdFromUrl = (url) => (url.match(/\\/itm\\/(\\d+)/) || [])[1] || "";
+  const listingIdFromUrl = (url) => {
+    const raw = (url ?? "").toString();
+    const idx = raw.indexOf("/itm/");
+    if (idx === -1) return "";
+    let i = idx + 5;
+    let digits = "";
+    while (i < raw.length) {
+      const ch = raw[i];
+      if (ch >= "0" && ch <= "9") digits += ch;
+      else break;
+      i += 1;
+    }
+    return digits;
+  };
 
   const parseFromSItem = () => {
     const nodes = Array.from(document.querySelectorAll("li.s-item"));
@@ -1215,7 +1237,18 @@ function getEbayDomSnippet() {
 
   const text = JSON.stringify(payload, null, 2);
 
-  if (navigator.clipboard?.writeText) {
+  // Chrome DevTools provides a global copy() helper.
+  if (typeof copy === "function") {
+    try {
+      copy(text);
+      console.log("[Gum-Gum] Copied", items.length, "items to clipboard.");
+      if (!items.length) {
+        console.log("[Gum-Gum] Tip: run this on a seller listings/search results page, e.g. https://www.ebay.com/sch/i.html?_ssn=gumgumcards10&rt=nc");
+      }
+    } catch {
+      console.log(text);
+    }
+  } else if (navigator.clipboard?.writeText) {
     navigator.clipboard
       .writeText(text)
       .then(() => {
