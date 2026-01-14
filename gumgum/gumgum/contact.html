@@ -8,6 +8,22 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
     body {
       margin: 0;
       font-family: 'Press Start 2P', cursive;
@@ -44,12 +60,17 @@
 
     nav {
       margin: 1rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     nav a {
       color: #ffe74c;
       text-decoration: none;
-      margin: 0 1.2rem;
+      margin: 0;
       font-size: 0.9rem;
     }
 

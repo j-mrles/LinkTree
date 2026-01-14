@@ -8,6 +8,22 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
     body {
       margin: 0;
       font-family: 'Press Start 2P', cursive;
@@ -349,12 +365,12 @@
     }
 
     .stats-banner::before {
-      left: -20px;
+      left: 8px;
       animation: blink 1s infinite;
     }
 
     .stats-banner::after {
-      right: -20px;
+      right: 8px;
       animation: blink 1s infinite 0.5s;
     }
 
@@ -1067,6 +1083,14 @@
 
     /* Mobile Responsive Styles */
     @media (max-width: 768px) {
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
       body {
         font-size: 0.7rem;
       }
@@ -1112,6 +1136,11 @@
 
       .hero img {
         max-width: 90%;
+      }
+
+      .arcade-section::before,
+      .arcade-section::after {
+        letter-spacing: 1rem;
       }
 
       .stats-banner {
@@ -1341,6 +1370,11 @@
     }
 
     @media (max-width: 480px) {
+      .arcade-section::before,
+      .arcade-section::after {
+        letter-spacing: 0.75rem;
+      }
+
       .stats-banner {
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -1550,11 +1584,11 @@
       }
 
       .stats-banner::before {
-        left: -15px;
+        left: 6px;
       }
 
       .stats-banner::after {
-        right: -15px;
+        right: 6px;
       }
     }
   </style>
