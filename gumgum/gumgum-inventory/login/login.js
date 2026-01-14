@@ -1,11 +1,6 @@
 const loginForm = document.getElementById("loginForm");
 const passwordField = document.getElementById("password");
 const togglePasswordBtn = document.querySelector(".toggle-password");
-const hasGateAccess = sessionStorage.getItem("gumgumStaffGate") === "unlocked";
-
-if (!hasGateAccess) {
-  window.location.replace("../../staff-access.html");
-}
 
 if (togglePasswordBtn && passwordField) {
   togglePasswordBtn.addEventListener("click", () => {
@@ -28,7 +23,6 @@ loginForm.addEventListener("submit", (event) => {
 
   if (username === "admin" && password === "gumgum") {
     localStorage.setItem("isLoggedIn", "true");
-    sessionStorage.removeItem("gumgumStaffGate");
     window.location.href = "../main/index.html";
   } else {
     alert("Incorrect username or password. Try admin / gumgum");

@@ -25,6 +25,7 @@
       box-sizing: border-box;
     }
 
+    html,
     body {
       margin: 0;
       min-height: 100vh;
@@ -35,9 +36,22 @@
       align-items: center;
       justify-content: center;
       position: relative;
+      max-width: 100vw;
       overflow-x: hidden;
       overflow-y: auto;
       padding: 3vh 1.5rem;
+    }
+
+    html {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    @supports (overflow: clip) {
+      html,
+      body {
+        overflow-x: clip;
+      }
     }
 
     body::before,
@@ -66,6 +80,7 @@
       width: min(960px, 100%);
       position: relative;
       z-index: 1;
+      overflow-x: clip;
     }
 
     .surface-card {
@@ -75,6 +90,7 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(20px);
+      max-width: 100%;
     }
 
     .hero {
@@ -163,6 +179,7 @@
       box-shadow: 0 16px 45px rgba(18, 8, 34, 0.52);
       transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
       border: 1px solid transparent;
+      width: 100%;
     }
 
     .action-card::before {
@@ -329,7 +346,7 @@
           </span>
           <span class="action-copy">
             <span class="label">Insta</span>
-            <span class="supporting">@gumgumpokemon</span>
+            <span class="supporting">@gumgumcards10</span>
           </span>
         </a>
 

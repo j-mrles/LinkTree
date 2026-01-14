@@ -1079,191 +1079,93 @@ async function importEbaySnapshot() {
 }
 
 function getEbayDomSnippet() {
-  return `;(() => {
-  const uniqueBy = (list, keyFn) => {
-    const seen = new Set();
-    const out = [];
-    for (const item of list) {
-      const key = keyFn(item);
-      if (!key || seen.has(key)) continue;
-      seen.add(key);
-      out.push(item);
-    }
-    return out;
-  };
-
-  const cleanTitle = (value) => {
-    let raw = (value ?? "").toString();
-    // Avoid regex literals to keep this snippet copy/paste-safe across consoles.
-    raw = raw.replaceAll("\r", " ").replaceAll("\n", " ").replaceAll("\t", " ");
-    raw = raw.replaceAll("Opens in a new window or tab", "");
-    raw = raw.trimStart();
-    if (raw.toLowerCase().startsWith("new listing")) {
-      raw = raw.slice("new listing".length);
-    }
-    raw = raw.trim();
-    // Collapse consecutive whitespace without regex.
-    while (raw.includes("  ")) raw = raw.replaceAll("  ", " ");
-    return raw;
-  };
-
-  const toNumber = (value) => {
-    const raw = (value ?? "").toString();
-    let cleaned = "";
-    for (let i = 0; i < raw.length; i += 1) {
-      const ch = raw[i];
-      if ((ch >= "0" && ch <= "9") || ch === "." || ch === "-") cleaned += ch;
-    }
-    const n = Number.parseFloat(cleaned);
-    return Number.isFinite(n) ? n : null;
-  };
-
-  const getSellerFromUrl = () => {
-    try {
-      const u = new URL(window.location.href);
-      const direct = u.searchParams.get("_ssn") || "";
-      if (direct) return direct;
-
-      const og = document.querySelector('meta[property="og:url"]')?.getAttribute("content") || "";
-      if (og) {
-        try {
-          const ou = new URL(og);
-          const fromOg = ou.searchParams.get("_ssn") || "";
-          if (fromOg) return fromOg;
-        } catch {}
-      }
-
-      const anySsnLink = document.querySelector('a[href*="_ssn="]')?.getAttribute("href") || "";
-      if (anySsnLink) {
-        try {
-          const lu = new URL(anySsnLink, window.location.href);
-          return lu.searchParams.get("_ssn") || "";
-        } catch {}
-      }
-
-      return "";
-    } catch {
-      return "";
-    }
-  };
-
-  const listingIdFromUrl = (url) => {
-    const raw = (url ?? "").toString();
-    const idx = raw.indexOf("/itm/");
-    if (idx === -1) return "";
-    let i = idx + 5;
-    let digits = "";
-    while (i < raw.length) {
-      const ch = raw[i];
-      if (ch >= "0" && ch <= "9") digits += ch;
-      else break;
-      i += 1;
-    }
-    return digits;
-  };
-
-  const parseFromSItem = () => {
-    const nodes = Array.from(document.querySelectorAll("li.s-item"));
-    const out = nodes
-      .map((node) => {
-        const link = node.querySelector("a.s-item__link") || node.querySelector('a[href*="/itm/"]');
-        const titleEl = node.querySelector(".s-item__title") || node.querySelector("h3") || link;
-        const priceEl =
-          node.querySelector(".s-item__price") ||
-          node.querySelector('[data-testid="price"]') ||
-          node.querySelector(".x-price-primary");
-
-        const url = (link?.href ?? "").toString().trim();
-        const title = cleanTitle(titleEl?.innerText ?? titleEl?.textContent ?? "");
-        const priceText = (priceEl?.innerText ?? priceEl?.textContent ?? "").toString().trim();
-        const price = toNumber(priceText);
-        const listingId = listingIdFromUrl(url);
-
-        if (!title || !url) return null;
-        if (title.toLowerCase() === "shop on ebay") return null;
-        return { title, url, listingId, price };
-      })
-      .filter(Boolean);
-    return uniqueBy(out, (i) => i.listingId || i.url);
-  };
-
-  const parseFromItmLinks = () => {
-    const anchors = Array.from(document.querySelectorAll('a[href*="/itm/"]'));
-    const out = [];
-    for (const a of anchors) {
-      if (!a.href) continue;
-      const url = a.href.toString().trim();
-      const listingId = listingIdFromUrl(url);
-      if (!listingId) continue;
-
-      const container =
-        a.closest("li") ||
-        a.closest('[data-testid="item-card"]') ||
-        a.closest("div");
-
-      const titleEl =
-        container?.querySelector(".s-item__title") ||
-        container?.querySelector("h3") ||
-        a;
-      const title = cleanTitle(titleEl?.innerText ?? titleEl?.textContent ?? "");
-      if (!title || title.length < 4) continue;
-      if (title.toLowerCase() === "shop on ebay") continue;
-
-      const priceEl =
-        container?.querySelector(".s-item__price") ||
-        container?.querySelector('[data-testid="price"]') ||
-        container?.querySelector(".x-price-primary") ||
-        container?.querySelector('[class*="price"]');
-      const priceText = (priceEl?.innerText ?? priceEl?.textContent ?? "").toString().trim();
-      const price = toNumber(priceText);
-
-      out.push({ title, url, listingId, price });
-    }
-    return uniqueBy(out, (i) => i.listingId);
-  };
-
-  const items = (() => {
-    const fromSItem = parseFromSItem();
-    if (fromSItem.length) return fromSItem;
-    const fromLinks = parseFromItmLinks();
-    return fromLinks;
-  })();
-
-  const payload = {
-    generatedAt: new Date().toISOString(),
-    store: getSellerFromUrl(),
-    items
-  };
-
-  const text = JSON.stringify(payload, null, 2);
-
-  // Chrome DevTools provides a global copy() helper.
-  if (typeof copy === "function") {
-    try {
-      copy(text);
-      console.log("[Gum-Gum] Copied", items.length, "items to clipboard.");
-      if (!items.length) {
-        console.log("[Gum-Gum] Tip: run this on a seller listings/search results page, e.g. https://www.ebay.com/sch/i.html?_ssn=gumgumcards10&rt=nc");
-      }
-    } catch {
-      console.log(text);
-    }
-  } else if (navigator.clipboard?.writeText) {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        console.log("[Gum-Gum] Copied", items.length, "items to clipboard.");
-        if (!items.length) {
-          console.log("[Gum-Gum] Tip: run this on a seller listings/search results page, e.g. https://www.ebay.com/sch/i.html?_ssn=gumgumcards10&rt=nc");
-        }
-      })
-      .catch(() => console.log(text));
-  } else {
-    console.log(text);
-  }
-
-  return payload;
-})();`;
+  // NOTE: Keep this snippet ES5-ish so it runs in older browsers / webviews.
+  // No optional chaining, no arrow functions, no `catch {}`, no replaceAll().
+  return (
+    "/* Gum-Gum eBay extract */\\n" +
+    "!function(){\\n" +
+    "  function cleanTitle(value){\\n" +
+    "    var raw = (value == null ? '' : String(value));\\n" +
+    "    raw = raw.replace(/[\\r\\n\\t]+/g,' ').replace(/Opens in a new window or tab/g,'');\\n" +
+    "    raw = raw.replace(/^\\s+/,'');\\n" +
+    "    if (raw.toLowerCase().indexOf('new listing') === 0) raw = raw.slice('new listing'.length);\\n" +
+    "    raw = raw.replace(/^\\s+|\\s+$/g,'').replace(/\\s{2,}/g,' ');\\n" +
+    "    return raw;\\n" +
+    "  }\\n" +
+    "  function toNumber(value){\\n" +
+    "    var raw = (value == null ? '' : String(value));\\n" +
+    "    var cleaned = (raw.match(/-?[0-9]+(?:\\.[0-9]+)?/)||[])[0];\\n" +
+    "    var n = cleaned ? parseFloat(cleaned) : NaN;\\n" +
+    "    return isFinite(n) ? n : null;\\n" +
+    "  }\\n" +
+    "  function listingIdFromUrl(url){\\n" +
+    "    var raw = (url == null ? '' : String(url));\\n" +
+    "    var m = raw.match(/\\/itm\\/(\\d+)/);\\n" +
+    "    return m && m[1] ? m[1] : '';\\n" +
+    "  }\\n" +
+    "  function uniqueBy(list, keyFn){\\n" +
+    "    var seen = {};\\n" +
+    "    var out = [];\\n" +
+    "    for (var i=0;i<list.length;i++){\\n" +
+    "      var item = list[i];\\n" +
+    "      var key = keyFn(item);\\n" +
+    "      if (!key || seen[key]) continue;\\n" +
+    "      seen[key] = true;\\n" +
+    "      out.push(item);\\n" +
+    "    }\\n" +
+    "    return out;\\n" +
+    "  }\\n" +
+    "  function parseFromSItem(){\\n" +
+    "    var nodes = Array.prototype.slice.call(document.querySelectorAll('li.s-item'));\\n" +
+    "    var out = [];\\n" +
+    "    for (var i=0;i<nodes.length;i++){\\n" +
+    "      var node = nodes[i];\\n" +
+    "      var link = node.querySelector('a.s-item__link') || node.querySelector('a[href*=\"/itm/\"]');\\n" +
+    "      var titleEl = node.querySelector('.s-item__title') || node.querySelector('h3') || link;\\n" +
+    "      var priceEl = node.querySelector('.s-item__price') || node.querySelector('[data-testid=\"price\"]') || node.querySelector('.x-price-primary');\\n" +
+    "      var url = link && link.href ? String(link.href).trim() : '';\\n" +
+    "      var title = cleanTitle(titleEl ? (titleEl.innerText || titleEl.textContent || '') : '');\\n" +
+    "      var priceText = priceEl ? (priceEl.innerText || priceEl.textContent || '') : '';\\n" +
+    "      var price = toNumber(String(priceText).trim());\\n" +
+    "      var listingId = listingIdFromUrl(url);\\n" +
+    "      if (!title || !url) continue;\\n" +
+    "      if (title.toLowerCase() === 'shop on ebay') continue;\\n" +
+    "      out.push({title:title,url:url,listingId:listingId,price:price});\\n" +
+    "    }\\n" +
+    "    return uniqueBy(out,function(it){ return it.listingId || it.url; });\\n" +
+    "  }\\n" +
+    "  function parseFromItmLinks(){\\n" +
+    "    var anchors = Array.prototype.slice.call(document.querySelectorAll('a[href*=\"/itm/\"]'));\\n" +
+    "    var out = [];\\n" +
+    "    for (var i=0;i<anchors.length;i++){\\n" +
+    "      var a = anchors[i];\\n" +
+    "      if (!a || !a.href) continue;\\n" +
+    "      var url = String(a.href).trim();\\n" +
+    "      var listingId = listingIdFromUrl(url);\\n" +
+    "      if (!listingId) continue;\\n" +
+    "      var container = a.closest ? (a.closest('li') || a.closest('[data-testid=\"item-card\"]') || a.closest('div')) : null;\\n" +
+    "      var titleEl = container ? (container.querySelector('.s-item__title') || container.querySelector('h3') || a) : a;\\n" +
+    "      var title = cleanTitle(titleEl ? (titleEl.innerText || titleEl.textContent || '') : '');\\n" +
+    "      if (!title || title.length < 4) continue;\\n" +
+    "      if (title.toLowerCase() === 'shop on ebay') continue;\\n" +
+    "      var priceEl = container ? (container.querySelector('.s-item__price') || container.querySelector('[data-testid=\"price\"]') || container.querySelector('.x-price-primary') || container.querySelector('[class*=\"price\"]')) : null;\\n" +
+    "      var priceText = priceEl ? (priceEl.innerText || priceEl.textContent || '') : '';\\n" +
+    "      var price = toNumber(String(priceText).trim());\\n" +
+    "      out.push({title:title,url:url,listingId:listingId,price:price});\\n" +
+    "    }\\n" +
+    "    return uniqueBy(out,function(it){ return it.listingId; });\\n" +
+    "  }\\n" +
+    "  var items = parseFromSItem();\\n" +
+    "  if (!items.length) items = parseFromItmLinks();\\n" +
+    "  var payload = { generatedAt: new Date().toISOString(), items: items };\\n" +
+    "  var text = JSON.stringify(payload, null, 2);\\n" +
+    "  try {\\n" +
+    "    if (typeof copy === 'function') { copy(text); }\\n" +
+    "  } catch (e) {}\\n" +
+    "  console.log(text);\\n" +
+    "  console.log('[Gum-Gum] Extracted ' + items.length + ' items. Copy the JSON above and paste it into the Inventory importer.');\\n" +
+    "}();"
+  );
 }
 
 async function copyEbaySnippet() {
