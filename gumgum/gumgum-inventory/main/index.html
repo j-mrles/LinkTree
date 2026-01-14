@@ -43,6 +43,8 @@
         <div class="command-strip__right">
           <button type="button" id="smartAddBtn" class="primary-btn command-primary">Smart Search</button>
           <button type="button" id="manualAddBtn" class="secondary-btn command-secondary">Manual Entry</button>
+          <button type="button" id="ebayImportBtn" class="secondary-btn command-secondary" title="Imports from ./ebay-snapshot.json">Import eBay</button>
+          <button type="button" id="ebayPasteBtn" class="secondary-btn command-secondary" title="Extract from eBay in your browser, then paste JSON here">Paste eBay</button>
           <div class="sync-indicator">
             <span class="sync-dot"></span>
             <span id="lastSynced">Last synced: --</span>
@@ -208,6 +210,39 @@
             <button type="submit" class="primary-btn" id="submitBtn">Save Card</button>
           </div>
         </form>
+
+        <div id="ebayPasteSection" class="is-hidden">
+          <h3 class="modal-section-title">Manual eBay Import (no API / no export)</h3>
+          <p class="modal-section-copy">
+            Because eBay blocks automated downloads, this method uses your normal browser session: open your eBay listings page,
+            run a console snippet to extract listing cards, then paste the JSON below to import.
+          </p>
+
+          <label class="notes-field">
+            <span>Step 1 — Run this snippet in your browser console (on the eBay listings page)</span>
+            <textarea id="ebaySnippet" rows="8" readonly spellcheck="false"></textarea>
+          </label>
+
+          <div class="modal-actions modal-actions--compact">
+            <button type="button" class="secondary-btn" id="copyEbaySnippetBtn">Copy Snippet</button>
+            <button type="button" class="secondary-btn" id="clearEbayPasteBtn">Clear JSON</button>
+          </div>
+
+          <label class="notes-field">
+            <span>Step 2 — Paste extracted JSON here</span>
+            <textarea
+              id="ebayPasteInput"
+              rows="10"
+              spellcheck="false"
+              placeholder='Paste the JSON here (the snippet copies it, or you can copy from console).'
+            ></textarea>
+          </label>
+
+          <div class="modal-actions">
+            <button type="button" class="secondary-btn" id="closeEbayPasteBtn">Close</button>
+            <button type="button" class="primary-btn" id="importEbayPasteBtn">Import into Inventory</button>
+          </div>
+        </div>
       </div>
     </div>
 

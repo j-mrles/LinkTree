@@ -28,6 +28,8 @@ const inventoryRef = collection(db, "inventory");
 
 const smartAddBtn = document.getElementById("smartAddBtn");
 const manualAddBtn = document.getElementById("manualAddBtn");
+const ebayImportBtn = document.getElementById("ebayImportBtn");
+const ebayPasteBtn = document.getElementById("ebayPasteBtn");
 const tableBody = document.getElementById("cardTableBody");
 const totalItemsEl = document.getElementById("totalItems");
 const totalQuantityEl = document.getElementById("totalQuantity");
@@ -44,6 +46,13 @@ const statusToast = document.getElementById("statusToast");
 const cardIdField = document.getElementById("cardId");
 const cardNameField = document.getElementById("cardName");
 const modalSearchSection = document.getElementById("modalSearchSection");
+const ebayPasteSection = document.getElementById("ebayPasteSection");
+const ebaySnippetField = document.getElementById("ebaySnippet");
+const ebayPasteInput = document.getElementById("ebayPasteInput");
+const copyEbaySnippetBtn = document.getElementById("copyEbaySnippetBtn");
+const clearEbayPasteBtn = document.getElementById("clearEbayPasteBtn");
+const closeEbayPasteBtn = document.getElementById("closeEbayPasteBtn");
+const importEbayPasteBtn = document.getElementById("importEbayPasteBtn");
 const cardFranchiseField = document.getElementById("cardFranchise");
 const cardSetField = document.getElementById("cardSet");
 const cardTypeField = document.getElementById("cardType");
@@ -92,6 +101,11 @@ onSnapshot(
         const data = docSnap.data();
         return {
           id: docSnap.id,
+          source: (data.source ?? "").toString(),
+          sku: (data.sku ?? "").toString(),
+          offerId: (data.offerId ?? "").toString(),
+          listingId: (data.listingId ?? "").toString(),
+          url: (data.url ?? "").toString(),
           name: data.name ?? "",
           franchise: normalizeFranchise(data.franchise),
           setName: data.setName ?? "",
@@ -121,8 +135,17 @@ onSnapshot(
 
 smartAddBtn?.addEventListener("click", () => openModal("create"));
 manualAddBtn?.addEventListener("click", () => openModal("manual"));
+ebayImportBtn?.addEventListener("click", () => importEbaySnapshot());
+ebayPasteBtn?.addEventListener("click", () => openModal("ebay-paste"));
 closeModalBtn.addEventListener("click", closeModal);
 cancelModalBtn.addEventListener("click", closeModal);
+copyEbaySnippetBtn?.addEventListener("click", copyEbaySnippet);
+clearEbayPasteBtn?.addEventListener("click", () => {
+  if (ebayPasteInput) ebayPasteInput.value = "";
+  showToast("Cleared.", false);
+});
+closeEbayPasteBtn?.addEventListener("click", closeModal);
+importEbayPasteBtn?.addEventListener("click", importEbayPastedJson);
 
 modalBackdrop.addEventListener("click", (event) => {
   if (event.target === modalBackdrop) {
@@ -726,8 +749,24 @@ function openModal(mode, card = null) {
   cardFranchiseField.value = "other";
   cardConditionField.value = "sealed";
   cardPricePaidField.value = "";
+  ebayPasteSection?.classList.add("is-hidden");
 
-  if (mode === "edit" && card) {
+  if (mode === "ebay-paste") {
+    modalSearchSection?.classList.add("is-hidden");
+    itemForm.classList.add("is-hidden");
+    ebayPasteSection?.classList.remove("is-hidden");
+    modalTitle.textContent = "Import eBay Listings";
+    modalSubtitle.textContent = "Run a snippet on your eBay listings page, then paste JSON here to import.";
+    submitBtn.textContent = "Save Card";
+
+    if (ebaySnippetField) {
+      ebaySnippetField.value = getEbayDomSnippet();
+    }
+
+    setTimeout(() => {
+      ebayPasteInput?.focus();
+    }, 50);
+  } else if (mode === "edit" && card) {
     modalSearchSection?.classList.add("is-hidden");
     itemForm.classList.remove("is-hidden");
     modalTitle.textContent = "Edit Card";
@@ -776,6 +815,7 @@ function closeModal() {
   cardIdField.value = "";
   itemForm.classList.add("is-hidden");
   modalSearchSection?.classList.remove("is-hidden");
+  ebayPasteSection?.classList.add("is-hidden");
   resetIntelUI();
 }
 
@@ -952,5 +992,379 @@ function renderConfigWarning() {
   `;
 
   showToast("Add your Firebase config to enable the inventory.", true);
+}
+
+async function importEbaySnapshot() {
+  if (!ebayImportBtn) return;
+  ebayImportBtn.disabled = true;
+  const originalText = ebayImportBtn.textContent;
+  ebayImportBtn.textContent = "Importing…";
+
+  try {
+    const response = await fetch("./ebay-snapshot.json", { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`Snapshot fetch failed (${response.status}). Generate it first via npm run ebay:sync`);
+    }
+    const snapshot = await response.json();
+    const items = Array.isArray(snapshot?.items) ? snapshot.items : [];
+
+    if (!items.length) {
+      showToast("No eBay items found in snapshot.", true);
+      return;
+    }
+
+    let created = 0;
+    let updated = 0;
+
+    for (const item of items) {
+      const sku = (item?.sku ?? "").toString();
+      const listingId = (item?.listingId ?? "").toString();
+      const offerId = (item?.offerId ?? "").toString();
+      const url = (item?.url ?? "").toString();
+      const name = (item?.title ?? sku ?? "eBay Listing").toString();
+      const stock = safeInteger(item?.availableQuantity ?? 0);
+      const price = safeNumber(item?.price ?? 0);
+
+      if (!sku && !listingId) continue;
+
+      const existing = inventoryCache.find(
+        (entry) =>
+          entry.source === "ebay" &&
+          ((sku && entry.sku === sku) ||
+            (listingId && entry.listingId === listingId))
+      );
+
+      const payload = {
+        source: "ebay",
+        sku,
+        listingId,
+        offerId,
+        url,
+        name,
+        franchise: "other",
+        setName: "eBay",
+        type: "",
+        condition: "unsealed",
+        rarity: "",
+        price,
+        pricePaid: 0,
+        stock,
+        notes: url ? `Imported from eBay • ${url}` : "Imported from eBay"
+      };
+
+      if (existing?.id) {
+        await updateDoc(doc(inventoryRef, existing.id), {
+          ...payload,
+          updatedAt: serverTimestamp()
+        });
+        updated += 1;
+      } else {
+        await addDoc(inventoryRef, {
+          ...payload,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        });
+        created += 1;
+      }
+    }
+
+    showToast(`eBay import complete: ${created} added, ${updated} updated.`, false);
+  } catch (error) {
+    console.error("eBay import failed:", error);
+    showToast("eBay import failed. Check console.", true);
+  } finally {
+    ebayImportBtn.disabled = false;
+    ebayImportBtn.textContent = originalText;
+  }
+}
+
+function getEbayDomSnippet() {
+  return `(() => {
+  const uniqueBy = (list, keyFn) => {
+    const seen = new Set();
+    const out = [];
+    for (const item of list) {
+      const key = keyFn(item);
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      out.push(item);
+    }
+    return out;
+  };
+
+  const cleanTitle = (value) => {
+    const raw = (value ?? "").toString();
+    return raw
+      .replace(/\r?\n/g, " ")
+      .replace(/^\s*new\s*listing\s*/i, "")
+      .replace(/\bopens in a new window or tab\b/gi, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  };
+
+  const toNumber = (value) => {
+    const raw = (value ?? "").toString();
+    const cleaned = raw.replace(/[^0-9.\\-]/g, "");
+    const n = Number.parseFloat(cleaned);
+    return Number.isFinite(n) ? n : null;
+  };
+
+  const getSellerFromUrl = () => {
+    try {
+      const u = new URL(window.location.href);
+      const direct = u.searchParams.get("_ssn") || "";
+      if (direct) return direct;
+
+      const og = document.querySelector('meta[property="og:url"]')?.getAttribute("content") || "";
+      if (og) {
+        try {
+          const ou = new URL(og);
+          const fromOg = ou.searchParams.get("_ssn") || "";
+          if (fromOg) return fromOg;
+        } catch {}
+      }
+
+      const anySsnLink = document.querySelector('a[href*="_ssn="]')?.getAttribute("href") || "";
+      if (anySsnLink) {
+        try {
+          const lu = new URL(anySsnLink, window.location.href);
+          return lu.searchParams.get("_ssn") || "";
+        } catch {}
+      }
+
+      return "";
+    } catch {
+      return "";
+    }
+  };
+
+  const listingIdFromUrl = (url) => (url.match(/\\/itm\\/(\\d+)/) || [])[1] || "";
+
+  const parseFromSItem = () => {
+    const nodes = Array.from(document.querySelectorAll("li.s-item"));
+    const out = nodes
+      .map((node) => {
+        const link = node.querySelector("a.s-item__link") || node.querySelector('a[href*="/itm/"]');
+        const titleEl = node.querySelector(".s-item__title") || node.querySelector("h3") || link;
+        const priceEl =
+          node.querySelector(".s-item__price") ||
+          node.querySelector('[data-testid="price"]') ||
+          node.querySelector(".x-price-primary");
+
+        const url = (link?.href ?? "").toString().trim();
+        const title = cleanTitle(titleEl?.innerText ?? titleEl?.textContent ?? "");
+        const priceText = (priceEl?.innerText ?? priceEl?.textContent ?? "").toString().trim();
+        const price = toNumber(priceText);
+        const listingId = listingIdFromUrl(url);
+
+        if (!title || !url) return null;
+        if (title.toLowerCase() === "shop on ebay") return null;
+        return { title, url, listingId, price };
+      })
+      .filter(Boolean);
+    return uniqueBy(out, (i) => i.listingId || i.url);
+  };
+
+  const parseFromItmLinks = () => {
+    const anchors = Array.from(document.querySelectorAll('a[href*="/itm/"]'));
+    const out = [];
+    for (const a of anchors) {
+      if (!a.href) continue;
+      const url = a.href.toString().trim();
+      const listingId = listingIdFromUrl(url);
+      if (!listingId) continue;
+
+      const container =
+        a.closest("li") ||
+        a.closest('[data-testid="item-card"]') ||
+        a.closest("div");
+
+      const titleEl =
+        container?.querySelector(".s-item__title") ||
+        container?.querySelector("h3") ||
+        a;
+      const title = cleanTitle(titleEl?.innerText ?? titleEl?.textContent ?? "");
+      if (!title || title.length < 4) continue;
+      if (title.toLowerCase() === "shop on ebay") continue;
+
+      const priceEl =
+        container?.querySelector(".s-item__price") ||
+        container?.querySelector('[data-testid="price"]') ||
+        container?.querySelector(".x-price-primary") ||
+        container?.querySelector('[class*="price"]');
+      const priceText = (priceEl?.innerText ?? priceEl?.textContent ?? "").toString().trim();
+      const price = toNumber(priceText);
+
+      out.push({ title, url, listingId, price });
+    }
+    return uniqueBy(out, (i) => i.listingId);
+  };
+
+  const items = (() => {
+    const fromSItem = parseFromSItem();
+    if (fromSItem.length) return fromSItem;
+    const fromLinks = parseFromItmLinks();
+    return fromLinks;
+  })();
+
+  const payload = {
+    generatedAt: new Date().toISOString(),
+    store: getSellerFromUrl(),
+    items
+  };
+
+  const text = JSON.stringify(payload, null, 2);
+
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        console.log("[Gum-Gum] Copied", items.length, "items to clipboard.");
+        if (!items.length) {
+          console.log("[Gum-Gum] Tip: run this on a seller listings/search results page, e.g. https://www.ebay.com/sch/i.html?_ssn=gumgumcards10&rt=nc");
+        }
+      })
+      .catch(() => console.log(text));
+  } else {
+    console.log(text);
+  }
+
+  return payload;
+})();`;
+}
+
+async function copyEbaySnippet() {
+  const snippet = getEbayDomSnippet();
+  if (ebaySnippetField) {
+    ebaySnippetField.value = snippet;
+  }
+  const copied = await copyToClipboard(snippet);
+  if (copied) {
+    showToast("Snippet copied. Paste it into your browser console on eBay.", false);
+  }
+}
+
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (error) {
+    console.warn("Clipboard copy failed:", error);
+    return false;
+  }
+}
+
+async function importEbayPastedJson() {
+  if (!importEbayPasteBtn || !ebayPasteInput) return;
+
+  const raw = ebayPasteInput.value.trim();
+  if (!raw) {
+    showToast("Paste the extracted JSON first.", true);
+    return;
+  }
+
+  importEbayPasteBtn.disabled = true;
+  const originalText = importEbayPasteBtn.textContent;
+  importEbayPasteBtn.textContent = "Importing…";
+
+  try {
+    let parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (error) {
+      showToast("Invalid JSON. Re-run the snippet and paste the output.", true);
+      return;
+    }
+
+    const items = Array.isArray(parsed)
+      ? parsed
+      : Array.isArray(parsed?.items)
+        ? parsed.items
+        : [];
+
+    if (!items.length) {
+      showToast("No items found in pasted JSON.", true);
+      return;
+    }
+
+    let created = 0;
+    let updated = 0;
+    let skipped = 0;
+
+    for (const item of items) {
+      const url = (item?.url ?? "").toString().trim();
+      const listingId =
+        (item?.listingId ?? "").toString().trim() ||
+        (url.match(/\/itm\/(\d+)/) || [])[1] ||
+        "";
+      const title = (item?.title ?? item?.name ?? "eBay Listing").toString().trim();
+      const price = safeNumber(item?.price ?? 0);
+      const availableQuantityRaw = safeInteger(item?.availableQuantity ?? item?.quantity ?? 0);
+
+      if (!listingId && !url) {
+        skipped += 1;
+        continue;
+      }
+
+      const existing = inventoryCache.find(
+        (entry) =>
+          entry.source === "ebay" &&
+          ((listingId && entry.listingId === listingId) || (url && entry.url === url))
+      );
+
+      const stock =
+        availableQuantityRaw > 0
+          ? availableQuantityRaw
+          : Number.isFinite(existing?.stock)
+            ? existing.stock
+            : 1;
+
+      const payload = {
+        source: "ebay",
+        sku: "",
+        listingId,
+        offerId: "",
+        url,
+        name: title,
+        franchise: "other",
+        setName: "eBay",
+        type: "",
+        condition: "unsealed",
+        rarity: "",
+        price,
+        pricePaid: Number.isFinite(existing?.pricePaid) ? existing.pricePaid : 0,
+        stock,
+        notes: url
+          ? `Imported from eBay (manual) • ${url}`
+          : "Imported from eBay (manual)"
+      };
+
+      if (existing?.id) {
+        await updateDoc(doc(inventoryRef, existing.id), {
+          ...payload,
+          updatedAt: serverTimestamp()
+        });
+        updated += 1;
+      } else {
+        await addDoc(inventoryRef, {
+          ...payload,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp()
+        });
+        created += 1;
+      }
+    }
+
+    showToast(
+      `eBay paste import complete: ${created} added, ${updated} updated${skipped ? `, ${skipped} skipped` : ""}.`,
+      false
+    );
+  } catch (error) {
+    console.error("eBay paste import failed:", error);
+    showToast("eBay paste import failed. Check console.", true);
+  } finally {
+    importEbayPasteBtn.disabled = false;
+    importEbayPasteBtn.textContent = originalText;
+  }
 }
   

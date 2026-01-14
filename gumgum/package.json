@@ -1,0 +1,11 @@
+{
+  "name": "gumgum",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ebay:sync": "node ./scripts/ebay-sync.mjs",
+    "ebay:csv": "node ./scripts/ebay-csv-to-snapshot.mjs",
+    "ebay:scrape": "node ./scripts/ebay-scrape-to-snapshot.mjs"
+  }
+}
+
