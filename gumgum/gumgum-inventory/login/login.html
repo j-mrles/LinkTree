@@ -7,24 +7,37 @@
   <link rel="stylesheet" href="../main/style.css" />
 </head>
 <body class="login-page">
+  <header class="go-topbar" aria-label="Status">
+    <div class="go-topbar__brand">
+      <span class="go-topbar__label">Gum-Gum Inventory</span>
+      <span class="go-topbar__chip">
+        <span class="go-topbar__dot" aria-hidden="true"></span>
+        Secure Access
+      </span>
+    </div>
+  </header>
+
   <div class="login-grid">
     <section class="login-hero">
       <div class="hero-glow"></div>
-      <img src="../../images/gengar_strawhat.png" alt="Gum Gum Logo" class="login-logo" />
-      <h1>Gum-Gum Dashboard</h1>
-      <p class="login-tagline">Retro inventory control for rare pulls, sealed sets, and collector grails.</p>
+      <div class="go-radar">
+        <img src="../../images/gengar_strawhat.png" alt="Gum-Gum Cards logo" class="login-logo" />
+      </div>
+
+      <h1>Staff Console</h1>
+      <p class="login-tagline">Sign in to manage inventory, pricing, and stock — fast, clean, and mobile-ready.</p>
 
       <ul class="login-perks">
         <li>
-          <span class="perk-icon">⚡</span>
+          <span class="perk-icon" aria-hidden="true"></span>
           Instant sync with your Firestore inventory.
         </li>
         <li>
-          <span class="perk-icon">🗃️</span>
+          <span class="perk-icon" aria-hidden="true"></span>
           Track sealed vs unsealed stock in one view.
         </li>
         <li>
-          <span class="perk-icon">📦</span>
+          <span class="perk-icon" aria-hidden="true"></span>
           Surface low-stock alerts before restock panic.
         </li>
       </ul>

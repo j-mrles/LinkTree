@@ -1330,63 +1330,234 @@ textarea {
   overflow-y: auto;
 }
 
+.login-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(900px at 15% 20%, rgba(167, 109, 255, 0.18), transparent 55%),
+    radial-gradient(1200px at 75% 15%, rgba(95, 125, 255, 0.16), transparent 55%),
+    radial-gradient(800px at 60% 80%, rgba(255, 230, 109, 0.08), transparent 60%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.045) 0px,
+      rgba(255, 255, 255, 0.045) 1px,
+      transparent 1px,
+      transparent 56px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.035) 0px,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px,
+      transparent 56px
+    );
+  opacity: 0.9;
+  z-index: 0;
+}
+
+.login-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 30%, rgba(95, 125, 255, 0.12), transparent 45%);
+  mix-blend-mode: screen;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.go-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: linear-gradient(180deg, rgba(12, 12, 22, 0.9), rgba(12, 12, 22, 0.35));
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(95, 125, 255, 0.22);
+}
+
+.go-topbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.go-topbar__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245, 246, 251, 0.78);
+  white-space: nowrap;
+}
+
+.go-topbar__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(95, 125, 255, 0.14);
+  border: 1px solid rgba(95, 125, 255, 0.3);
+  color: rgba(245, 246, 251, 0.9);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.go-topbar__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(76, 211, 167, 0.95);
+  box-shadow: 0 0 14px rgba(76, 211, 167, 0.65);
+  animation: pulse 2.4s infinite ease-in-out;
+}
+
 .login-grid {
   position: relative;
   z-index: 1;
-  max-width: 1000px;
+  max-width: 1040px;
   margin: 0 auto;
-  padding: 80px 24px;
+  padding: 54px 24px 72px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
   align-items: start;
   align-content: start;
 }
 
 .login-hero {
   position: relative;
-  background: linear-gradient(145deg, rgba(90, 50, 160, 0.6), rgba(20, 16, 40, 0.85));
   border-radius: 28px;
-  padding: 48px 36px;
-  border: 1px solid rgba(255, 230, 109, 0.35);
-  box-shadow: var(--shadow);
+  padding: 34px 32px;
+  border: 1px solid rgba(95, 125, 255, 0.3);
+  box-shadow: 0 30px 70px rgba(10, 16, 35, 0.55);
   overflow: hidden;
+  background:
+    radial-gradient(600px at 20% 10%, rgba(167, 109, 255, 0.22), transparent 55%),
+    radial-gradient(900px at 80% 80%, rgba(95, 125, 255, 0.18), transparent 60%),
+    linear-gradient(145deg, rgba(18, 16, 32, 0.82), rgba(12, 12, 22, 0.92));
+  backdrop-filter: blur(18px);
+}
+
+.login-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    conic-gradient(from 220deg at 30% 20%, rgba(95, 125, 255, 0.22), transparent 45%),
+    radial-gradient(circle at 70% 35%, rgba(255, 230, 109, 0.09), transparent 55%);
+  opacity: 1;
+  mix-blend-mode: screen;
+  z-index: 0;
 }
 
 .hero-glow {
   position: absolute;
-  inset: -40px;
-  background: radial-gradient(circle at 20% 20%, rgba(255, 230, 109, 0.25), transparent 55%),
-    radial-gradient(circle at 80% 80%, rgba(94, 61, 153, 0.35), transparent 60%);
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 230, 109, 0.12), transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(167, 109, 255, 0.18), transparent 60%);
+  opacity: 1;
   z-index: 0;
+}
+
+.go-hud {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  background: rgba(10, 12, 24, 0.55);
+  border: 1px solid rgba(95, 125, 255, 0.22);
+  color: rgba(245, 246, 251, 0.85);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.go-radar {
+  position: relative;
+  z-index: 1;
+  width: 160px;
+  height: 160px;
+  display: grid;
+  place-items: center;
+  margin: 8px 0 18px;
+}
+
+.go-radar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(95, 125, 255, 0.22), transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(255, 230, 109, 0.08), transparent 65%);
+  border: 1px solid rgba(95, 125, 255, 0.35);
+  box-shadow: 0 24px 60px rgba(10, 16, 35, 0.6);
+}
+
+.go-radar::after {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    rgba(95, 125, 255, 0.0),
+    rgba(95, 125, 255, 0.24),
+    rgba(95, 125, 255, 0.0)
+  );
+  opacity: 0.9;
+  filter: blur(0.2px);
+  animation: goSweep 2.8s linear infinite;
+  mask: radial-gradient(circle at 50% 50%, transparent 0 62%, #000 64% 100%);
+}
+
+@keyframes goSweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .login-logo {
   position: relative;
-  z-index: 1;
-  width: 140px;
+  z-index: 2;
+  width: 104px;
   height: auto;
-  margin-bottom: 24px;
-  filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 10px 26px rgba(0, 0, 0, 0.55));
 }
 
 .login-hero h1 {
   position: relative;
   z-index: 1;
-  margin: 0 0 12px;
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  color: var(--primary);
-  text-shadow: 0 0 18px rgba(255, 230, 109, 0.4);
-  letter-spacing: 0.1em;
+  margin: 0 0 10px;
+  font-size: clamp(1.8rem, 3.6vw, 2.5rem);
+  color: rgba(245, 246, 251, 0.96);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .login-tagline {
   position: relative;
   z-index: 1;
-  margin: 0 0 32px;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 1rem;
-  line-height: 1.6;
+  margin: 0 0 22px;
+  color: rgba(245, 246, 251, 0.78);
+  font-size: 0.98rem;
+  line-height: 1.65;
 }
 
 .login-perks {
@@ -1400,31 +1571,103 @@ textarea {
 }
 
 .login-perks li {
-  display: flex;
+  display: grid;
+  grid-template-columns: 22px 1fr;
   align-items: center;
-  gap: 10px;
-  background: rgba(24, 30, 44, 0.6);
+  gap: 12px;
+  background: rgba(10, 12, 24, 0.5);
   border: 1px solid rgba(95, 125, 255, 0.22);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 12px 14px;
-  color: rgba(245, 246, 251, 0.9);
+  color: rgba(245, 246, 251, 0.88);
   font-size: 0.95rem;
 }
 
 .perk-icon {
-  font-size: 1.1rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 230, 109, 0.7), rgba(95, 125, 255, 0.7));
+  box-shadow: 0 0 16px rgba(95, 125, 255, 0.35);
 }
 
 .login-card {
-  background: linear-gradient(165deg, rgba(27, 33, 48, 0.96), rgba(18, 24, 36, 0.96));
-  border-radius: 24px;
-  padding: 36px 32px 32px;
-  border: 1px solid rgba(95, 125, 255, 0.3);
-  box-shadow: 0 30px 60px rgba(10, 16, 35, 0.55);
+  position: relative;
+  background: linear-gradient(165deg, rgba(15, 18, 32, 0.92), rgba(12, 12, 22, 0.9));
+  border-radius: 26px;
+  padding: 34px 30px 28px;
+  border: 1px solid rgba(95, 125, 255, 0.32);
+  box-shadow: 0 32px 75px rgba(10, 16, 35, 0.6);
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  gap: 22px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.login-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(700px at 15% 20%, rgba(167, 109, 255, 0.18), transparent 55%),
+    conic-gradient(from 140deg at 60% 35%, rgba(95, 125, 255, 0.18), transparent 45%);
+  opacity: 1;
+  mix-blend-mode: screen;
+  z-index: 0;
+}
+
+.login-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.0) 0px,
+    rgba(255, 255, 255, 0.0) 10px,
+    rgba(255, 255, 255, 0.035) 11px
+  );
+  opacity: 0.18;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.login-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.login-page .login-badge {
+  background: rgba(167, 109, 255, 0.14);
+  border-color: rgba(167, 109, 255, 0.32);
+}
+
+.login-page .primary-btn.login-submit {
+  background: linear-gradient(180deg, rgba(167, 109, 255, 0.95), rgba(95, 125, 255, 0.92));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 40px rgba(95, 125, 255, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.login-page .primary-btn.login-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 48px rgba(95, 125, 255, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.login-page .toggle-password {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(95, 125, 255, 0.12);
+  border: 1px solid rgba(95, 125, 255, 0.24);
+  display: grid;
+  place-items: center;
+}
+
+.login-page .toggle-password:hover {
+  background: rgba(95, 125, 255, 0.18);
+  color: rgba(245, 246, 251, 0.92);
 }
 
 .login-card--unlocked {
